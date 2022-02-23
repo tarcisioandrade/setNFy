@@ -1,0 +1,146 @@
+@import "../../var-mixins";
+
+.nfs {
+  margin-top: rem(55);
+}
+
+.nfs__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  h2 {
+    font-family: $font-nunito;
+    flex: 1;
+  }
+  svg {
+    width: rem(34);
+    color: $preto;
+    cursor: pointer;
+    margin-right: rem(50);
+  }
+}
+
+.nfs__add {
+  display: block;
+  background: $azul;
+  color: $branco;
+  padding: 0rem 1rem;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.nfs__search {
+  input {
+    display: block;
+    padding: 0.47rem 1rem 0.47rem 2.2rem;
+    font-size: 1rem;
+    background: url("../../imgs/search.svg") no-repeat 5px center;
+    background-size: 24px;
+    border: 2px solid $azul-fraco;
+    border-radius: 3px;
+    margin-right: 2rem;
+    &:focus,
+    &:hover {
+      outline: none;
+      border-color: $azul-medio;
+    }
+  }
+}
+
+.nfs__content {
+  height: rem(380);
+  overflow-y: scroll;
+  & table thead tr {
+    position: sticky;
+    top: 0;
+  }
+}
+
+.nfs__content::-webkit-scrollbar {
+  width: rem();
+}
+
+.nfs__content::-webkit-scrollbar-thumb {
+  background: $azul-fraco;
+  border-radius: 3px;
+  &:hover {
+    background: $azul-medio;
+  }
+}
+
+.nfs__table {
+  width: 100%;
+  font-family: $font-roboto;
+  border-collapse: collapse;
+  & td,
+  th {
+    padding: rem(12) rem(15);
+  }
+  thead tr {
+    font-size: rem(14);
+    font-weight: bold;
+    color: $branco;
+    text-transform: uppercase;
+    background-color: $azul;
+    text-align: left;
+    th:nth-child(2){
+      width: rem(235);
+    }
+    th:last-child {
+      text-align: center;
+      width: rem(180);
+    }
+  }
+  tbody {
+    tr {
+      font-size: rem(14);
+    }
+    tr:nth-child(even) {
+      background-color: rgb(231, 231, 231);
+    }
+    td:nth-child(2) {
+      text-transform: capitalize;
+      font-weight: bold;
+    }
+    td:last-child {
+      text-align: center;
+    }
+  }
+}
+
+.nfs__table_icon {
+  cursor: pointer;
+  border: none;
+  vertical-align: middle;
+  background: $azul-medio;
+  padding: 0.2rem;
+  border-radius: 3px;
+  transition: background 0.3s;
+  &:hover {
+    background: $azul;
+  }
+  &:nth-child(2) {
+    margin-left: rem(17);
+    margin-right: rem(17);
+  }
+  svg {
+    min-width: rem(18);
+    margin-top: auto;
+    color: $branco;
+  }
+}
+
+.nfs__status--true {
+  color: green;
+}
+
+.nfs__status--false {
+  color: red;
+}
+
+.nfs__status--true,
+.nfs__status--false {
+  font-weight: bolder;
+}

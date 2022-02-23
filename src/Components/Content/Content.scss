@@ -1,0 +1,24 @@
+@import "../../var-mixins";
+
+.content {
+  padding: 1.7rem;
+}
+
+.content__header {
+  display: flex;
+  align-items: center;
+}
+.content__title{
+  font-family: $font-nunito;
+  font-weight: 100;
+  font-size: rem(32);
+  color: $preto;
+  margin-right: rem();
+}
+
+.content__title_icon {
+  display: inline-block;
+  width: 50px;
+  fill: #fb1;
+  color: #fb1;
+}

@@ -1,0 +1,18 @@
+// Fontes
+$font-nunito: 'Nunito', sans-serif;
+$font-roboto: "Roboto", sans-serif;
+// Cores
+$azul-forte: #1A374D;
+$azul: #406882;
+$azul-medio: #6998AB;
+$azul-fraco: #B1D0E0;
+$branco: #fff;
+$preto: #181818;
+
+
+
+// Funções
+@function rem($size: 16) {
+  @return $size / 16 + rem
+}
+

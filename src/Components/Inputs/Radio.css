@@ -1,0 +1,15 @@
+.radio-label:first-child {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.radio-label {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.875rem;
+}
+
+.radio-label input[type="radio"] {
+  margin-right: 0.1875rem;
+  position: relative;
+  bottom: -1.3px;
+}

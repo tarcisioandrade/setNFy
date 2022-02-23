@@ -1,0 +1,16 @@
+@import "../../_var-mixins";
+
+.radio-label:first-child {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.radio-label {
+  font-family: $font-nunito;
+  font-size: rem(14);
+}
+.radio-label input[type="radio"] {
+  margin-right: rem(3);
+  position: relative;
+  bottom: -1.3px;
+}

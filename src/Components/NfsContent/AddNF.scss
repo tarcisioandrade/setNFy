@@ -1,0 +1,53 @@
+@import "../../_var-mixins";
+
+.addNF {
+  padding: 2rem 2rem 0rem 2rem;
+}
+
+.addNF__title {
+  font-family: $font-nunito;
+  font-weight: 100;
+  font-size: rem(32);
+  color: $preto;
+}
+
+.addNF__form {
+  margin-top: rem(25);
+}
+
+.addNF__tipo {
+  font-family: $font-nunito;
+  font-size: rem(14);
+  font-style: italic;
+  font-weight: bold;
+}
+
+.addNF__tipo--red {
+  color: rgb(255, 0, 0);
+}
+
+.addNf__row {
+  display: flex;
+  & label {
+    width: 100%;
+    &:first-child {
+      margin-right: 16px;
+    }
+  }
+}
+
+.addNF__button {
+  display: block;
+  padding: rem(12);
+  background-color: $azul;
+  border: none;
+  color: $branco;
+  cursor: pointer;
+  margin-top: rem();
+  border-radius: 3px;
+  font-size: rem(18);
+  transition: .3s;
+  &:hover {
+    background-color: $azul-forte;
+  }
+}
