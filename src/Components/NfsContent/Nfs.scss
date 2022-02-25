@@ -12,12 +12,6 @@
     font-family: $font-nunito;
     flex: 1;
   }
-  svg {
-    width: rem(34);
-    color: $preto;
-    cursor: pointer;
-    margin-right: rem(50);
-  }
 }
 
 .nfs__add {
@@ -77,6 +71,8 @@
   & td,
   th {
     padding: rem(12) rem(15);
+    border: 1px solid #ccc;
+
   }
   thead tr {
     font-size: rem(14);
@@ -85,8 +81,11 @@
     text-transform: uppercase;
     background-color: $azul;
     text-align: left;
-    th:nth-child(2){
-      width: rem(235);
+    th:first-child {
+      width: rem(128);
+    }
+    th:nth-child(2) {
+      width: rem(230);
     }
     th:last-child {
       text-align: center;
@@ -143,4 +142,8 @@
 .nfs__status--true,
 .nfs__status--false {
   font-weight: bolder;
+}
+
+.nfs__tipo--red {
+  color: red;
 }

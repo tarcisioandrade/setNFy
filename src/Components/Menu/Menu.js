@@ -15,10 +15,10 @@ const Menu = () => {
         <li>
           <HomeIcon className="menu__icon" />
           <a href="/">Inicio</a>
-        </li>
+        </li> 
         <li>
           <DoneIcon className="menu__icon" />
-          <a href=".">Finalizados</a>
+          <a href="finalizados">Finalizados</a>
         </li>
       </ul>
       <div className="menu__user">

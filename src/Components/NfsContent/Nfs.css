@@ -19,13 +19,6 @@
           flex: 1;
 }
 
-.nfs__header svg {
-  width: 2.125rem;
-  color: #181818;
-  cursor: pointer;
-  margin-right: 3.125rem;
-}
-
 .nfs__add {
   display: block;
   background: #406882;
@@ -86,6 +79,7 @@
 .nfs__table td,
 .nfs__table th {
   padding: 0.75rem 0.9375rem;
+  border: 1px solid #ccc;
 }
 
 .nfs__table thead tr {
@@ -97,8 +91,12 @@
   text-align: left;
 }
 
+.nfs__table thead tr th:first-child {
+  width: 8rem;
+}
+
 .nfs__table thead tr th:nth-child(2) {
-  width: 14.6875rem;
+  width: 14.375rem;
 }
 
 .nfs__table thead tr th:last-child {
@@ -160,4 +158,8 @@
 .nfs__status--true,
 .nfs__status--false {
   font-weight: bolder;
+}
+
+.nfs__tipo--red {
+  color: red;
 }
