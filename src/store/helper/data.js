@@ -10,6 +10,7 @@ const data = [
     processo: 151.235,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
   },
   {
     id: generateID(),
@@ -20,6 +21,7 @@ const data = [
     processo: 153.591,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
   },
   {
     id: generateID(),
@@ -30,6 +32,7 @@ const data = [
     processo: 151.235,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
   },
   {
     id: generateID(),
@@ -40,6 +43,8 @@ const data = [
     processo: 151.345,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
+
   },
   {
     id: generateID(),
@@ -50,6 +55,7 @@ const data = [
     processo: 121.235,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
   },
   {
     id: generateID(),
@@ -60,6 +66,7 @@ const data = [
     processo: 153.586,
     statusNF: "Pendente",
     statusBoleto: "Pendente",
+    statusFinal: "Completo"
   },
 ];
 

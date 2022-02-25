@@ -5,15 +5,15 @@ import "./Nfs.css";
 import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
 import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
-import { deleteNfItem, finalizeNfItem } from "../../store/slices/setNotaFiscal";
+import { deleteNfItem, nfFinalizeSet } from "../../store/slices/setNotaFiscal";
 
 const Nfs = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
   return (
-    <section className="nfs">
+    <div className="nfs">
       <div className="nfs__header">
         <h2>Notas Fiscais</h2>
         <div className="nfs__search">
@@ -39,61 +39,70 @@ const Nfs = () => {
             </tr>
           </thead>
           <tbody>
-            {state.map(
-              ({
-                id,
-                tipoNF,
-                residuo,
-                nfCliente,
-                nfGri,
-                processo,
-                statusNF,
-                statusBoleto,
-              }) => (
-                <tr key={id} id={id}>
-                  <td>{tipoNF}</td>
-                  <td>{residuo}</td>
-                  <td>{nfCliente}</td>
-                  <td>{nfGri}</td>
-                  <td>{processo}</td>
-                  <td
-                    className={
-                      statusNF === "Enviado"
-                        ? "nfs__status--true"
-                        : "nfs__status--false"
-                    }
-                  >
-                    {statusNF === "Enviado" ? "Enviado" : "Pendente"}
-                  </td>
-                  <td
-                    className={
-                      statusBoleto === "Enviado"
-                        ? "nfs__status--true"
-                        : "nfs__status--false"
-                    }
-                  >
-                    {statusBoleto === "Enviado" ? "Enviado" : "Pendente"}
-                  </td>
-                  <td className="test">
-                    <button className="nfs__table_icon">
-                      <DoneIcon onClick={() => dispatch(finalizeNfItem(id))} />
-                    </button>
-                    <button className="nfs__table_icon">
-                      <Link to={`nf/${id}`}>
-                        <EditIcon />
-                      </Link>
-                    </button>
-                    <button className="nfs__table_icon">
-                      <DeleteIcon onClick={() => dispatch(deleteNfItem(id))} />
-                    </button>
-                  </td>
-                </tr>
-              )
-            )}
+            {state &&
+              state.map(
+                ({
+                  id,
+                  tipoNF,
+                  residuo,
+                  nfCliente,
+                  nfGri,
+                  processo,
+                  statusNF,
+                  statusBoleto,
+                }) => (
+                  <tr key={id}>
+                    <td
+                      className={`${
+                        tipoNF === "Complementar" ? "addNF__tipo--red" : ""
+                      }`}
+                    >
+                      {tipoNF}
+                    </td>
+                    <td>{residuo}</td>
+                    <td>{nfCliente}</td>
+                    <td>{nfGri}</td>
+                    <td>{processo}</td>
+                    <td
+                      className={
+                        statusNF === "Enviado"
+                          ? "nfs__status--true"
+                          : "nfs__status--false"
+                      }
+                    >
+                      {statusNF === "Enviado" ? "Enviado" : "Pendente"}
+                    </td>
+                    <td
+                      className={
+                        statusBoleto === "Enviado"
+                          ? "nfs__status--true"
+                          : "nfs__status--false"
+                      }
+                    >
+                      {statusBoleto === "Enviado" ? "Enviado" : "Pendente"}
+                    </td>
+                    <td className="test">
+                      <button className="nfs__table_icon">
+                        <DoneIcon onClick={() => dispatch(nfFinalizeSet(id))} />
+                      </button>
+                      <button className="nfs__table_icon">
+                        <Link to={`nf/${id}`}>
+                          <EditIcon />
+                        </Link>
+                      </button>
+                      <button className="nfs__table_icon">
+                        <DeleteIcon
+                          onClick={() => dispatch(deleteNfItem(id))}
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                )
+              )}
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
   );
 };
 

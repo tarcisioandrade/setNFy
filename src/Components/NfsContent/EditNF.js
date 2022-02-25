@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { editNfItem } from "../../store/slices/setNotaFiscal";
+import { nfEditSet } from "../../store/slices/setNotaFiscal";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import "./AddNF.css";
 
 const EditNF = () => {
   const { id } = useParams();
-  const state = useSelector((state) => state);
+  const state = useSelector((state) => state.data);
   const nfTarget = state.filter((nf) => nf.id === id)[0];
 
   const [residuo, setResiduo] = React.useState(nfTarget.residuo);
@@ -27,7 +27,7 @@ const EditNF = () => {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(
-      editNfItem({
+      nfEditSet({
         id,
         tipoNF: tipoDaNF,
         residuo,
@@ -77,6 +77,7 @@ const EditNF = () => {
           NF Gri
         </Input>
         <Input
+          maxLength={6}
           value={processo}
           onChange={({ target }) => setProcesso(target.value)}
         >

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-import { setNfItem } from "../../store/slices/setNotaFiscal";
+import { nfSet } from "../../store/slices/setNotaFiscal";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import Radio from "../Inputs/Radio";
@@ -25,7 +25,7 @@ const AddNF = () => {
     e.preventDefault();
     if (residuo && nfCliente !== "") {
       dispatch(
-        setNfItem({
+        nfSet({
           id: generateID(),
           tipoNF,
           residuo,
@@ -65,6 +65,9 @@ const AddNF = () => {
         <Input
           required
           type="number"
+          min={0}
+          max={99999}
+          maxLength={99999}
           value={nfCliente}
           onChange={({ target }) => setNfCliente(target.value)}
         >
@@ -72,6 +75,9 @@ const AddNF = () => {
         </Input>
         <Input
           type="number"
+          min={0}
+          max={99999}
+          maxLength={99999}
           value={nfGri}
           onChange={({ target }) => setNfGri(target.value)}
         >
@@ -79,6 +85,8 @@ const AddNF = () => {
         </Input>
         <Input
           type="number"
+          max={999999}
+          maxLength={999999}
           value={processo}
           onChange={({ target }) => setProcesso(target.value)}
         >
