@@ -4,8 +4,8 @@ import "./Finalizados.css";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
-
   const state = useSelector((state) => state.completeList);
+  
   return (
     <section className="finalizados">
       <h1 className="finalizados__title">Nota Fiscais Finalizadas</h1>
