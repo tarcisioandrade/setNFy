@@ -33,7 +33,7 @@ const AddNF = () => {
           nfGri: nfGri === "" ? "" : Number(nfGri),
           processo: Number(processo.replace(regexp, ".")),
           statusNF: statusNF !== "" ? statusNF : "Pendente",
-          statusBoleto: statusBoleto !== "" ? statusNF : "Pendente",
+          statusBoleto: statusBoleto !== "" ? statusBoleto : "Pendente",
           statusFinal:
             statusNF === "Enviado" && statusBoleto === "Enviado"
               ? "Completo"

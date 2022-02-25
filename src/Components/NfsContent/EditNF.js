@@ -44,6 +44,7 @@ const EditNF = () => {
     );
     navigate("/");
   }
+
   return (
     <section className="addNF" onSubmit={handleSubmit}>
       <h1 className="addNF__title">Editar Nota Fiscal</h1>
