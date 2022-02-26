@@ -14,8 +14,6 @@ svg {
 }
 
 .App {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 12rem auto;
-      grid-template-columns: 12rem auto;
+  max-width: 1366px;
+  margin: 0 auto;
 }

@@ -49,7 +49,6 @@ const EditNF = () => {
 
   return (
     <section className="addNF" onSubmit={handleSubmit}>
-      <h1 className="addNF__title">Editar Nota Fiscal</h1>
       <form className="addNF__form">
         <p
           className={`addNF__tipo ${

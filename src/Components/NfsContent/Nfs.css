@@ -1,5 +1,6 @@
 .nfs {
-  margin-top: 3.4375rem;
+  padding: 1rem;
+  margin-top: calc(2.5rem + 62px);
 }
 
 .nfs__header {
@@ -13,6 +14,7 @@
 }
 
 .nfs__header h2 {
+  color: #181818;
   font-family: "Nunito", sans-serif;
   -webkit-box-flex: 1;
       -ms-flex: 1;

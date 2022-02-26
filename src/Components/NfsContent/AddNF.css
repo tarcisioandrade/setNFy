@@ -1,4 +1,5 @@
 .addNF {
+  margin-top: 3.75rem;
   padding: 2rem 2rem 0rem 2rem;
 }
 
@@ -7,10 +8,6 @@
   font-weight: 100;
   font-size: 2rem;
   color: #181818;
-}
-
-.addNF__form {
-  margin-top: 1.5625rem;
 }
 
 .addNF__tipo {
@@ -45,11 +42,11 @@
   border: none;
   color: #fff;
   cursor: pointer;
-  margin-top: 1rem;
+  margin: 1rem 0;
   border-radius: 3px;
   font-size: 1.125rem;
-  -webkit-transition: .3s;
-  transition: .3s;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .addNF__button:hover {

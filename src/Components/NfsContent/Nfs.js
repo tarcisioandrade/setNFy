@@ -86,7 +86,15 @@ const Nfs = () => {
                     </td>
                     <td className="test">
                       <button className="nfs__table_icon">
-                        <DoneIcon onClick={() => modalConfirm(id,`Deseja Finalizar o Processo da NF ${nfGri}?`, nfFinalizeSet)} />
+                        <DoneIcon
+                          onClick={() =>
+                            modalConfirm(
+                              id,
+                              `Deseja Finalizar o Processo da NF ${nfGri}?`,
+                              nfFinalizeSet
+                            )
+                          }
+                        />
                       </button>
                       <button className="nfs__table_icon">
                         <Link to={`nf/${id}`}>
@@ -95,7 +103,13 @@ const Nfs = () => {
                       </button>
                       <button className="nfs__table_icon">
                         <DeleteIcon
-                          onClick={() => modalConfirm(id, `Deseja Deletar a NF ${nfGri}?`, deleteNfItem)}
+                          onClick={() =>
+                            modalConfirm(
+                              id,
+                              `Deseja Remover a NF ${nfGri}?`,
+                              deleteNfItem
+                            )
+                          }
                         />
                       </button>
                     </td>

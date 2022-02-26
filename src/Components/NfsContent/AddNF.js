@@ -44,7 +44,6 @@ const AddNF = () => {
 
   return (
     <section className="addNF">
-      <h1 className="addNF__title">Adicione uma Nota Fiscal</h1>
       <form className="addNF__form" onSubmit={handleSubmite}>
         <div className="addNf__row--radio">
           <Radio
