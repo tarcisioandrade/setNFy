@@ -1,6 +1,7 @@
 @import "../../_var-mixins";
 
 .addNF {
+  margin-top: rem(60);
   padding: 2rem 2rem 0rem 2rem;
 }
 
@@ -9,10 +10,6 @@
   font-weight: 100;
   font-size: rem(32);
   color: $preto;
-}
-
-.addNF__form {
-  margin-top: rem(25);
 }
 
 .addNF__tipo {
@@ -43,10 +40,10 @@
   border: none;
   color: $branco;
   cursor: pointer;
-  margin-top: rem();
+  margin: rem() 0;
   border-radius: 3px;
   font-size: rem(18);
-  transition: .3s;
+  transition: 0.3s;
   &:hover {
     background-color: $azul-forte;
   }

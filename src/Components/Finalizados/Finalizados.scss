@@ -1,21 +1,16 @@
 @import "../../var-mixins";
 
 .finalizados {
-  padding: 1.7rem;
+  padding: 1rem;
+  margin-top: calc(2.5rem + 62px);
 }
-.finalizados__title {
-  font-family: $font-nunito;
-  font-weight: 100;
-  font-size: rem(32);
-  color: $preto;
-  margin-right: rem();
-}
+
 .finalizados__header {
-  margin-top: rem(55);
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
   h2 {
+    color: $preto;
     font-family: $font-nunito;
     flex: 1;
   }
@@ -29,7 +24,7 @@
   background-size: 24px;
   border: 2px solid $azul-fraco;
   border-radius: 3px;
-  margin-right: 2rem;
+  margin-right: rem();
   &:focus,
   &:hover {
     outline: none;
@@ -72,7 +67,7 @@
       width: rem(198);
     }
     th:nth-child(2) {
-      width: rem(280);
+      min-width: rem(280);
     }
     th:nth-child(3),
     th:nth-child(4) {

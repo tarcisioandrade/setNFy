@@ -8,8 +8,8 @@ const Finalizados = () => {
 
   return (
     <section className="finalizados">
-      <h1 className="finalizados__title">Nota Fiscais Finalizadas</h1>
       <div className="finalizados__header">
+        <h2>Nota Fiscais Finalizadas</h2>
         <input
           type="search"
           name="search"
