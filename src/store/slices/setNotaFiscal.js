@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import data from "../helper/data";
+
 const slice = createSlice({
   name: "setNotaFiscal",
   initialState: {
@@ -53,6 +54,7 @@ export const {
 
 export const nfSet = (payload) => (dispatch) => {
   if (payload.statusFinal === "Completo") {
+    window.alert("Processo da NF concluído, movido para finalizados.");
     dispatch(setCompletList(payload));
     dispatch(deleteNfItem(payload.id));
   } else {
@@ -62,6 +64,7 @@ export const nfSet = (payload) => (dispatch) => {
 
 export const nfEditSet = (payload) => (dispatch) => {
   if (payload.statusFinal === "Completo") {
+    window.alert("Processo da NF concluído, movido para finalizados.");
     dispatch(editNfItem(payload));
     dispatch(setCompletList(payload));
     dispatch(deleteNfItem(payload.id));

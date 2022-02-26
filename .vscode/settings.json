@@ -4,6 +4,7 @@
     "package-lock.json": true,
     "package.json": true,
     ".gitignore": true,
-    ".vscode": true
+    ".vscode": true,
+    "build": true,
   }
 }

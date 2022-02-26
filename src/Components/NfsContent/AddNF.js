@@ -23,26 +23,25 @@ const AddNF = () => {
 
   function handleSubmite(e) {
     e.preventDefault();
-    if (residuo && nfCliente !== "") {
-      dispatch(
-        nfSet({
-          id: generateID(),
-          tipoNF,
-          residuo,
-          nfCliente: Number(nfCliente),
-          nfGri: nfGri === "" ? "" : Number(nfGri),
-          processo: Number(processo.replace(regexp, ".")),
-          statusNF: statusNF !== "" ? statusNF : "Pendente",
-          statusBoleto: statusBoleto !== "" ? statusBoleto : "Pendente",
-          statusFinal:
-            statusNF === "Enviado" && statusBoleto === "Enviado"
-              ? "Completo"
-              : "Incompleto",
-        })
-      );
-      navigate("/");
-    }
+    dispatch(
+      nfSet({
+        id: generateID(),
+        tipoNF,
+        residuo,
+        nfCliente: Number(nfCliente),
+        nfGri: nfGri === "" ? "" : Number(nfGri),
+        processo: Number(processo.replace(/\./g, "").replace(regexp, ".")),
+        statusNF: statusNF !== "" ? statusNF : "Pendente",
+        statusBoleto: statusBoleto !== "" ? statusBoleto : "Pendente",
+        statusFinal:
+          statusNF === "Enviado" && statusBoleto === "Enviado"
+            ? "Completo"
+            : "Incompleto",
+      })
+    );
+    navigate("/");
   }
+
   return (
     <section className="addNF">
       <h1 className="addNF__title">Adicione uma Nota Fiscal</h1>
