@@ -14,8 +14,6 @@ svg {
 }
 
 .App {
-  max-width: 1368px;
-  margin: 0 auto;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 12rem auto;

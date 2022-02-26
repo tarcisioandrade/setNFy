@@ -33,7 +33,9 @@ const EditNF = () => {
         residuo,
         nfCliente: Number(nfCliente),
         nfGri: nfGri === "" ? "" : Number(nfGri),
-        processo: Number(processo.toString().replace(regexp, ".")),
+        processo: Number(
+          processo.toString().replace(/\./g, "").replace(regexp, ".")
+        ),
         statusNF,
         statusBoleto,
         statusFinal:
@@ -78,7 +80,7 @@ const EditNF = () => {
           NF Gri
         </Input>
         <Input
-          maxLength={6}
+          maxLength={7}
           value={processo}
           onChange={({ target }) => setProcesso(target.value)}
         >

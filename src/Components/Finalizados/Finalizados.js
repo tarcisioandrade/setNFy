@@ -5,7 +5,7 @@ import "./Finalizados.css";
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const state = useSelector((state) => state.completeList);
-  
+
   return (
     <section className="finalizados">
       <h1 className="finalizados__title">Nota Fiscais Finalizadas</h1>
@@ -31,7 +31,7 @@ const Finalizados = () => {
           </thead>
           <tbody>
             {state
-              .filter(({ residuo, nfCliente, nfGri }) => {
+              .filter(({ tipoNF, residuo, nfCliente, nfGri, processo }) => {
                 if (searchValue === "") {
                   return residuo;
                 } else if (
@@ -41,9 +41,19 @@ const Finalizados = () => {
                 ) {
                   return residuo;
                 } else if (
+                  tipoNF
+                    .toLocaleLowerCase()
+                    .includes(searchValue.toLocaleLowerCase())
+                ) {
+                  return residuo;
+                } else if (
                   nfCliente.toString().includes(searchValue.toString())
                 ) {
                   return nfCliente;
+                } else if (
+                  processo.toString().replace(/\./g, "").includes(searchValue.toString().replace(/\./g, ""))
+                ) {
+                  return processo;
                 } else if (nfGri.toString().includes(searchValue.toString())) {
                   return nfGri;
                 } else {

@@ -12,13 +12,16 @@ const Nfs = () => {
   const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
+  function modalConfirm(id, message, action) {
+    if (window.confirm(message)) {
+      dispatch(action(id));
+    }
+  }
+
   return (
     <div className="nfs">
       <div className="nfs__header">
         <h2>Notas Fiscais</h2>
-        <div className="nfs__search">
-          <input type="search" name="search" />
-        </div>
         <button onClick={() => navigate("/adicionar")} className="nfs__add">
           +
         </button>
@@ -31,8 +34,8 @@ const Nfs = () => {
               <th>Tipo</th>
               <th>Resíduo</th>
               <th>NF Cliente</th>
-              <th>NF Gri</th>
               <th>Nº Processo</th>
+              <th>NF Gri</th>
               <th>Status NF</th>
               <th>Status Boleto</th>
               <th>Acões</th>
@@ -61,8 +64,8 @@ const Nfs = () => {
                     </td>
                     <td>{residuo}</td>
                     <td>{nfCliente}</td>
-                    <td>{nfGri}</td>
                     <td>{processo}</td>
+                    <td>{nfGri}</td>
                     <td
                       className={
                         statusNF === "Enviado"
@@ -83,7 +86,7 @@ const Nfs = () => {
                     </td>
                     <td className="test">
                       <button className="nfs__table_icon">
-                        <DoneIcon onClick={() => dispatch(nfFinalizeSet(id))} />
+                        <DoneIcon onClick={() => modalConfirm(id,`Deseja Finalizar o Processo da NF ${nfGri}?`, nfFinalizeSet)} />
                       </button>
                       <button className="nfs__table_icon">
                         <Link to={`nf/${id}`}>
@@ -92,7 +95,7 @@ const Nfs = () => {
                       </button>
                       <button className="nfs__table_icon">
                         <DeleteIcon
-                          onClick={() => dispatch(deleteNfItem(id))}
+                          onClick={() => modalConfirm(id, `Deseja Deletar a NF ${nfGri}?`, deleteNfItem)}
                         />
                       </button>
                     </td>
