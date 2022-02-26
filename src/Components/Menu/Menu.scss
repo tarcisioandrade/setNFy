@@ -17,7 +17,13 @@
     text-decoration: none;
   }
 }
-
+.menu__logo-content {
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: .5rem;
+  }
+}
 .menu__logo {
   color: $branco;
   text-align: center;

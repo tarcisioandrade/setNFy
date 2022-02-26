@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Head from "../Head/Head";
 import "./Finalizados.css";
 
 const Finalizados = () => {
@@ -8,6 +9,7 @@ const Finalizados = () => {
 
   return (
     <section className="finalizados">
+      <Head title="Finalizadas" description="NFs Finalizadas"/>
       <div className="finalizados__header">
         <h2>Nota Fiscais Finalizadas</h2>
         <input
