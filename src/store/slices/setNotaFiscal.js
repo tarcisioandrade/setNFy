@@ -5,7 +5,7 @@ const slice = createSlice({
   name: "setNotaFiscal",
   initialState: {
     data,
-    completeList: data,
+    completeList: [],
   },
   reducers: {
     setNfItem(state, action) {
@@ -36,9 +36,12 @@ const slice = createSlice({
       { statusFinal: (nf[0].statusFinal = "Completo") });
     },
     setCompletList(state, action) {
-      const nf = state.data.filter(
-        (nf) => nf.id === action.payload || action.payload.id
-      );
+      let nf;
+      if (typeof action.payload === "object") {
+        nf = state.data.filter((nf) => nf.id === action.payload.id);
+      } else {
+        nf = state.data.filter((nf) => nf.id === action.payload);
+      }
       state.completeList.unshift(...nf);
     },
   },

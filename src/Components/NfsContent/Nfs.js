@@ -6,6 +6,7 @@ import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
 import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
 import { deleteNfItem, nfFinalizeSet } from "../../store/slices/setNotaFiscal";
+import Head from "../Head/Head";
 
 const Nfs = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Nfs = () => {
 
   return (
     <div className="nfs">
+      <Head title="Gerenciador de Notas Fiscais" descripion="Gerencie e controle suas notas fiscais"/>
       <div className="nfs__header">
         <h2>Notas Fiscais</h2>
         <button onClick={() => navigate("/adicionar")} className="nfs__add">

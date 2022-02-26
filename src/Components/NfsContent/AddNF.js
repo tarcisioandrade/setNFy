@@ -7,6 +7,7 @@ import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import Radio from "../Inputs/Radio";
 import "./AddNF.css";
+import Head from "../Head/Head";
 
 const AddNF = () => {
   const [residuo, setResiduo] = React.useState("");
@@ -44,6 +45,7 @@ const AddNF = () => {
 
   return (
     <section className="addNF">
+      <Head title="Adicionar Nota Fiscal" descripion="Adicione uma Nota Fiscal"/>
       <form className="addNF__form" onSubmit={handleSubmite}>
         <div className="addNf__row--radio">
           <Radio

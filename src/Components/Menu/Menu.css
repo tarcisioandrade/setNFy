@@ -24,6 +24,19 @@
   text-decoration: none;
 }
 
+.menu__logo-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.menu__logo-content svg {
+  margin-right: .5rem;
+}
+
 .menu__logo {
   color: #fff;
   text-align: center;

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { nfEditSet } from "../../store/slices/setNotaFiscal";
+import Head from "../Head/Head";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import "./AddNF.css";
@@ -49,6 +50,7 @@ const EditNF = () => {
 
   return (
     <section className="addNF" onSubmit={handleSubmit}>
+      <Head title="Editar Nota Fiscal" descripion="Modifique uma Nota Fiscal"/>
       <form className="addNF__form">
         <p
           className={`addNF__tipo ${
