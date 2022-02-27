@@ -10,7 +10,6 @@ const Home = () => {
   return (
     <>
       <Menu />
-
       <Routes>
         <Route path="/" element={<Nfs />} />
         <Route path="adicionar" element={<AddNF />} />
