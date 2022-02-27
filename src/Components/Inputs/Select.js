@@ -1,15 +1,15 @@
 import React from "react";
 import "./Input.css";
-const Select = ({ onChange, optionOne, optionTwo, label, value }) => {
+const Select = React.forwardRef(({ onChange, onBlur, name, label },ref) => {
   return (
     <label className="labelComp">
       {label}
-      <select value={value} className="inputComp" onChange={onChange}>
-        <option>{optionOne}</option>
-        <option>{optionTwo}</option>
+      <select className="inputComp" name={name} ref={ref} onChange={onChange} onBlur={onBlur}>
+        <option value="Pendente">Pendente</option>
+        <option value="Enviado">Enviado</option>
       </select>
     </label>
   );
-};
+});
 
 export default Select;

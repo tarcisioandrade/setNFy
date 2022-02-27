@@ -1,18 +1,19 @@
 import React from "react";
 import "./Input.css";
 
-const Input = ({ type = "text", placeholder, children, ...props }) => {
+const Input = React.forwardRef(({ type = "text", children, ...props }, ref) => {
+  
   return (
     <label className="labelComp">
       {children}
       <input
         className="inputComp"
         type={type}
-        placeholder={placeholder}
+        ref={ref}
         {...props}
       />
     </label>
   );
-};
+});
 
 export default Input;

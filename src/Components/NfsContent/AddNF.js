@@ -8,22 +8,29 @@ import Select from "../Inputs/Select";
 import Radio from "../Inputs/Radio";
 import "./AddNF.css";
 import Head from "../Head/Head";
+import { useForm } from "react-hook-form";
+import Error from "../Error/Error";
 
 const AddNF = () => {
-  const [residuo, setResiduo] = React.useState("");
-  const [nfCliente, setNfCliente] = React.useState("");
-  const [nfGri, setNfGri] = React.useState("");
-  const [processo, setProcesso] = React.useState("");
-  const [statusNF, setStatusNF] = React.useState("");
-  const [statusBoleto, setStatusBoleto] = React.useState("");
+  // Tipo de NF Venda por padrão
   const [tipoNF, setTipoNF] = React.useState("Venda");
 
+  // State Redux Métodos
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // Utilities
   const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
-  function handleSubmite(e) {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
+      data;
     dispatch(
       nfSet({
         id: generateID(),
@@ -31,9 +38,11 @@ const AddNF = () => {
         residuo,
         nfCliente: Number(nfCliente),
         nfGri: nfGri === "" ? "" : Number(nfGri),
-        processo: Number(processo.replace(/\./g, "").replace(regexp, ".")),
-        statusNF: statusNF !== "" ? statusNF : "Pendente",
-        statusBoleto: statusBoleto !== "" ? statusBoleto : "Pendente",
+        processo: Number(
+          processo.toString().replace(/\./g, "").replace(regexp, ".")
+        ),
+        statusNF,
+        statusBoleto,
         statusFinal:
           statusNF === "Enviado" && statusBoleto === "Enviado"
             ? "Completo"
@@ -41,12 +50,15 @@ const AddNF = () => {
       })
     );
     navigate("/");
-  }
+  };
 
   return (
     <section className="addNF">
-      <Head title="Adicionar Nota Fiscal" descripion="Adicione uma Nota Fiscal"/>
-      <form className="addNF__form" onSubmit={handleSubmite}>
+      <Head
+        title="Adicionar Nota Fiscal"
+        descripion="Adicione uma Nota Fiscal"
+      />
+      <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="addNf__row--radio">
           <Radio
             options={["Venda", "Complementar"]}
@@ -55,59 +67,54 @@ const AddNF = () => {
           />
         </div>
         <Input
-          required
+          {...register("residuo", {
+            required: "Insira um nome do resíduo.",
+            pattern: {
+              value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
+              message: "Digite apenas letras",
+            },
+          })}
           placeholder="ex: Tambores"
-          value={residuo}
-          onChange={({ target }) => setResiduo(target.value)}
         >
           Resíduo*
         </Input>
+        {errors.residuo?.message && <Error message={errors.residuo.message} />}
         <Input
-          required
+          {...register("nfCliente", {
+            required: "Insira o número da NF do Cliente.",
+            maxLength: { value: 5, message: "Digite no máximo 5 números." },
+          })}
           type="number"
-          min={0}
-          max={99999}
-          maxLength={99999}
-          value={nfCliente}
-          onChange={({ target }) => setNfCliente(target.value)}
         >
           NF Cliente*
         </Input>
+        {errors.nfCliente?.message && (
+          <Error message={errors.nfCliente.message} />
+        )}
         <Input
           type="number"
-          min={0}
-          max={99999}
-          maxLength={99999}
-          value={nfGri}
-          onChange={({ target }) => setNfGri(target.value)}
+          {...register("nfGri", {
+            maxLength: { value: 4, message: "Digite no máximo 4 números." },
+          })}
         >
           NF Gri
         </Input>
+        {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
-          type="number"
-          max={999999}
-          maxLength={999999}
-          value={processo}
-          onChange={({ target }) => setProcesso(target.value)}
+          {...register("processo", {
+            required: "Insira o número do processo Lecom",
+            valueAsNumber: true,
+          })}
         >
-          Nª Processo Lecom
+          Nª Processo Lecom*
         </Input>
+        {errors.processo?.message && (
+          <Error message={errors.processo.message} />
+        )}
         <div className="addNf__row">
-          <Select
-            value={statusNF}
-            onChange={({ target }) => setStatusNF(target.value)}
-            label="Status NF"
-            optionOne="Pendente"
-            optionTwo="Enviado"
-          ></Select>
+          <Select label="Status NF" {...register("statusNF")}></Select>
 
-          <Select
-            value={statusBoleto}
-            onChange={({ target }) => setStatusBoleto(target.value)}
-            label="Status Boleto"
-            optionOne="Pendente"
-            optionTwo="Enviado"
-          ></Select>
+          <Select label="Status Boleto" {...register("statusBoleto")}></Select>
         </div>
         <button className="addNF__button">Adicionar</button>
       </form>
