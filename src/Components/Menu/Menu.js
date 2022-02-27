@@ -20,7 +20,6 @@ const Menu = () => {
         <li>
           <HomeIcon className="menu__icon" />
           <Link to="/">Inicio</Link>
-          {/* <a href="/">Inicio</a> */}
         </li>
         <li>
           <DoneIcon className="menu__icon" />

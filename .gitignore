@@ -2,3 +2,5 @@ node_modules
 .vscode
 build
 .gitignore
+public/netlify.toml
+public/_redirects

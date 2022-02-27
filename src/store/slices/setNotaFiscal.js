@@ -21,6 +21,7 @@ const slice = createSlice({
           state.data[i].processo = action.payload.processo;
           state.data[i].statusNF = action.payload.statusNF;
           state.data[i].statusBoleto = action.payload.statusBoleto;
+          state.data[i].statusFinal = action.payload.statusFinal;
         }
       }
     },
@@ -58,6 +59,7 @@ export const {
 export const nfSet = (payload) => (dispatch) => {
   if (payload.statusFinal === "Completo") {
     window.alert("Processo da NF concluído, movido para finalizados.");
+    dispatch(setNfItem(payload));
     dispatch(setCompletList(payload));
     dispatch(deleteNfItem(payload.id));
   } else {
