@@ -5,7 +5,7 @@ import "./Finalizados.css";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
-  const state = useSelector((state) => state.completeList);
+  const state = useSelector((state) => state.setNotaFiscal.completeList);
 
   return (
     <section className="finalizados">
