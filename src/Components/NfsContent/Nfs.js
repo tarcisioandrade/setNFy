@@ -10,7 +10,7 @@ import Head from "../Head/Head";
 
 const Nfs = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state.data);
+  const state = useSelector((state) => state.setNotaFiscal.data);
   const dispatch = useDispatch();
 
   function modalConfirm(id, message, action) {
@@ -20,7 +20,7 @@ const Nfs = () => {
   }
 
   return (
-    <div className="nfs">
+    <section className="nfs">
       <Head title="Gerenciador de Notas Fiscais" descripion="Gerencie e controle suas notas fiscais"/>
       <div className="nfs__header">
         <h2>Notas Fiscais</h2>
@@ -121,7 +121,7 @@ const Nfs = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </section>
   );
 };
 

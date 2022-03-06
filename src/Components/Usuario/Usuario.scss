@@ -1,0 +1,47 @@
+@import "../../_var-mixins";
+
+.usuario {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.usuario__form {
+  min-width: rem(400);
+  background-color: $azul-forte;
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+.usuario__button {
+  display: block;
+  padding: rem(12);
+  background-color: $azul;
+  border: none;
+  color: $branco;
+  cursor: pointer;
+  margin: rem() 0 0 0;
+  border-radius: 3px;
+  font-size: rem(18);
+  transition: 0.3s;
+  width: 100%;
+}
+.labelComp {
+  color: white;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.usuario__link {
+  margin-top: .5rem;
+  font-family: $font-nunito;
+  color: $branco;
+  a {
+    color: $azul-fraco;
+  }
+}
+.error-message {
+  margin-top: .2rem;
+}

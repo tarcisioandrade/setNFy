@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Finalizados from "../Finalizados/Finalizados";
 import Menu from "../Menu/Menu";
 import AddNF from "../NfsContent/AddNF";
@@ -7,6 +8,8 @@ import EditNF from "../NfsContent/EditNF";
 import Nfs from "../NfsContent/Nfs";
 
 const Home = () => {
+  const state = useSelector((state) => state.setUser.login);
+  if (state.data === null || state.data.token === null) return <Navigate to="/user/login" />;
   return (
     <>
       <Menu />

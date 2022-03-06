@@ -1,0 +1,60 @@
+.usuario body {
+  background-color: #B1D0E0;
+}
+
+.usuario {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.usuario__form {
+  min-width: 25rem;
+  background-color: #1A374D;
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+.usuario__button {
+  display: block;
+  padding: 0.75rem;
+  background-color: #406882;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin: 1rem 0 0 0;
+  border-radius: 3px;
+  font-size: 1.125rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.labelComp {
+  color: white;
+}
+
+.labelComp:first-child {
+  margin-top: 0;
+}
+
+.usuario__link {
+  margin-top: .5rem;
+  font-family: "Nunito", sans-serif;
+  color: #fff;
+}
+
+.usuario__link a {
+  color: #B1D0E0;
+}
+
+.error-message {
+  margin-top: .2rem;
+}
