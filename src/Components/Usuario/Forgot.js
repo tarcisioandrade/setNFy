@@ -4,6 +4,7 @@ import "./Usuario.css";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
 import Head from "../Head/Head";
+import { Link } from "react-router-dom";
 
 const Forgot = () => {
   const {
@@ -32,6 +33,9 @@ const Forgot = () => {
         >
           E-mail
         </Input>
+        <p className="usuario__link">
+          Lembrou a senha? <Link to="/user/login">Faça Login</Link>
+        </p>
         {errors.email?.message && <Error message={errors.email.message} />}
         <button className="usuario__button">Enviar</button>
       </form>

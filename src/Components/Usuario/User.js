@@ -1,10 +1,17 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import Forgot from "./Forgot";
+import { useSelector } from "react-redux";
 
 const User = () => {
+  const state = useSelector((state) => state.setUser.login);
+  React.useEffect(() => {}, [state.data]);
+  if ((state.data !== null) & (state.data?.token !== null)) {
+    document.body.style.backgroundColor = "white";
+    return <Navigate to="/" />;
+  }
   return (
     <>
       <Routes>
