@@ -1,7 +1,3 @@
-.usuario body {
-  background-color: #B1D0E0;
-}
-
 .usuario {
   height: 100vh;
   display: -webkit-box;
@@ -49,6 +45,7 @@
   margin-top: .5rem;
   font-family: "Nunito", sans-serif;
   color: #fff;
+  font-size: .875rem;
 }
 
 .usuario__link a {

@@ -2,6 +2,7 @@ import createAsyncSlice from "../helper/createAsyncSlice";
 import { combineReducers } from "@reduxjs/toolkit";
 import getLocalStorage from "../helper/getLocalStorage";
 
+// SLICES
 const setLogin = createAsyncSlice({
   name: "setUser",
   initialState: {
@@ -59,29 +60,36 @@ const setUserToken = createAsyncSlice({
 const setLoginToken = setUserToken.asyncAction;
 
 // METODOS
+
+// CADASTRO DO USUARIO
 export const signup = (user) => async (dispatch) => {
   try {
     await dispatch(fetchRegister(user));
   } catch (error) {}
 };
 
+// LOGIN DO USUARIO
 export const login = (user) => async (dispatch) => {
   try {
     await dispatch(fetchUser(user));
   } catch (error) {}
 };
 
+// LOGIN AUTOMATICO DO USUARIO
 export const autoLogin = () => async (dispatch, getState) => {
   const state = getState();
   const { token } = state.setUser.login.data;
   if (token) await dispatch(setLoginToken(token));
 };
 
+// DESLOGA O USUARIO
 export const logout = () => (dispatch) => {
   dispatch(removeUser());
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("id_user");
 };
+
+
 const reducer = combineReducers({
   login: setLogin.reducer,
   register: setSignup.reducer,

@@ -30,15 +30,17 @@ const Signup = () => {
     navigate("/user/login")
   };
 
-  document.body.style.backgroundColor = "#B1D0E0";
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
       <Head title="Criar uma Conta" descripion="Cria uma conta" />
       <form className="usuario__form">
         <Input
-          {...register("usuario", { required: "Insira um nome de usuário" })}
+          {...register("usuario", { required: "Insira um nome de usuário", pattern: {
+            value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
+            message: "Digite apenas letras"
+          } })}
         >
-          Usuário
+          Usuário:
         </Input>
         {errors.usuario?.message && <Error message={errors.usuario.message} />}
         <Input
@@ -50,7 +52,7 @@ const Signup = () => {
             },
           })}
         >
-          E-mail
+          E-mail:
         </Input>
         {errors.email?.message && <Error message={errors.email.message} />}
         <Input
@@ -63,13 +65,13 @@ const Signup = () => {
             },
           })}
         >
-          Senha
+          Senha:
         </Input>
         {errors.senha?.message && <Error message={errors.senha.message} />}
         <p className="usuario__link">
           Já possui uma conta? <Link to="/user/login">Faça Login</Link>
         </p>
-        {loading ? <button disabled style={{cursor: "wait"}} className="usuario__button">Enviando...</button> : <button className="usuario__button">Enviar</button>}
+        {loading ? <button disabled style={{cursor: "wait"}} className="usuario__button">Registrando...</button> : <button className="usuario__button">Registrar</button>}
       </form>
     </section>
   );

@@ -4,7 +4,7 @@ import "./Usuario.css";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
 import Head from "../Head/Head";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login } from "../../store/slices/setUser";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,9 +15,8 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
 
-  const {data, loading, error} = useSelector(state => state.setUser.login);
+  const { loading, error } = useSelector((state) => state.setUser.login);
 
   const onSubmit = (data) => {
     const { email, senha } = data;
@@ -29,13 +28,6 @@ const Login = () => {
     );
   };
 
-  React.useEffect(() => {
-    if(data && data.ok) {
-      window.location.replace("http://localhost:3001");
-    }
-  }, [navigate, data])
-
-  document.body.style.backgroundColor = "#B1D0E0";
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
       <Head title="Login" descripion="Logar em uma conta" />
@@ -49,7 +41,7 @@ const Login = () => {
             },
           })}
         >
-          E-mail
+          E-mail:
         </Input>
         {errors.email?.message && <Error message={errors.email.message} />}
         <p className="usuario__link">
@@ -65,14 +57,24 @@ const Login = () => {
             },
           })}
         >
-          Senha
+          Senha:
         </Input>
         {error && <Error message={error} />}
         {errors.senha?.message && <Error message={errors.senha.message} />}
         <p className="usuario__link usuario__link--margin">
           Esqueçeu a senha? <Link to="/user/forgot">Recuperar</Link>
         </p>
-        {loading ? <button disabled style={{cursor: "wait"}} className="usuario__button">Logando...</button> : <button className="usuario__button">Enviar</button>}
+        {loading ? (
+          <button
+            disabled
+            style={{ cursor: "wait" }}
+            className="usuario__button"
+          >
+            Logando...
+          </button>
+        ) : (
+          <button className="usuario__button">Login</button>
+        )}
       </form>
     </section>
   );
