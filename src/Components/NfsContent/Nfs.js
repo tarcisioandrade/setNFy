@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Nfs.css";
 import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
@@ -7,21 +7,37 @@ import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
 import { deleteNfItem, nfFinalizeSet } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 
 const Nfs = () => {
   const navigate = useNavigate();
   const state = useSelector((state) => state.setNotaFiscal.data);
-  const dispatch = useDispatch();
+  const [toggleModal, setToggleModal] = React.useState(false);
+  const [finalize, setFinalize] = React.useState({
+    id: null,
+    message: null,
+    action: null,
+  });
 
-  function modalConfirm(id, message, action) {
-    if (window.confirm(message)) {
-      dispatch(action(id));
-    }
+  function openModal() {
+    setToggleModal(true);
+  }
+
+  function closeModal() {
+    setToggleModal(false);
   }
 
   return (
     <section className="nfs">
-      <Head title="Gerenciador de Notas Fiscais" descripion="Gerencie e controle suas notas fiscais"/>
+      <ModalConfirm
+        closeModal={closeModal}
+        toggleModal={toggleModal}
+        finalize={finalize}
+      />
+      <Head
+        title="Gerenciador de Notas Fiscais"
+        description="Gerencie e controle suas notas fiscais"
+      />
       <div className="nfs__header">
         <h2>Notas Fiscais</h2>
         <button onClick={() => navigate("/adicionar")} className="nfs__add">
@@ -89,13 +105,14 @@ const Nfs = () => {
                     <td className="test">
                       <button className="nfs__table_icon">
                         <DoneIcon
-                          onClick={() =>
-                            modalConfirm(
+                          onClick={() => {
+                            openModal();
+                            setFinalize({
                               id,
-                              `Deseja Finalizar o Processo da NF ${nfGri}?`,
-                              nfFinalizeSet
-                            )
-                          }
+                              message: `Deseja finalizar o processo da NF ${nfGri}?`,
+                              action: nfFinalizeSet,
+                            });
+                          }}
                         />
                       </button>
                       <button className="nfs__table_icon">
@@ -105,13 +122,14 @@ const Nfs = () => {
                       </button>
                       <button className="nfs__table_icon">
                         <DeleteIcon
-                          onClick={() =>
-                            modalConfirm(
+                          onClick={() => {
+                            openModal();
+                            setFinalize({
                               id,
-                              `Deseja Remover a NF ${nfGri}?`,
-                              deleteNfItem
-                            )
-                          }
+                              message: `Deseja remover a NF ${nfGri}?`,
+                              action: deleteNfItem,
+                            });
+                          }}
                         />
                       </button>
                     </td>

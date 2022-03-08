@@ -12,7 +12,7 @@ import Error from "../Error/Error";
 const EditNF = () => {
   // Seleciona a array especifica para editar
   const { id } = useParams();
-  const state = useSelector((state) => state.data);
+  const state = useSelector((state) => state.setNotaFiscal.data);
   const nfTarget = state.filter((nf) => nf.id === id)[0];
   const tipoNF = nfTarget?.tipoNF;
 

@@ -33,11 +33,11 @@
   width: 100%;
 }
 
-.labelComp {
+.usuario__form .labelComp {
   color: white;
 }
 
-.labelComp:first-child {
+.usuario__form .labelComp:first-child {
   margin-top: 0;
 }
 
