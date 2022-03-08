@@ -57,7 +57,6 @@ const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
           </div>
         </div>
       </Modal>
-      ;
     </>
   );
 };
