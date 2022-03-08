@@ -4,16 +4,32 @@ import { ReactComponent as HomeIcon } from "../../imgs/home-outline.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/checkmark-done-outline.svg";
 import { ReactComponent as UserIcon } from "../../imgs/person-sharp.svg";
 import { ReactComponent as Logo } from "../../imgs/logo.svg";
+import { ReactComponent as Logout } from "../../imgs/logout.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { logout } from "../../store/slices/setUser";
+import getLocalStorage from "../../store/helper/getLocalStorage";
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 
 const Menu = () => {
-  const dispatch = useDispatch()
+  const [confirmLogout, setConfirmLogout] = React.useState({
+    id: null,
+    action: null,
+    message: null,
+  });
+  const [toggleModal, setToggleModal] = React.useState(false);
+  const username = getLocalStorage("username", null);
+
+  function openModal() {
+    setToggleModal(true);
+  }
+  function closeModal() {
+    setToggleModal(false);
+  }
+
   return (
     <header className="menu">
       <div className="menu__logo-content">
-          <Logo />
+        <Logo />
         <a href="/" className="menu__logo">
           SetNFy
         </a>
@@ -30,10 +46,24 @@ const Menu = () => {
         </li>
       </ul>
       <div className="menu__user">
-        <UserIcon className="menu__user_icon" />
-        <p className="menu__user_name">Tarcisio Andrade</p>
+        <UserIcon className="menu__user_icon menu__user_icon--user" />
+        <p className="menu__user_name">{username}</p>
+        <Logout
+          className="menu__user_icon menu__user_icon--logout"
+          onClick={() => {
+            openModal();
+            setConfirmLogout({
+              action: logout,
+              message: "Deseja encerrar a sessão?",
+            });
+          }}
+        />
       </div>
-      <button onClick={() => dispatch(logout())}>Deslogar</button>
+      <ModalConfirm
+        closeModal={closeModal}
+        toggleModal={toggleModal}
+        finalize={confirmLogout}
+      />
     </header>
   );
 };

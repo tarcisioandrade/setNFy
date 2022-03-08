@@ -80,15 +80,26 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-right: 16px;
 }
 
-.menu__user_icon {
-  width: 1.25rem;
+.menu__user_icon--user {
   fill: #fff;
   margin-right: 0.5rem;
+  width: 1.25rem;
+}
+
+.menu__user_icon--logout {
+  color: #fff;
+  width: 1.625rem;
+  margin-left: 4rem;
+  cursor: pointer;
 }
 
 .menu__user_name {
   color: #fff;
+  text-transform: capitalize;
 }

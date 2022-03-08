@@ -56,14 +56,24 @@
 
 .menu__user {
   display: flex;
+  align-items: center;
   margin-right: 16px;
 }
-.menu__user_icon {
-  width: rem(20);
+
+.menu__user_icon--user {
   fill: $branco;
   margin-right: 0.5rem;
+  width: rem(20);
+}
+
+.menu__user_icon--logout {
+  color: $branco;
+  width: rem(26);
+  margin-left: 4rem;
+  cursor: pointer;
 }
 
 .menu__user_name {
   color: $branco;
+  text-transform: capitalize;
 }
