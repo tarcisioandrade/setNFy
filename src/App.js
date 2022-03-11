@@ -7,11 +7,12 @@ import { useDispatch } from "react-redux";
 import { autoLogin } from "./store/slices/setUser";
 
 const App = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  React.useEffect(() =>{
-    dispatch(autoLogin())
-  },[dispatch])
+  React.useEffect(() => {
+    dispatch(autoLogin());
+  }, [dispatch]);
+
   return (
     <main className="App">
       <BrowserRouter>

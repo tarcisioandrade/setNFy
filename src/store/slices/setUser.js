@@ -87,6 +87,7 @@ export const logout = () => (dispatch) => {
   dispatch(removeUser());
   window.localStorage.removeItem("token");
   window.localStorage.removeItem("id_user");
+  window.localStorage.removeItem("username");
 };
 
 

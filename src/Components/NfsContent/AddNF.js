@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-import { nfSet } from "../../store/slices/setNotaFiscal";
+// import { nfSet } from "../../store/slices/setNotaFiscal";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import Radio from "../Inputs/Radio";
@@ -10,11 +10,13 @@ import "./AddNF.css";
 import Head from "../Head/Head";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
+import { addNF } from "../../store/slices/SetNotaFiscal";
+import getLocalStorage from "../../store/helper/getLocalStorage";
 
 const AddNF = () => {
   // Tipo de NF Venda por padrão
   const [tipoNF, setTipoNF] = React.useState("Venda");
-
+  const id_user = getLocalStorage("id_user", null);
   // State Redux Métodos
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,22 +34,26 @@ const AddNF = () => {
     const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
       data;
     dispatch(
-      nfSet({
-        id: generateID(),
-        tipoNF,
-        residuo,
-        nfCliente: Number(nfCliente),
-        nfGri: nfGri === "" ? "" : Number(nfGri),
-        processo: Number(
-          processo.toString().replace(/\./g, "").replace(regexp, ".")
-        ),
-        statusNF,
-        statusBoleto,
-        statusFinal:
-          statusNF === "Enviado" && statusBoleto === "Enviado"
-            ? "Completo"
-            : "Incompleto",
-      })
+      addNF(
+        {
+          id_user: getLocalStorage("id_user", null),
+          nf_id: generateID(),
+          type: tipoNF,
+          residuo,
+          nfClient: Number(nfCliente),
+          nfGri: nfGri === "" ? null : Number(nfGri),
+          processo: Number(
+            processo.toString().replace(/\./g, "").replace(regexp, ".")
+          ),
+          statusNF,
+          statusBoleto,
+          statusFinal:
+            statusNF === "Enviado" && statusBoleto === "Enviado"
+              ? "Completo"
+              : "Incompleto",
+        },
+        id_user
+      )
     );
     navigate("/");
   };
