@@ -1,87 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
-import data from "../helper/data";
+import { ADD_NF, ATT_NF, DEL_NF, FIN_NF } from "../../API";
+import createAsyncSlice from "../helper/createAsyncSlice";
 
-const slice = createSlice({
+const setNotaFiscal = createAsyncSlice({
   name: "setNotaFiscal",
-  initialState: {
-    data,
-    completeList: [],
-  },
-  reducers: {
-    setNfItem(state, action) {
-      state.data.unshift(action.payload);
+  fetchConfig: (id_user) => ({
+    url: `https://setnfy-api.herokuapp.com/api/get=${id_user}`,
+    options: {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-    editNfItem(state, action) {
-      for (let i in state.data) {
-        if (state.data[i].id === action.payload.id) {
-          state.data[i].tipoNF = action.payload.tipoNF;
-          state.data[i].residuo = action.payload.residuo;
-          state.data[i].nfCliente = action.payload.nfCliente;
-          state.data[i].nfGri = action.payload.nfGri;
-          state.data[i].processo = action.payload.processo;
-          state.data[i].statusNF = action.payload.statusNF;
-          state.data[i].statusBoleto = action.payload.statusBoleto;
-          state.data[i].statusFinal = action.payload.statusFinal;
-        }
-      }
-    },
-    deleteNfItem(state, action) {
-      const nfs = state.data.filter((nf) => nf.id !== action.payload);
-      return { data: nfs, completeList: state.completeList };
-    },
-    finalizeNfItem(state, action) {
-      const nf = state.data.filter((nf) => nf.id === action.payload);
-
-      return void ({ nf: (nf[0].statusNF = "Enviado") },
-      { nf: (nf[0].statusBoleto = "Enviado") },
-      { statusFinal: (nf[0].statusFinal = "Completo") });
-    },
-    setCompletList(state, action) {
-      let nf;
-      if (typeof action.payload === "object") {
-        nf = state.data.filter((nf) => nf.id === action.payload.id);
-      } else {
-        nf = state.data.filter((nf) => nf.id === action.payload);
-      }
-      state.completeList.unshift(...nf);
-    },
-  },
+  }),
 });
+const fetchNF = setNotaFiscal.asyncAction;
 
-export const {
-  setNfItem,
-  editNfItem,
-  deleteNfItem,
-  finalizeNfItem,
-  setCompletList,
-} = slice.actions;
-
-export const nfSet = (payload) => (dispatch) => {
-  if (payload.statusFinal === "Completo") {
-    window.alert("Processo da NF concluído, movido para finalizados.");
-    dispatch(setNfItem(payload));
-    dispatch(setCompletList(payload));
-    dispatch(deleteNfItem(payload.id));
-  } else {
-    dispatch(setNfItem(payload));
-  }
+export const getNF = (id_user) => async (dispatch) => {
+  await dispatch(fetchNF(id_user));
 };
 
-export const nfEditSet = (payload) => (dispatch) => {
-  if (payload.statusFinal === "Completo") {
-    window.alert("Processo da NF concluído, movido para finalizados.");
-    dispatch(editNfItem(payload));
-    dispatch(setCompletList(payload));
-    dispatch(deleteNfItem(payload.id));
-  } else {
-    dispatch(editNfItem(payload));
-  }
+export const addNF = (nf) => async () => {
+  await ADD_NF(nf);
 };
 
-export const nfFinalizeSet = (payload) => (dispatch) => {
-  dispatch(finalizeNfItem(payload));
-  dispatch(setCompletList(payload));
-  dispatch(deleteNfItem(payload));
+export const attNF = (nf) => async () => {
+  await ATT_NF(nf);
 };
 
-export default slice.reducer;
+export const delNF = (nf_id) => async () => {
+  await DEL_NF(nf_id);
+};
+
+export const finalizeNF = (nf_id) => async () => {
+  await FIN_NF(nf_id);
+};
+
+export default setNotaFiscal.reducer;

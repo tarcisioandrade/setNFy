@@ -10,7 +10,6 @@ import Nfs from "../NfsContent/Nfs";
 const Home = () => {
   const state = useSelector((state) => state.setUser.login);
   if (state.data === null || state.data.token === null) {
-    document.body.style.backgroundColor = "#B1D0E0";
     return <Navigate to="/user/login" />;
   }
   return (

@@ -1,22 +1,23 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { nfEditSet } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import "./AddNF.css";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
+import { attNF } from "../../store/slices/SetNotaFiscal";
 
 const EditNF = () => {
   // Seleciona a array especifica para editar
   const { id } = useParams();
-  const state = useSelector((state) => state.setNotaFiscal.data);
-  const nfTarget = state.filter((nf) => nf.id === id)[0];
-  const tipoNF = nfTarget?.tipoNF;
+  // const state = useSelector((state) => state.setNotaFiscal.data);
+  const state = useSelector((state) => state.SetNotaFiscal);
+  const nfTarget = state.data.filter((nf) => nf.nf_id === id)[0];
+  const tipoNF = nfTarget?.type;
 
-// State Redux Métodos
+  // State Redux Métodos
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,8 +27,8 @@ const EditNF = () => {
   // Valores padroes no input
   const preValues = {
     residuo: nfTarget?.residuo,
-    nfCliente: nfTarget?.nfCliente,
-    nfGri: nfTarget?.nfGri,
+    nfCliente: nfTarget?.nfClient,
+    nfGri: nfTarget?.nfGri === 0 ? "" : nfTarget?.nfGri,
     processo: Number(
       nfTarget?.processo.toString().replace(/\./g, "").replace(regexp, ".")
     ),
@@ -47,11 +48,11 @@ const EditNF = () => {
     const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
       data;
     dispatch(
-      nfEditSet({
-        id,
-        tipoNF,
+      attNF({
+        nf_id: id,
+        type: tipoNF,
         residuo,
-        nfCliente: Number(nfCliente),
+        nfClient: Number(nfCliente),
         nfGri: nfGri === "" ? "" : Number(nfGri),
         processo,
         statusNF,

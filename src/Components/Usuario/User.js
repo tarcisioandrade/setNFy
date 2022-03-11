@@ -11,6 +11,8 @@ const User = () => {
   if ((state.data !== null) & (state.data?.token !== null)) {
     document.body.style.backgroundColor = "white";
     return <Navigate to="/" />;
+  } else {
+    document.body.style.backgroundColor = "#B1D0E0";
   }
   return (
     <>

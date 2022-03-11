@@ -22,7 +22,7 @@ const customStyles = {
 
 const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
   const dispatch = useDispatch();
-  const { id, action, message } = finalize;
+  const { nf_id, action, message } = finalize;
 
   return (
     <>
@@ -47,7 +47,7 @@ const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
             </button>
             <button
               onClick={() => {
-                dispatch(action(id));
+                dispatch(action({ nf_id }));
                 closeModal();
               }}
               className="modal-confirm_btn modal-confirm_btn--confirm"

@@ -1,20 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Nfs.css";
 import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
 import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
-import { deleteNfItem, nfFinalizeSet } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import getLocalStorage from "../../store/helper/getLocalStorage";
+import { getNF, delNF, finalizeNF } from "../../store/slices/SetNotaFiscal";
+import Loading from "../Loading/Loading";
 
 const Nfs = () => {
   const navigate = useNavigate();
-  const state = useSelector((state) => state.setNotaFiscal.data);
+  const dispatch = useDispatch();
+  const { data, loading } = useSelector((state) => state.SetNotaFiscal);
+  const id_user = getLocalStorage("id_user", null);
   const [toggleModal, setToggleModal] = React.useState(false);
-  const [finalize, setFinalize] = React.useState({
-    id: null,
+  const [actionModal, setActionModal] = React.useState({
+    nf_id: null,
     message: null,
     action: null,
   });
@@ -27,12 +31,19 @@ const Nfs = () => {
     setToggleModal(false);
   }
 
+  React.useEffect(() => {
+    if (id_user) {
+      dispatch(getNF(id_user));
+    }
+  }, [dispatch, id_user]);
+
+  if (loading) return <Loading />;
   return (
     <section className="nfs">
       <ModalConfirm
         closeModal={closeModal}
         toggleModal={toggleModal}
-        finalize={finalize}
+        finalize={actionModal}
       />
       <Head
         title="Gerenciador de Notas Fiscais"
@@ -59,84 +70,88 @@ const Nfs = () => {
               <th>Acões</th>
             </tr>
           </thead>
-          <tbody>
-            {state &&
-              state.map(
-                ({
-                  id,
-                  tipoNF,
-                  residuo,
-                  nfCliente,
-                  nfGri,
-                  processo,
-                  statusNF,
-                  statusBoleto,
-                }) => (
-                  <tr key={id}>
-                    <td
-                      className={`${
-                        tipoNF === "Complementar" ? "addNF__tipo--red" : ""
-                      }`}
-                    >
-                      {tipoNF}
-                    </td>
-                    <td>{residuo}</td>
-                    <td>{nfCliente}</td>
-                    <td>{processo}</td>
-                    <td>{nfGri}</td>
-                    <td
-                      className={
-                        statusNF === "Enviado"
-                          ? "nfs__status--true"
-                          : "nfs__status--false"
-                      }
-                    >
-                      {statusNF === "Enviado" ? "Enviado" : "Pendente"}
-                    </td>
-                    <td
-                      className={
-                        statusBoleto === "Enviado"
-                          ? "nfs__status--true"
-                          : "nfs__status--false"
-                      }
-                    >
-                      {statusBoleto === "Enviado" ? "Enviado" : "Pendente"}
-                    </td>
-                    <td className="test">
-                      <button className="nfs__table_icon">
-                        <DoneIcon
-                          onClick={() => {
-                            openModal();
-                            setFinalize({
-                              id,
-                              message: `Deseja finalizar o processo da NF ${nfGri}?`,
-                              action: nfFinalizeSet,
-                            });
-                          }}
-                        />
-                      </button>
-                      <button className="nfs__table_icon">
-                        <Link to={`nf/${id}`}>
-                          <EditIcon />
-                        </Link>
-                      </button>
-                      <button className="nfs__table_icon">
-                        <DeleteIcon
-                          onClick={() => {
-                            openModal();
-                            setFinalize({
-                              id,
-                              message: `Deseja remover a NF ${nfGri}?`,
-                              action: deleteNfItem,
-                            });
-                          }}
-                        />
-                      </button>
-                    </td>
-                  </tr>
-                )
-              )}
-          </tbody>
+          {
+            <tbody>
+              {data &&
+                data
+                  .filter(({ statusFinal }) => statusFinal !== "Completo")
+                  .map(
+                    ({
+                      nf_id,
+                      type,
+                      residuo,
+                      nfClient,
+                      nfGri,
+                      processo,
+                      statusNF,
+                      statusBoleto,
+                    }) => (
+                      <tr key={nf_id}>
+                        <td
+                          className={`${
+                            type === "Complementar" ? "addNF__tipo--red" : ""
+                          }`}
+                        >
+                          {type}
+                        </td>
+                        <td>{residuo}</td>
+                        <td>{nfClient}</td>
+                        <td>{processo}</td>
+                        <td>{nfGri === null ? "" : nfGri}</td>
+                        <td
+                          className={
+                            statusNF === "Enviado"
+                              ? "nfs__status--true"
+                              : "nfs__status--false"
+                          }
+                        >
+                          {statusNF === "Enviado" ? "Enviado" : "Pendente"}
+                        </td>
+                        <td
+                          className={
+                            statusBoleto === "Enviado"
+                              ? "nfs__status--true"
+                              : "nfs__status--false"
+                          }
+                        >
+                          {statusBoleto === "Enviado" ? "Enviado" : "Pendente"}
+                        </td>
+                        <td className="test">
+                          <button className="nfs__table_icon">
+                            <DoneIcon
+                              onClick={() => {
+                                openModal();
+                                setActionModal({
+                                  nf_id,
+                                  message: `Deseja finalizar o processo da NF ${nfGri}?`,
+                                  action: finalizeNF,
+                                });
+                              }}
+                            />
+                          </button>
+                          <button className="nfs__table_icon">
+                            <Link to={`nf/${nf_id}`}>
+                              <EditIcon />
+                            </Link>
+                          </button>
+                          <button className="nfs__table_icon">
+                            <DeleteIcon
+                              onClick={() => {
+                                openModal();
+                                setActionModal({
+                                  nf_id,
+                                  message: `Deseja remover a NF ${nfGri}?`,
+                                  action: delNF,
+                                });
+                              }}
+                            />
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  )}
+            </tbody>
+          }
         </table>
       </div>
     </section>
