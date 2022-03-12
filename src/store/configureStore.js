@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import setLocalStorage from "./middlewares/setLocalStorage";
 import setUser from "./slices/setUser";
-import SetNotaFiscal from "./slices/SetNotaFiscal";
+import setNotaFiscal from "./slices/setNotaFiscal";
 
-const reducer = combineReducers({ SetNotaFiscal, setUser });
+const reducer = combineReducers({ setNotaFiscal, setUser });
 const store = configureStore({
   reducer,
   middleware: (getDefaultMiddleware) =>

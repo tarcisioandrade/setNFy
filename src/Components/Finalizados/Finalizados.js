@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "../../store/helper/getLocalStorage";
-import { getNF } from "../../store/slices/SetNotaFiscal";
+import { getNF } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import "./Finalizados.css";
 import Loading from "../Loading/Loading";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
-  const { data, loading } = useSelector((state) => state.SetNotaFiscal);
+  const { data, loading } = useSelector((state) => state.setNotaFiscal);
   const dispatch = useDispatch();
   const id_user = getLocalStorage("id_user", null);
 

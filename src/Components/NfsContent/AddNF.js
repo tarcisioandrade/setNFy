@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
 // import { nfSet } from "../../store/slices/setNotaFiscal";
 import Input from "../Inputs/Input";
@@ -10,20 +10,18 @@ import "./AddNF.css";
 import Head from "../Head/Head";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
-import { addNF } from "../../store/slices/SetNotaFiscal";
+import { addNF } from "../../store/slices/setNotaFiscal";
 import getLocalStorage from "../../store/helper/getLocalStorage";
 
 const AddNF = () => {
   // Tipo de NF Venda por padrão
   const [tipoNF, setTipoNF] = React.useState("Venda");
-  const id_user = getLocalStorage("id_user", null);
   // State Redux Métodos
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const { data, loading } = useSelector((state) => state.setNotaFiscal);
   // Utilities
   const regexp = /\B(?=(\d{3})+(?!\d))/g;
-
+  
   const {
     register,
     handleSubmit,
@@ -34,30 +32,27 @@ const AddNF = () => {
     const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
       data;
     dispatch(
-      addNF(
-        {
-          id_user: getLocalStorage("id_user", null),
-          nf_id: generateID(),
-          type: tipoNF,
-          residuo,
-          nfClient: Number(nfCliente),
-          nfGri: nfGri === "" ? null : Number(nfGri),
-          processo: Number(
-            processo.toString().replace(/\./g, "").replace(regexp, ".")
-          ),
-          statusNF,
-          statusBoleto,
-          statusFinal:
-            statusNF === "Enviado" && statusBoleto === "Enviado"
-              ? "Completo"
-              : "Incompleto",
-        },
-        id_user
-      )
+      addNF({
+        id_user: getLocalStorage("id_user", null),
+        nf_id: generateID(),
+        type: tipoNF,
+        residuo,
+        nfClient: Number(nfCliente),
+        nfGri: nfGri === "" ? null : Number(nfGri),
+        processo: Number(
+          processo.toString().replace(/\./g, "").replace(regexp, ".")
+        ),
+        statusNF,
+        statusBoleto,
+        statusFinal:
+          statusNF === "Enviado" && statusBoleto === "Enviado"
+            ? "Completo"
+            : "Incompleto",
+      })
     );
-    navigate("/");
   };
 
+  if (data && data.ok) return <Navigate to="/" />;
   return (
     <section className="addNF">
       <Head
@@ -107,9 +102,10 @@ const AddNF = () => {
         </Input>
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
+          type="number"
           {...register("processo", {
             required: "Insira o número do processo Lecom",
-            valueAsNumber: true,
+            maxLength: { value: 6, message: "Digite no máximo 6 números" },
           })}
         >
           Nª Processo Lecom*
@@ -122,7 +118,13 @@ const AddNF = () => {
 
           <Select label="Status Boleto" {...register("statusBoleto")}></Select>
         </div>
-        <button className="addNF__button">Adicionar</button>
+        {loading ? (
+          <button disabled style={{ cursor: "wait" }} className="addNF__button">
+            Adicionando...
+          </button>
+        ) : (
+          <button className="addNF__button">Adicionar</button>
+        )}
       </form>
     </section>
   );

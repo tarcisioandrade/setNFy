@@ -1,4 +1,4 @@
-import { ADD_NF, ATT_NF, DEL_NF, FIN_NF } from "../../API";
+import { DEL_NF, FIN_NF } from "../../API";
 import createAsyncSlice from "../helper/createAsyncSlice";
 
 const setNotaFiscal = createAsyncSlice({
@@ -12,19 +12,42 @@ const setNotaFiscal = createAsyncSlice({
       },
     },
   }),
+  asyncAdd: (nf) => ({
+    url: `https://setnfy-api.herokuapp.com/api/add`,
+    options: {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nf),
+    },
+  }),
+  asyncAtt: (nf) => ({
+    url: `https://setnfy-api.herokuapp.com/api/att`,
+    options: {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nf),
+    },
+  }),
 });
-const fetchNF = setNotaFiscal.asyncAction;
+
+const GET_NF = setNotaFiscal.asyncAction;
+const ADD_NF = setNotaFiscal.asyncAdd;
+const ATT_NF = setNotaFiscal.asyncAtt;
 
 export const getNF = (id_user) => async (dispatch) => {
-  await dispatch(fetchNF(id_user));
+  await dispatch(GET_NF(id_user));
 };
 
-export const addNF = (nf) => async () => {
-  await ADD_NF(nf);
+export const addNF = (nf) => async (dispatch) => {
+  await dispatch(ADD_NF(nf));
 };
 
-export const attNF = (nf) => async () => {
-  await ATT_NF(nf);
+export const attNF = (nf) => async (dispatch) => {
+  await dispatch(ATT_NF(nf));
 };
 
 export const delNF = (nf_id) => async () => {

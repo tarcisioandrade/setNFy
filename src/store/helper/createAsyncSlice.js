@@ -44,6 +44,7 @@ const createAsyncSlice = (config) => {
       const { url, options } = config.fetchConfig(payload);
       const response = await fetch(url, options);
       const data = await response.json();
+      console.log(data);
       if (data.ok || data) {
         return dispatch(fetchSuccess(data));
       } else {
@@ -54,7 +55,41 @@ const createAsyncSlice = (config) => {
     }
   };
 
-  return { ...slice, asyncAction };
+  const asyncAdd = (payload) => async (dispatch) => {
+    try {
+      dispatch(fetchStarted());
+      const { url, options } = config.asyncAdd(payload);
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      if (data.ok || data) {
+        return dispatch(fetchSuccess(data));
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      return dispatch(fetchError(error.message || true));
+    }
+  };
+
+  const asyncAtt = (payload) => async (dispatch) => {
+    try {
+      dispatch(fetchStarted());
+      const { url, options } = config.asyncAtt(payload);
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      if (data.ok || data) {
+        return dispatch(fetchSuccess(data));
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      return dispatch(fetchError(error.message || true));
+    }
+  };
+
+  return { ...slice, asyncAction, asyncAdd, asyncAtt };
 };
 
 export default createAsyncSlice;

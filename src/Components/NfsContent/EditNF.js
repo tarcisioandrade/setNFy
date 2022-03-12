@@ -1,26 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import Head from "../Head/Head";
 import Input from "../Inputs/Input";
 import Select from "../Inputs/Select";
 import "./AddNF.css";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
-import { attNF } from "../../store/slices/SetNotaFiscal";
+import { attNF } from "../../store/slices/setNotaFiscal";
 
 const EditNF = () => {
   // Seleciona a array especifica para editar
   const { id } = useParams();
   // const state = useSelector((state) => state.setNotaFiscal.data);
-  const state = useSelector((state) => state.SetNotaFiscal);
-  const nfTarget = state.data.filter((nf) => nf.nf_id === id)[0];
+  const { data, loading } = useSelector((state) => state.setNotaFiscal);
+  const nfTarget = data.length && data.filter((nf) => nf.nf_id === id)[0];
   const tipoNF = nfTarget?.type;
 
   // State Redux Métodos
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   // Utilitários
   const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
@@ -63,9 +61,9 @@ const EditNF = () => {
             : "Incompleto",
       })
     );
-    navigate("/");
   };
 
+  if (data && data.ok) return <Navigate to="/" />;
   return (
     <section className="addNF">
       <Head title="Editar Nota Fiscal" descripion="Modifique uma Nota Fiscal" />
@@ -127,7 +125,13 @@ const EditNF = () => {
 
           <Select label="Status Boleto" {...register("statusBoleto")}></Select>
         </div>
-        <button className="addNF__button">Editar Nota Fiscal</button>
+        {loading ? (
+          <button disabled style={{ cursor: "wait" }} className="addNF__button">
+            Editando...
+          </button>
+        ) : (
+          <button className="addNF__button">Editar</button>
+        )}
       </form>
     </section>
   );
