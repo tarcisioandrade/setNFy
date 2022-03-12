@@ -1,4 +1,3 @@
-import { DEL_NF, FIN_NF } from "../../API";
 import createAsyncSlice from "../helper/createAsyncSlice";
 
 const setNotaFiscal = createAsyncSlice({
@@ -32,11 +31,34 @@ const setNotaFiscal = createAsyncSlice({
       body: JSON.stringify(nf),
     },
   }),
+  asyncDel: (nf_id) => ({
+    url: `https://setnfy-api.herokuapp.com/api/del`,
+    options: {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nf_id),
+    },
+  }),
+
+  asyncFinalize: (nf_id) => ({
+    url: `https://setnfy-api.herokuapp.com/api/fin`,
+    options: {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nf_id),
+    },
+  }),
 });
 
 const GET_NF = setNotaFiscal.asyncAction;
 const ADD_NF = setNotaFiscal.asyncAdd;
 const ATT_NF = setNotaFiscal.asyncAtt;
+const DEL_NF = setNotaFiscal.asyncDel;
+const FIN_NF = setNotaFiscal.asyncFinalize;
 
 export const getNF = (id_user) => async (dispatch) => {
   await dispatch(GET_NF(id_user));
@@ -50,12 +72,12 @@ export const attNF = (nf) => async (dispatch) => {
   await dispatch(ATT_NF(nf));
 };
 
-export const delNF = (nf_id) => async () => {
-  await DEL_NF(nf_id);
+export const delNF = (nf_id) => async (dispatch) => {
+  await dispatch(DEL_NF(nf_id));
 };
 
-export const finalizeNF = (nf_id) => async () => {
-  await FIN_NF(nf_id);
+export const finalizeNF = (nf_id) => async (dispatch) => {
+  await dispatch(FIN_NF(nf_id));
 };
 
 export default setNotaFiscal.reducer;

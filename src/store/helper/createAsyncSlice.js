@@ -89,7 +89,41 @@ const createAsyncSlice = (config) => {
     }
   };
 
-  return { ...slice, asyncAction, asyncAdd, asyncAtt };
+  const asyncDel = (payload) => async (dispatch) => {
+    try {
+      dispatch(fetchStarted());
+      const { url, options } = config.asyncDel(payload);
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      if (data.ok || data) {
+        return dispatch(fetchSuccess(data));
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      return dispatch(fetchError(error.message || true));
+    }
+  };
+
+  const asyncFinalize = (payload) => async (dispatch) => {
+    try {
+      dispatch(fetchStarted());
+      const { url, options } = config.asyncFinalize(payload);
+      const response = await fetch(url, options);
+      const data = await response.json();
+      console.log(data);
+      if (data.ok || data) {
+        return dispatch(fetchSuccess(data));
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      return dispatch(fetchError(error.message || true));
+    }
+  };
+
+  return { ...slice, asyncAction, asyncAdd, asyncAtt, asyncDel, asyncFinalize };
 };
 
 export default createAsyncSlice;

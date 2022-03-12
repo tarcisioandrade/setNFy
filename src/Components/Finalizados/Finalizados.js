@@ -13,9 +13,7 @@ const Finalizados = () => {
   const id_user = getLocalStorage("id_user", null);
 
   React.useEffect(() => {
-    if (id_user) {
-      dispatch(getNF(id_user));
-    }
+    dispatch(getNF(id_user));
   }, [dispatch, id_user]);
 
   if (loading) return <Loading />;
@@ -23,7 +21,7 @@ const Finalizados = () => {
     <section className="finalizados">
       <Head title="Finalizadas" description="NFs Finalizadas" />
       <div className="finalizados__header">
-        <h2>Nota Fiscais Finalizadas</h2>
+        <h2>Notas Fiscais Finalizadas</h2>
         <input
           type="search"
           name="search"

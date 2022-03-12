@@ -30,7 +30,7 @@ const Nfs = () => {
   function closeModal() {
     setToggleModal(false);
   }
-  
+
   React.useEffect(() => {
     dispatch(getNF(id_user));
   }, [dispatch, id_user]);

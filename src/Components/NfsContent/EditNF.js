@@ -51,7 +51,7 @@ const EditNF = () => {
         type: tipoNF,
         residuo,
         nfClient: Number(nfCliente),
-        nfGri: nfGri === "" ? "" : Number(nfGri),
+        nfGri: nfGri === "" ? null : Number(nfGri),
         processo,
         statusNF,
         statusBoleto,
