@@ -6,9 +6,9 @@ import Forgot from "./Forgot";
 import { useSelector } from "react-redux";
 
 const User = () => {
-  const state = useSelector((state) => state.setUser.login);
-  React.useEffect(() => {}, [state.data]);
-  if ((state.data !== null) & (state.data?.token !== null)) {
+  const { data, loading } = useSelector((state) => state.setUser.login);
+
+  if ((data !== null) & (data?.token !== null)) {
     document.body.style.backgroundColor = "white";
     return <Navigate to="/" />;
   } else {

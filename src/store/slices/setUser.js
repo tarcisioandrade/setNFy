@@ -1,16 +1,15 @@
 import createAsyncSlice from "../helper/createAsyncSlice";
 import { combineReducers } from "@reduxjs/toolkit";
-import getLocalStorage from "../helper/getLocalStorage";
 
 // SLICES
 const setLogin = createAsyncSlice({
   name: "setUser",
-  initialState: {
-    data: {
-      id_user: getLocalStorage("id_user", null),
-      token: getLocalStorage("token", null),
-    },
-  },
+  // initialState: {
+  //   data: {
+  //     id_user: getLocalStorage("id_user", null),
+  //     token: getLocalStorage("token", null),
+  //   },
+  // },
   reducers: {
     removeUser(state) {
       state.data = null;
@@ -26,8 +25,20 @@ const setLogin = createAsyncSlice({
       body: JSON.stringify(user),
     },
   }),
+
+  asyncToken: (token) => ({
+    url: "https://setnfy-api.herokuapp.com/user/token",
+    options: {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    },
+  }),
 });
 const fetchUser = setLogin.asyncAction;
+const setLoginToken = setLogin.asyncToken;
+
 const { removeUser } = setLogin.actions;
 
 const setSignup = createAsyncSlice({
@@ -45,41 +56,19 @@ const setSignup = createAsyncSlice({
 });
 const fetchRegister = setSignup.asyncAction;
 
-const setUserToken = createAsyncSlice({
-  name: "tokenLogin",
-  fetchConfig: (token) => ({
-    url: "https://setnfy-api.herokuapp.com/user/token",
-    options: {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    },
-  }),
-});
-const setLoginToken = setUserToken.asyncAction;
-
 // METODOS
 
 // CADASTRO DO USUARIO
 export const signup = (user) => async (dispatch) => {
-  try {
-    await dispatch(fetchRegister(user));
-  } catch (error) {}
+  await dispatch(fetchRegister(user));
 };
 
 // LOGIN DO USUARIO
 export const login = (user) => async (dispatch) => {
-  try {
-    await dispatch(fetchUser(user));
-  } catch (error) {}
-};
-
-// LOGIN AUTOMATICO DO USUARIO
-export const autoLogin = () => async (dispatch, getState) => {
-  const state = getState();
-  const { token } = state.setUser.login.data;
-  if (token) await dispatch(setLoginToken(token));
+  const { payload } = await dispatch(fetchUser(user));
+  window.localStorage.setItem("id_user", payload.id_user);
+  window.localStorage.setItem("token", payload.token);
+  window.localStorage.setItem("username", payload.username);
 };
 
 // DESLOGA O USUARIO
@@ -90,6 +79,12 @@ export const logout = () => (dispatch) => {
   window.localStorage.removeItem("username");
 };
 
+// LOGIN AUTOMATICO DO USUARIO
+export const autoLogin = () => async (dispatch, getState) => {
+  const token = window.localStorage.getItem("token");
+  // const { token } = state.setUser.login.data;
+  if (token) await dispatch(setLoginToken(token));
+};
 
 const reducer = combineReducers({
   login: setLogin.reducer,

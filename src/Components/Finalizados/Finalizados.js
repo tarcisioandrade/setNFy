@@ -1,14 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "../../store/helper/getLocalStorage";
-import { getNF } from "../../store/slices/setNotaFiscal";
+import { getNF, filterCompleteNF } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import "./Finalizados.css";
 import Loading from "../Loading/Loading";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
-  const { data, loading } = useSelector((state) => state.setNotaFiscal);
+  const data = useSelector(filterCompleteNF);
+  const { loading } = useSelector((state) => state.setNotaFiscal);
   const dispatch = useDispatch();
   const id_user = getLocalStorage("id_user", null);
 
@@ -44,7 +45,6 @@ const Finalizados = () => {
           <tbody>
             {data &&
               data
-                .filter(({ statusFinal }) => statusFinal === "Completo")
                 .filter(({ type, residuo, nfClient, nfGri, processo }) => {
                   if (searchValue === "") {
                     return residuo;

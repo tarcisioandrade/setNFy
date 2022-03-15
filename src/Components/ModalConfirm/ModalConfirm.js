@@ -21,8 +21,20 @@ const customStyles = {
 };
 
 const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
-  const dispatch = useDispatch();
   const { nf_id, action, message } = finalize;
+  const dispatch = useDispatch();
+
+  async function handleConfirm() {
+    if (nf_id) {
+      const { data } = await action({ nf_id });
+      closeModal();
+      console.log(data);
+      if (data.ok) window.location.reload();
+    } else {
+      dispatch(action());
+      closeModal();
+    }
+  }
 
   return (
     <>
@@ -46,10 +58,7 @@ const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
               Cancelar
             </button>
             <button
-              onClick={() => {
-                dispatch(action({ nf_id }));
-                closeModal();
-              }}
+              onClick={handleConfirm}
               className="modal-confirm_btn modal-confirm_btn--confirm"
             >
               Confirmar
