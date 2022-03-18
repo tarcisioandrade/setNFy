@@ -142,7 +142,7 @@ const EditNF = () => {
             "processo",
             {
               pattern: {
-                value: /^[0-9]*$/,
+                value: /^[0-9.]*$/,
                 message: "Digite apenas números",
               },
             },

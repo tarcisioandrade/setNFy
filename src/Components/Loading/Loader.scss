@@ -1,14 +1,15 @@
 @import "../../_var-mixins";
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid $azul; /* Blue */
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid $azul; 
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   animation: spin 2s linear infinite;
-  margin-top: 20%;
-  margin-left: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40vh;
 }
 
 @keyframes spin {

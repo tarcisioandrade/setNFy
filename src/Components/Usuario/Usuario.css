@@ -13,7 +13,7 @@
 
 .usuario__form {
   min-width: 25rem;
-  background-color: #1A374D;
+  background-color: #1a374d;
   padding: 2rem;
   border-radius: 4px;
 }
@@ -49,7 +49,7 @@
 }
 
 .usuario__link a {
-  color: #B1D0E0;
+  color: #b1d0e0;
 }
 
 .error-message {

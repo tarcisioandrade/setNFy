@@ -62,8 +62,8 @@ const Nfs = () => {
               <th>Tipo</th>
               <th>Resíduo</th>
               <th>NF Cliente</th>
-              <th>Nº Processo</th>
               <th>NF Gri</th>
+              <th>Nº Processo</th>
               <th>Status NF</th>
               <th>Status Boleto</th>
               <th>Acões</th>
@@ -92,8 +92,8 @@ const Nfs = () => {
                     </td>
                     <td>{residuo}</td>
                     <td>{nfClient}</td>
-                    <td>{processo === null ? "" : processo}</td>
                     <td>{nfGri === null ? "" : nfGri}</td>
+                    <td>{processo === null ? "" : processo}</td>
                     <td
                       className={
                         statusNF === "Enviado"
