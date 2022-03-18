@@ -45,13 +45,10 @@ const createAsyncSlice = (config) => {
       const response = await fetch(url, options);
       const data = await response.json();
       console.log(data);
-      if (data.error) {
-        throw new Error(data.message || data.error.message);
-      } else {
-        return dispatch(fetchSuccess(data));
-      }
+      if (!response.ok) throw new Error(data.message || data.error.message);
+      return dispatch(fetchSuccess(data));
     } catch (error) {
-      return dispatch(fetchError(error.message || true));
+      return dispatch(fetchError(error.message || error));
     }
   };
 
@@ -89,24 +86,7 @@ const createAsyncSlice = (config) => {
     }
   };
 
-  const asyncToken = (payload) => async (dispatch) => {
-    try {
-      dispatch(fetchStarted());
-      const { url, options } = config.asyncToken(payload);
-      const response = await fetch(url, options);
-      const data = await response.json();
-      console.log(data);
-      if (data.error) {
-        throw new Error(data.message || data.error.message);
-      } else {
-        return dispatch(fetchSuccess(data));
-      }
-    } catch (error) {
-      return dispatch(fetchError(error.message || true));
-    }
-  };
-
-  return { ...slice, asyncAction, asyncAdd, asyncAtt, asyncToken };
+  return { ...slice, asyncAction, asyncAdd, asyncAtt };
 };
 
 export default createAsyncSlice;

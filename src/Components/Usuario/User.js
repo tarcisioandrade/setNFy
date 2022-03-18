@@ -4,16 +4,13 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Forgot from "./Forgot";
 import { useSelector } from "react-redux";
+import Loading from "../Loading/Loading";
 
 const User = () => {
-  const { data, loading } = useSelector((state) => state.setUser.login);
+  const { data, loading } = useSelector((state) => state.setToken);
 
-  if ((data !== null) & (data?.token !== null)) {
-    document.body.style.backgroundColor = "white";
-    return <Navigate to="/" />;
-  } else {
-    document.body.style.backgroundColor = "#B1D0E0";
-  }
+  if (loading) return <Loading />;
+  if (data) return <Navigate to="/" />;
   return (
     <>
       <Routes>

@@ -15,8 +15,9 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
-
-  const { loading, error } = useSelector((state) => state.setUser.login);
+  const { setUser, setToken } = useSelector((state) => state);
+  const loading = setUser.loading || setToken.loading;
+  const error = setUser.error || setToken.error;
 
   const onSubmit = (data) => {
     const { email, senha } = data;
@@ -59,7 +60,7 @@ const Login = () => {
         >
           Senha:
         </Input>
-        {error && <Error message={error} />}
+        {error && <Error message="Dados Incorretos" />}
         {errors.senha?.message && <Error message={errors.senha.message} />}
         <p className="usuario__link usuario__link--margin">
           Esqueçeu a senha? <Link to="/user/forgot">Recuperar</Link>

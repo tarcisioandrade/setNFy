@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getLocalStorage from "../../store/helper/getLocalStorage";
 import { getNF, filterCompleteNF } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import "./Finalizados.css";
@@ -10,8 +9,8 @@ const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const data = useSelector(filterCompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
+  const {id_user} = useSelector((state) => state.setToken.data)
   const dispatch = useDispatch();
-  const id_user = getLocalStorage("id_user", null);
 
   React.useEffect(() => {
     dispatch(getNF(id_user));

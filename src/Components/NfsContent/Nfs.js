@@ -7,7 +7,6 @@ import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
 import Head from "../Head/Head";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
-import getLocalStorage from "../../store/helper/getLocalStorage";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import Loading from "../Loading/Loading";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
@@ -17,7 +16,7 @@ const Nfs = () => {
   const dispatch = useDispatch();
   const data = useSelector(filterIncompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
-  const id_user = getLocalStorage("id_user", null);
+  const { id_user } = useSelector((state) => state.setToken.data);
   const [toggleModal, setToggleModal] = React.useState(false);
   const [actionModal, setActionModal] = React.useState({
     nf_id: null,
