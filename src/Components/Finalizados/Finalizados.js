@@ -9,7 +9,7 @@ const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const data = useSelector(filterCompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
-  const {id_user} = useSelector((state) => state.setToken.data)
+  const { id_user } = useSelector((state) => state.setToken.data);
   const dispatch = useDispatch();
 
   React.useEffect(() => {

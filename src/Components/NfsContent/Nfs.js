@@ -92,7 +92,7 @@ const Nfs = () => {
                     </td>
                     <td>{residuo}</td>
                     <td>{nfClient}</td>
-                    <td>{processo}</td>
+                    <td>{processo === null ? "" : processo}</td>
                     <td>{nfGri === null ? "" : nfGri}</td>
                     <td
                       className={

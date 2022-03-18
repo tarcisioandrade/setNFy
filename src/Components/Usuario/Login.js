@@ -60,8 +60,8 @@ const Login = () => {
         >
           Senha:
         </Input>
-        {error && <Error message="Dados Incorretos" />}
-        {errors.senha?.message && <Error message={errors.senha.message} />}
+        {error && <Error message="Falha na Autenticação" />}
+        {errors.senha?.message  && <Error message={errors.senha.message} />}
         <p className="usuario__link usuario__link--margin">
           Esqueçeu a senha? <Link to="/user/forgot">Recuperar</Link>
         </p>

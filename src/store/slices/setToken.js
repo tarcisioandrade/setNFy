@@ -16,6 +16,6 @@ const slice = createAsyncSlice({
 });
 
 export const fetchToken = slice.asyncAction;
-export const { removeToken } = slice.actions;
+export const { removeToken, fetchError: fetchErrorToken } = slice.actions;
 
 export default slice.reducer;

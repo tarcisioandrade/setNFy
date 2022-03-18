@@ -1,6 +1,6 @@
 import createAsyncSlice from "../helper/createAsyncSlice";
 import { API_USER_LOGIN } from "../../API";
-import { fetchToken, removeToken } from "./setToken";
+import { fetchErrorToken, fetchToken, removeToken } from "./setToken";
 
 // SLICES
 const setLogin = createAsyncSlice({
@@ -14,7 +14,7 @@ const setLogin = createAsyncSlice({
 });
 
 const fetchUser = setLogin.asyncAction;
-const { removeUser, fetchError } = setLogin.actions;
+const { removeUser } = setLogin.actions;
 
 // LOGIN DO USUARIO
 export const login = (user) => async (dispatch) => {
@@ -37,7 +37,7 @@ export const autoLogin = () => async (dispatch, getState) => {
   const { setToken } = getState();
   if (setToken?.token) {
     const { type } = await dispatch(fetchToken(setToken?.token));
-    if (type === fetchError.type) dispatch(logout());
+    if (type === fetchErrorToken.type) dispatch(logout());
   }
 };
 

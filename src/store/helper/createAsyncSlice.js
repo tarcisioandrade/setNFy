@@ -45,7 +45,7 @@ const createAsyncSlice = (config) => {
       const response = await fetch(url, options);
       const data = await response.json();
       console.log(data);
-      if (!response.ok) throw new Error(data.message || data.error.message);
+      if (!response.ok) throw new Error(data.message || data.error.message || data.error);
       return dispatch(fetchSuccess(data));
     } catch (error) {
       return dispatch(fetchError(error.message || error));

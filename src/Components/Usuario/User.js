@@ -10,7 +10,10 @@ const User = () => {
   const { data, loading } = useSelector((state) => state.setToken);
 
   if (loading) return <Loading />;
-  if (data) return <Navigate to="/" />;
+  if (data) {
+    document.body.style.backgroundColor = "#fff";
+    return <Navigate to="/" />;
+  } else if (!data) document.body.style.backgroundColor = "#B1D0E0";
   return (
     <>
       <Routes>
