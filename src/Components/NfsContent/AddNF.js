@@ -19,8 +19,6 @@ const AddNF = () => {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
-  // Utilities
-  
 
   const {
     register,

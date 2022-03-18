@@ -17,8 +17,7 @@ const Menu = () => {
     message: null,
   });
   const [toggleModal, setToggleModal] = React.useState(false);
-  const {username} = useSelector((state) => state.setToken.data)
-
+  const { username } = useSelector((state) => state.setToken.data);
 
   function openModal() {
     setToggleModal(true);
