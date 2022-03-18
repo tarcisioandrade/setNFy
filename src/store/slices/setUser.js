@@ -1,41 +1,20 @@
 import createAsyncSlice from "../helper/createAsyncSlice";
 import { combineReducers } from "@reduxjs/toolkit";
+import { API_USER_LOGIN, API_USER_TOKEN } from "../../API";
 
 // SLICES
 const setLogin = createAsyncSlice({
   name: "setUser",
-  // initialState: {
-  //   data: {
-  //     id_user: getLocalStorage("id_user", null),
-  //     token: getLocalStorage("token", null),
-  //   },
-  // },
   reducers: {
     removeUser(state) {
       state.data = null;
     },
   },
-  fetchConfig: (user) => ({
-    url: "https://setnfy-api.herokuapp.com/user/login",
-    options: {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    },
-  }),
+  fetchConfig: (user) => API_USER_LOGIN(user),
 
-  asyncToken: (token) => ({
-    url: "https://setnfy-api.herokuapp.com/user/token",
-    options: {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    },
-  }),
+  asyncToken: (token) => API_USER_TOKEN(token),
 });
+
 const fetchUser = setLogin.asyncAction;
 const setLoginToken = setLogin.asyncToken;
 

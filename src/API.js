@@ -1,5 +1,41 @@
 const API_URL = "https://setnfy-api.herokuapp.com";
 
+export function API_USER_LOGIN(user) {
+  return {
+    url: API_URL + "/user/login",
+    options: {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  };
+}
+
+export function API_USER_TOKEN(token) {
+  return {
+    url: API_URL + "/user/token",
+    options: {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    },
+  };
+}
+
+export async function API_USER_REGISTER(user) {
+  const response = await fetch(API_URL + "/user/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  const data = await response.json();
+  return { data };
+}
+
 export function API_GET_NF(id_user) {
   return {
     url: API_URL + `/api/get=${id_user}`,
