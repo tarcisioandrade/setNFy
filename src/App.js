@@ -5,10 +5,10 @@ import Home from "./Components/Home/Home";
 import User from "./Components/Usuario/User";
 import { useDispatch } from "react-redux";
 import { autoLogin } from "./store/slices/setUser";
+import ProtectedRoute from "./store/helper/ProtectedRoute";
 
 const App = () => {
   const dispatch = useDispatch();
-
   React.useEffect(() => {
     dispatch(autoLogin());
   }, [dispatch]);
@@ -17,7 +17,9 @@ const App = () => {
     <main className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/*" element={<Home />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/*" element={<Home />} />
+          </Route>
           <Route path="/user/*" element={<User />} />
         </Routes>
       </BrowserRouter>

@@ -11,7 +11,6 @@ import Head from "../Head/Head";
 import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
 import { addNF } from "../../store/slices/setNotaFiscal";
-import getLocalStorage from "../../store/helper/getLocalStorage";
 
 const AddNF = () => {
   // Tipo de NF Venda por padrão
@@ -19,9 +18,10 @@ const AddNF = () => {
   // State Redux Métodos
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.setNotaFiscal);
+  const { id_user } = useSelector((state) => state.setToken.data);
   // Utilities
   const regexp = /\B(?=(\d{3})+(?!\d))/g;
-  
+
   const {
     register,
     handleSubmit,
@@ -33,7 +33,7 @@ const AddNF = () => {
       data;
     dispatch(
       addNF({
-        id_user: getLocalStorage("id_user", null),
+        id_user,
         nf_id: generateID(),
         type: tipoNF,
         residuo,

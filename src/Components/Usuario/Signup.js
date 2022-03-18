@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import Error from "../Error/Error";
 import Head from "../Head/Head";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../../store/slices/setUser";
+import { API_USER_REGISTER } from "../../API";
+import useFetch from "../../Hooks/useFetch";
 
 const Signup = () => {
   const {
@@ -14,20 +14,18 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const {loading} = useSelector(state => state.setUser.register);
+  const navigate = useNavigate();
+  const { loading, error, request } = useFetch();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { usuario, email, senha } = data;
-    dispatch(
-      signup({
-        username: usuario,
-        email,
-        password: senha,
-      })
-    );
-    navigate("/user/login")
+    const { url, options } = API_USER_REGISTER({
+      username: usuario,
+      email,
+      password: senha,
+    });
+    const { response } = await request(url, options);
+    if (response.ok) navigate("/user/login");
   };
 
   return (
@@ -35,10 +33,13 @@ const Signup = () => {
       <Head title="Criar uma Conta" descripion="Cria uma conta" />
       <form className="usuario__form">
         <Input
-          {...register("usuario", { required: "Insira um nome de usuário", pattern: {
-            value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-            message: "Digite apenas letras"
-          } })}
+          {...register("usuario", {
+            required: "Insira um nome de usuário",
+            pattern: {
+              value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
+              message: "Digite apenas letras",
+            },
+          })}
         >
           Usuário:
         </Input>
@@ -67,11 +68,22 @@ const Signup = () => {
         >
           Senha:
         </Input>
+        {error && <Error message={error.message} />}
         {errors.senha?.message && <Error message={errors.senha.message} />}
         <p className="usuario__link">
           Já possui uma conta? <Link to="/user/login">Faça Login</Link>
         </p>
-        {loading ? <button disabled style={{cursor: "wait"}} className="usuario__button">Registrando...</button> : <button className="usuario__button">Registrar</button>}
+        {loading ? (
+          <button
+            disabled
+            style={{ cursor: "wait" }}
+            className="usuario__button"
+          >
+            Registrando...
+          </button>
+        ) : (
+          <button className="usuario__button">Registrar</button>
+        )}
       </form>
     </section>
   );

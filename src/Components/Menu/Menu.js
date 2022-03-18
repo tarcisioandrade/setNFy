@@ -7,8 +7,8 @@ import { ReactComponent as Logo } from "../../imgs/logo.svg";
 import { ReactComponent as Logout } from "../../imgs/logout.svg";
 import { Link } from "react-router-dom";
 import { logout } from "../../store/slices/setUser";
-import getLocalStorage from "../../store/helper/getLocalStorage";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
   const [confirmLogout, setConfirmLogout] = React.useState({
@@ -17,7 +17,8 @@ const Menu = () => {
     message: null,
   });
   const [toggleModal, setToggleModal] = React.useState(false);
-  const username = getLocalStorage("username", null);
+  const {username} = useSelector((state) => state.setToken.data)
+
 
   function openModal() {
     setToggleModal(true);
