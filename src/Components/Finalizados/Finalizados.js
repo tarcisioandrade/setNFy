@@ -25,6 +25,7 @@ const Finalizados = () => {
         <input
           type="search"
           name="search"
+          placeholder="Pesquisar..."
           className="finalizados__search"
           onChange={({ target }) => setSearchValue(target.value)}
         />

@@ -16,7 +16,7 @@
       -ms-flex-pack: justify;
           justify-content: space-between;
   background-color: #1a374d;
-  padding: 1rem;
+  padding: 0 1rem;
   -webkit-box-shadow: 0px 1px 17px 1px #18181840;
           box-shadow: 0px 1px 17px 1px #18181840;
   font-family: "Nunito", sans-serif;
@@ -40,7 +40,7 @@
 }
 
 .menu__logo {
-  color: #fff;
+  color: #ece6e6;
   text-align: center;
   font-size: 1.375rem;
   font-weight: bold;
@@ -67,39 +67,75 @@
 }
 
 .menu__ul a {
-  color: #fff;
+  color: #ece6e6;
+  text-transform: uppercase;
+  padding: 0.8rem;
+}
+
+.menu__ul a.active {
+  background-color: #406882;
 }
 
 .menu__icon {
   width: 1.25rem;
-  color: #fff;
+  color: #ece6e6;
   margin-right: 0.25rem;
 }
 
 .menu__user {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.menu__user_content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-right: 16px;
 }
 
 .menu__user_icon--user {
-  fill: #fff;
+  fill: #ece6e6;
   margin-right: 0.5rem;
   width: 1.25rem;
 }
 
-.menu__user_icon--logout {
-  color: #fff;
-  width: 1.625rem;
-  margin-left: 4rem;
+.menu__user_name {
+  color: #ece6e6;
+  text-transform: capitalize;
+}
+
+.menu__user_dropdown {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: #1a374d;
+  z-index: 100;
+  padding: 1.125rem 0.5rem 0.5rem 0.5rem;
+}
+
+.menu__user_dropdown p {
+  color: #ece6e6;
+}
+
+.menu__user_logout-target {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   cursor: pointer;
 }
 
-.menu__user_name {
-  color: #fff;
-  text-transform: capitalize;
+.menu__user:hover .menu__user_dropdown {
+  display: block;
+}
+
+.menu__user_icon--logout {
+  color: #ece6e6;
+  width: 1.625rem;
+  margin-right: 0.5rem;
 }
