@@ -6,6 +6,7 @@ import User from "./Components/Usuario/User";
 import { useDispatch } from "react-redux";
 import { autoLogin } from "./store/slices/setUser";
 import ProtectedRoute from "./store/helper/ProtectedRoute";
+import NotFound from "./Components/NotFound/NotFound";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const App = () => {
             <Route path="/*" element={<Home />} />
           </Route>
           <Route path="/user/*" element={<User />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </main>

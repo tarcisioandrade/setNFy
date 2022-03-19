@@ -15,7 +15,7 @@ const Nfs = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector(filterIncompleteNF);
-  const { loading } = useSelector((state) => state.setNotaFiscal);
+  const { loading, error } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   const [toggleModal, setToggleModal] = React.useState(false);
   const [actionModal, setActionModal] = React.useState({
@@ -148,6 +148,9 @@ const Nfs = () => {
               )}
           </tbody>
         </table>
+        {error && (
+          <p className="nfs__errorMsg">Nenhuma nota fiscal foi encontrada.</p>
+        )}
       </div>
     </section>
   );

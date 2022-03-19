@@ -150,3 +150,10 @@
 .nfs__tipo--red {
   color: red;
 }
+
+.nfs__errorMsg {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #181818;
+  margin-top: 1rem;
+}

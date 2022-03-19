@@ -131,3 +131,10 @@
 .nfs__tipo--red {
   color: red;
 }
+
+.nfs__errorMsg {
+  text-align: center;
+  font-family: $font-roboto;
+  color: $preto;
+  margin-top: 1rem;
+}
