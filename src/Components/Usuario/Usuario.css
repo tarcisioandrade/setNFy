@@ -42,10 +42,10 @@
 }
 
 .usuario__link {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   font-family: "Nunito", sans-serif;
   color: #ece6e6;
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 
 .usuario__link a {
@@ -53,5 +53,10 @@
 }
 
 .error-message {
-  margin-top: .2rem;
+  margin-top: 0.2rem;
+}
+
+.usuario__message {
+  font-family: "Nunito", sans-serif;
+  color: #ece6e6;
 }

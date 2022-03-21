@@ -1,5 +1,31 @@
 const API_URL = "https://setnfy-api.herokuapp.com";
 
+export function API_USER_RESET_PASSWORD(token, password) {
+  return {
+    url: API_URL + `/user/reset_password/${token}`,
+    options: {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(password),
+    },
+  };
+}
+
+export function API_USER_FORGOT(email) {
+  return {
+    url: API_URL + "/user/forgot",
+    options: {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(email),
+    },
+  };
+}
+
 export function API_USER_LOGIN(user) {
   return {
     url: API_URL + "/user/login",

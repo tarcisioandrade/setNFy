@@ -5,6 +5,7 @@ import Login from "./Login";
 import Forgot from "./Forgot";
 import { useSelector } from "react-redux";
 import Loading from "../Loading/Loading";
+import ResetPassword from "./ResetPassword";
 
 const User = () => {
   const { data, loading } = useSelector((state) => state.setToken);
@@ -20,6 +21,7 @@ const User = () => {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="forgot" element={<Forgot />} />
+        <Route path="reset_password/:token" element={<ResetPassword />} />
       </Routes>
     </>
   );
