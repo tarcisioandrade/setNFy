@@ -44,7 +44,6 @@ const createAsyncSlice = (config) => {
       const { url, options } = config.fetchConfig(payload);
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data);
       if (!response.ok)
         throw new Error(
           data.mensagem || data.message || data.error.message || data.error
@@ -61,7 +60,6 @@ const createAsyncSlice = (config) => {
       const { url, options } = config.asyncAdd(payload);
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data);
       if (!response.ok)
         throw new Error(
           data.mensagem || data.message || data.error.message || data.error

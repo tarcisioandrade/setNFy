@@ -76,12 +76,6 @@
   background-color: #406882;
 }
 
-.menu__icon {
-  width: 1.25rem;
-  color: #ece6e6;
-  margin-right: 0.25rem;
-}
-
 .menu__user {
   position: relative;
   margin-right: 1rem;
@@ -100,6 +94,7 @@
   fill: #ece6e6;
   margin-right: 0.5rem;
   width: 1.25rem;
+  cursor: pointer;
 }
 
 .menu__user_name {
@@ -110,14 +105,40 @@
 .menu__user_dropdown {
   display: none;
   position: absolute;
-  width: 100%;
+  min-width: 6.25rem;
+  right: 2.5rem;
+  top: 2.5rem;
+  border-radius: 4px;
   background-color: #1a374d;
-  z-index: 100;
-  padding: 1.125rem 0.5rem 0.5rem 0.5rem;
+  z-index: 2;
+  -webkit-box-shadow: 0px 1px 17px 1px #18181840;
+          box-shadow: 0px 1px 17px 1px #18181840;
 }
 
 .menu__user_dropdown p {
-  color: #ece6e6;
+  color: #181818;
+  background-color: white;
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 0 4px 4px 0;
+  margin-left: 1.2rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.menu__user_dropdown::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -10px;
+  right: 0.9375rem;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+}
+
+.menu__user_dropdown--active {
+  display: block;
 }
 
 .menu__user_logout-target {
@@ -127,15 +148,11 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  cursor: pointer;
-}
-
-.menu__user:hover .menu__user_dropdown {
-  display: block;
+  background: url("../../imgs/logout.svg") 0.3125rem no-repeat;
+  background-size: 1.5rem;
 }
 
 .menu__user_icon--logout {
-  color: #ece6e6;
-  width: 1.625rem;
-  margin-right: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }

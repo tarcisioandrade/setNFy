@@ -10,7 +10,7 @@ import useFetch from "../../Hooks/useFetch";
 import UserMessage from "./UserMessage";
 
 const Forgot = () => {
-  const [successForgot, setSuccessForgot] = React.useState(true);
+  const [successForgot, setSuccessForgot] = React.useState(false);
   const { loading, request, error } = useFetch();
   const {
     register,
@@ -37,7 +37,7 @@ const Forgot = () => {
             required: true,
             pattern: {
               value: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-              message: "Insira um email válido",
+              message: "Insira um email válido.",
             },
           })}
         >
@@ -47,7 +47,7 @@ const Forgot = () => {
           Lembrou a senha? <Link to="/user/login">Faça Login</Link>
         </p>
         {error && (
-          <Error message="Ocorreu um erro, verifique o email e tente novamente" />
+          <Error message="Ocorreu um erro, verifique o email e tente novamente." />
         )}
         {errors.email?.message && <Error message={errors.email.message} />}
         {loading ? (

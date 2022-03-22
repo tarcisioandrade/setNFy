@@ -2,7 +2,6 @@ import React from "react";
 import "./Menu.css";
 import { ReactComponent as UserIcon } from "../../imgs/person-sharp.svg";
 import { ReactComponent as Logo } from "../../imgs/logo.svg";
-import { ReactComponent as Logout } from "../../imgs/logout.svg";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/slices/setUser";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
@@ -15,6 +14,7 @@ const Menu = () => {
     message: null,
   });
   const [toggleModal, setToggleModal] = React.useState(false);
+  const [toggleDropdown, setToggleDropdown] = React.useState(false);
   const { username } = useSelector((state) => state.setToken.data);
 
   function openModal() {
@@ -23,6 +23,18 @@ const Menu = () => {
   function closeModal() {
     setToggleModal(false);
   }
+
+  React.useEffect(() => {
+    function handleToggleDropDown() {
+      if (toggleDropdown) {
+        setToggleDropdown(false);
+      }
+    }
+    document.body.addEventListener("click", handleToggleDropDown);
+    return () => {
+      document.body.removeEventListener("click", handleToggleDropDown);
+    };
+  }, [toggleDropdown]);
 
   return (
     <header className="menu">
@@ -45,24 +57,32 @@ const Menu = () => {
       </ul>
       <div className="menu__user">
         <div className="menu__user_content">
-          <UserIcon className="menu__user_icon menu__user_icon--user" />
+          <UserIcon
+            className="menu__user_icon--user"
+            onClick={() => setToggleDropdown(!toggleDropdown)}
+          />
           <p className="menu__user_name">{username}</p>
         </div>
-        <div className="menu__user_dropdown">
-          <div
-            className="menu__user_logout-target"
-            onClick={() => {
-              openModal();
-              setConfirmLogout({
-                action: logout,
-                message: "Deseja encerrar a sessão?",
-              });
-            }}
-          >
-            <Logout className="menu__user_icon menu__user_icon--logout" />
-            <p>Sair</p>
-          </div>
-        </div>
+        <ul
+          className={`menu__user_dropdown ${
+            toggleDropdown && "menu__user_dropdown--active"
+          }`}
+        >
+          <li className="menu__user_logout-target">
+            <div className="menu__user_icon--logout"></div>
+            <p
+              onClick={() => {
+                openModal();
+                setConfirmLogout({
+                  action: logout,
+                  message: "Deseja encerrar a sessão?",
+                });
+              }}
+            >
+              Sair
+            </p>
+          </li>
+        </ul>
       </div>
       <ModalConfirm
         closeModal={closeModal}

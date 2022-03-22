@@ -38,7 +38,7 @@ const Login = () => {
             required: true,
             pattern: {
               value: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-              message: "Insira um email válido",
+              message: "Insira um email válido.",
             },
           })}
         >
@@ -54,13 +54,13 @@ const Login = () => {
             required: true,
             pattern: {
               value: /^.{8,}$/,
-              message: "Insira uma senha com no mínimo 8 carácteres",
+              message: "Insira uma senha com no mínimo 8 carácteres.",
             },
           })}
         >
           Senha:
         </Input>
-        {error && <Error message="Falha na Autenticação" />}
+        {error && <Error message="Falha na Autenticação." />}
         {errors.senha?.message  && <Error message={errors.senha.message} />}
         <p className="usuario__link usuario__link--margin">
           Esqueçeu a senha? <Link to="/user/forgot">Recuperar</Link>

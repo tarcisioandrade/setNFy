@@ -37,7 +37,7 @@ const ResetPassword = () => {
             required: true,
             pattern: {
               value: /^.{8,}$/,
-              message: "Insira uma senha com no mínimo 8 carácteres",
+              message: "Insira uma senha com no mínimo 8 carácteres.",
             },
           })}
         >

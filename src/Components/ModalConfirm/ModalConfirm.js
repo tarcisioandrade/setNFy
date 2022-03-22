@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 const customStyles = {
   overlay: {
     background: "rgba(0, 0, 0, 0.200)",
+    zIndex: "1000",
   },
   content: {
     top: "50%",

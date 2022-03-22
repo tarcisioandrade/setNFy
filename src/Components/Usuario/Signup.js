@@ -34,10 +34,10 @@ const Signup = () => {
       <form className="usuario__form">
         <Input
           {...register("usuario", {
-            required: "Insira um nome de usuário",
+            required: "Insira um nome de usuário.",
             pattern: {
               value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-              message: "Digite apenas letras",
+              message: "Digite apenas letras.",
             },
           })}
         >
@@ -49,7 +49,7 @@ const Signup = () => {
             required: true,
             pattern: {
               value: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-              message: "Insira um email válido",
+              message: "Insira um email válido.",
             },
           })}
         >
@@ -62,7 +62,7 @@ const Signup = () => {
             required: true,
             pattern: {
               value: /^.{8,}$/,
-              message: "Insira uma senha com no mínimo 8 carácteres",
+              message: "Insira uma senha com no mínimo 8 carácteres.",
             },
           })}
         >
