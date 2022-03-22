@@ -100,19 +100,14 @@ const EditNF = () => {
         </Input>
         {errors.residuo?.message && <Error message={errors.residuo.message} />}
         <Input
-          {...register(
-            "nfCliente",
-            {
-              pattern: {
-                value: /^[0-9]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("nfCliente", {
+            required: "Insira o número da NF do Cliente.",
+            maxLength: { value: 5, message: "Digite no máximo 5 números." },
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Digite apenas números",
             },
-            {
-              required: "Insira o número da NF do Cliente.",
-              maxLength: { value: 5, message: "Digite no máximo 5 números." },
-            }
-          )}
+          })}
           type="number"
         >
           NF Cliente*
@@ -121,35 +116,25 @@ const EditNF = () => {
           <Error message={errors.nfCliente.message} />
         )}
         <Input
-          {...register(
-            "nfGri",
-            {
-              pattern: {
-                value: /^[0-9]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("nfGri", {
+            maxLength: { value: 4, message: "Digite no máximo 4 números." },
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Digite apenas números",
             },
-            {
-              maxLength: { value: 4, message: "Digite no máximo 4 números." },
-            }
-          )}
+          })}
         >
           NF Gri
         </Input>
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
-          {...register(
-            "processo",
-            {
-              pattern: {
-                value: /^[0-9.]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("processo", {
+            maxLength: { value: 6, message: "Digite no máximo 6 números" },
+            pattern: {
+              value: /^[0-9.]*$/,
+              message: "Digite apenas números",
             },
-            {
-              maxLength: { value: 6, message: "Digite no máximo 6 números" },
-            }
-          )}
+          })}
         >
           Nª Processo Lecom
         </Input>

@@ -119,7 +119,7 @@ const Nfs = () => {
                             openModal();
                             setActionModal({
                               nf_id,
-                              message: `Deseja finalizar o processo da NF ${nfGri}?`,
+                              message: `Deseja finalizar o processo da NF ${nfClient}?`,
                               action: API_FIN_NF,
                             });
                           }}
@@ -136,7 +136,7 @@ const Nfs = () => {
                             openModal();
                             setActionModal({
                               nf_id,
-                              message: `Deseja remover a NF ${nfGri}?`,
+                              message: `Deseja remover a NF ${nfClient}?`,
                               action: API_DEL_NF,
                             });
                           }}

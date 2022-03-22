@@ -19,6 +19,7 @@ const AddNF = () => {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
+  const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
   const {
     register,
@@ -37,7 +38,12 @@ const AddNF = () => {
         residuo,
         nfClient: Number(nfCliente),
         nfGri: nfGri === "" ? null : Number(nfGri),
-        processo: processo === "" ? null : Number(processo),
+        processo:
+          processo === ""
+            ? null
+            : Number(
+                processo.toString().replace(/\./g, "").replace(regexp, ".")
+              ),
         statusNF,
         statusBoleto,
         statusFinal:
@@ -77,20 +83,14 @@ const AddNF = () => {
         </Input>
         {errors.residuo?.message && <Error message={errors.residuo.message} />}
         <Input
-          {...register(
-            "nfCliente",
-            {
-              pattern: {
-                value: /^[0-9]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("nfCliente", {
+            required: "Insira o número da NF do Cliente.",
+            maxLength: { value: 5, message: "Digite no máximo 5 números." },
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Digite apenas números",
             },
-            {
-              required: "Insira o número da NF do Cliente.",
-              maxLength: { value: 5, message: "Digite no máximo 5 números." },
-            }
-          )}
-          type="number"
+          })}
         >
           NF Cliente*
         </Input>
@@ -98,35 +98,26 @@ const AddNF = () => {
           <Error message={errors.nfCliente.message} />
         )}
         <Input
-          {...register(
-            "nfGri",
-            {
-              pattern: {
-                value: /^[0-9]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("nfGri", {
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Digite apenas números",
             },
-            {
-              maxLength: { value: 4, message: "Digite no máximo 4 números." },
-            }
-          )}
+            maxLength: { value: 4, message: "Digite no máximo 4 números." },
+          })}
         >
           NF Gri
         </Input>
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
-          {...register(
-            "processo",
-            {
-              pattern: {
-                value: /^[0-9]*$/,
-                message: "Digite apenas números",
-              },
+          {...register("processo", {
+            pattern: {
+              value: /^[0-9]*$/,
+              message: "Digite apenas números",
             },
-            {
-              maxLength: { value: 6, message: "Digite no máximo 6 números" },
-            }
-          )}
+
+            maxLength: { value: 6, message: "Digite no máximo 6 números" },
+          })}
         >
           Nª Processo Lecom
         </Input>
