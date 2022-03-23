@@ -42,11 +42,16 @@ const EditNF = () => {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: preValues,
   });
+
+  // Valida se statusNF está enviado para habilitar o select do boleto
+  const {statusNF} = watch();
+  const statusValid = statusNF === "Enviado";
 
   const onSubmit = (data) => {
     const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
@@ -65,7 +70,7 @@ const EditNF = () => {
                 processo.toString().replace(/\./g, "").replace(regexp, ".")
               ),
         statusNF,
-        statusBoleto,
+        statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
         statusFinal:
           statusNF === "Enviado" && statusBoleto === "Enviado"
             ? "Completo"
@@ -144,7 +149,8 @@ const EditNF = () => {
         <div className="addNf__row">
           <Select label="Status NF" {...register("statusNF")}></Select>
 
-          <Select label="Status Boleto" {...register("statusBoleto")}></Select>
+          {/* STATUS BOLETO SO É HABILITADO SE O STATUS NF FOR ENVIADO */}
+          {statusValid === true ? <Select label="Status Boleto" {...register("statusBoleto")} ></Select> : <Select label="Status Boleto" {...register("statusBoleto")} disabled ></Select>}
         </div>
         {loading ? (
           <button disabled style={{ cursor: "wait" }} className="addNF__button">

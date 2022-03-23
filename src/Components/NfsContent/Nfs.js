@@ -71,7 +71,7 @@ const Nfs = () => {
           </thead>
           <tbody>
             {data &&
-              data.map(
+              data.sort((a, b) => b.processo - a.processo).map(
                 ({
                   nf_id,
                   type,

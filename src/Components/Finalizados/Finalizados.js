@@ -79,6 +79,7 @@ const Finalizados = () => {
                     return null;
                   }
                 })
+                .sort((a, b) => b.processo - a.processo)
                 .map(
                   ({
                     nf_id,
