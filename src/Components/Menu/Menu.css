@@ -106,7 +106,7 @@
   display: none;
   position: absolute;
   min-width: 6.25rem;
-  right: 2.5rem;
+  left: -4.0625rem;
   top: 2.5rem;
   border-radius: 4px;
   background-color: #1a374d;
