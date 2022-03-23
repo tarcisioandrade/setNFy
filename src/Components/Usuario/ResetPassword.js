@@ -29,7 +29,7 @@ const ResetPassword = () => {
     return <UserMessage message="Senha Redefinida com Sucesso!" />;
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
-      <Head title="Nova Senha" descripion="Digite sua nova senha" />
+      <Head title="Nova Senha" description="Digite sua nova senha" />
       <form className="usuario__form">
         <Input
           type="password"

@@ -66,7 +66,7 @@ const AddNF = () => {
     <section className="addNF">
       <Head
         title="Adicionar Nota Fiscal"
-        descripion="Adicione uma Nota Fiscal"
+        descritpion="Adicione uma Nota Fiscal"
       />
       <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="addNf__row--radio">

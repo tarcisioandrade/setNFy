@@ -31,7 +31,7 @@ const Login = () => {
 
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
-      <Head title="Login" descripion="Logar em uma conta" />
+      <Head title="Login" description="Logue em sua conta" />
       <form className="usuario__form">
         <Input
           {...register("email", {

@@ -29,7 +29,6 @@ const ModalConfirm = ({ closeModal, toggleModal, finalize }) => {
     if (nf_id) {
       const { data } = await action({ nf_id });
       closeModal();
-      console.log(data);
       if (data.ok) window.location.reload();
     } else {
       dispatch(action());

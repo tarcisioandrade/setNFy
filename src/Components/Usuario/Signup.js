@@ -30,7 +30,7 @@ const Signup = () => {
 
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
-      <Head title="Criar uma Conta" descripion="Cria uma conta" />
+      <Head title="Criar uma Conta" description="Cria uma conta" />
       <form className="usuario__form">
         <Input
           {...register("usuario", {

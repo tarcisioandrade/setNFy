@@ -50,7 +50,7 @@ const EditNF = () => {
   });
 
   // Valida se statusNF está enviado para habilitar o select do boleto
-  const {statusNF} = watch();
+  const { statusNF } = watch();
   const statusValid = statusNF === "Enviado";
 
   const onSubmit = (data) => {
@@ -82,7 +82,10 @@ const EditNF = () => {
   if (data && data.ok) return <Navigate to="/" />;
   return (
     <section className="addNF">
-      <Head title="Editar Nota Fiscal" descripion="Modifique uma Nota Fiscal" />
+      <Head
+        title="Editar Nota Fiscal"
+        description="Modifique uma Nota Fiscal"
+      />
       <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
         <p
           className={`addNF__tipo ${
@@ -150,7 +153,18 @@ const EditNF = () => {
           <Select label="Status NF" {...register("statusNF")}></Select>
 
           {/* STATUS BOLETO SO É HABILITADO SE O STATUS NF FOR ENVIADO */}
-          {statusValid === true ? <Select label="Status Boleto" {...register("statusBoleto")} ></Select> : <Select label="Status Boleto" {...register("statusBoleto")} disabled ></Select>}
+          {statusValid === true ? (
+            <Select
+              label="Status Boleto"
+              {...register("statusBoleto")}
+            ></Select>
+          ) : (
+            <Select
+              label="Status Boleto"
+              {...register("statusBoleto")}
+              disabled
+            ></Select>
+          )}
         </div>
         {loading ? (
           <button disabled style={{ cursor: "wait" }} className="addNF__button">

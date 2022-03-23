@@ -30,7 +30,7 @@ const Forgot = () => {
     return <UserMessage message="E-mail de redefinição foi enviado!" />;
   return (
     <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
-      <Head title="Recuperar Senha" descripion="Recuperar senha esquecida" />
+      <Head title="Recuperar Senha" description="Recuperar senha esquecida" />
       <form className="usuario__form">
         <Input
           {...register("email", {
