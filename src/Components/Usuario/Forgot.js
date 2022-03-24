@@ -25,7 +25,6 @@ const Forgot = () => {
     if (response.ok) setSuccessForgot(true);
   };
 
-  document.body.style.backgroundColor = "#B1D0E0";
   if (successForgot)
     return <UserMessage message="E-mail de redefinição foi enviado!" />;
   return (

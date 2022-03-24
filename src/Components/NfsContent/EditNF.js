@@ -63,12 +63,7 @@ const EditNF = () => {
         residuo,
         nfClient: Number(nfCliente),
         nfGri: nfGri === "" ? null : Number(nfGri),
-        processo:
-          processo === ""
-            ? null
-            : Number(
-                processo.toString().replace(/\./g, "").replace(regexp, ".")
-              ),
+        processo: processo === "" ? null : processo,
         statusNF,
         statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
         statusFinal:
@@ -137,7 +132,6 @@ const EditNF = () => {
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
           {...register("processo", {
-            maxLength: { value: 6, message: "Digite no máximo 6 números" },
             pattern: {
               value: /^[0-9.]*$/,
               message: "Digite apenas números",

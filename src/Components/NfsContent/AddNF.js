@@ -21,8 +21,8 @@ const AddNF = () => {
   const { id_user } = useSelector((state) => state.setToken.data);
 
   // Utilitários
-  const regexp = /\B(?=(\d{3})+(?!\d))/g;
-  
+  // const regexp = /\B(?=(\d{3})+(?!\d))/g;
+
   const {
     register,
     handleSubmit,
@@ -31,9 +31,9 @@ const AddNF = () => {
   } = useForm();
 
   // Valida se statusNF está enviado para habilitar o select do boleto
-  const {statusNF} = watch();
+  const { statusNF } = watch();
   const statusValid = statusNF === "Enviado";
-  
+
   const onSubmit = (data) => {
     const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
       data;
@@ -45,12 +45,7 @@ const AddNF = () => {
         residuo,
         nfClient: Number(nfCliente),
         nfGri: nfGri === "" ? null : Number(nfGri),
-        processo:
-          processo === ""
-            ? null
-            : Number(
-                processo.toString().replace(/\./g, "").replace(regexp, ".")
-              ),
+        processo: processo === "" ? null : processo,
         statusNF,
         statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
         statusFinal:
@@ -133,8 +128,18 @@ const AddNF = () => {
           <Select label="Status NF" {...register("statusNF")}></Select>
 
           {/* STATUS BOLETO SO É HABILITADO SE O STATUS NF FOR ENVIADO */}
-          {statusValid === true ? <Select label="Status Boleto" {...register("statusBoleto")} ></Select> : <Select label="Status Boleto" {...register("statusBoleto")} disabled ></Select>}
-
+          {statusValid === true ? (
+            <Select
+              label="Status Boleto"
+              {...register("statusBoleto")}
+            ></Select>
+          ) : (
+            <Select
+              label="Status Boleto"
+              {...register("statusBoleto")}
+              disabled
+            ></Select>
+          )}
         </div>
         {loading ? (
           <button disabled style={{ cursor: "wait" }} className="addNF__button">
