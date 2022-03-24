@@ -20,9 +20,6 @@ const AddNF = () => {
   const { data, loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
 
-  // Utilitários
-  // const regexp = /\B(?=(\d{3})+(?!\d))/g;
-
   const {
     register,
     handleSubmit,

@@ -19,23 +19,13 @@ const EditNF = () => {
 
   // State Redux Métodos
   const dispatch = useDispatch();
-  // Utilitários
-  const regexp = /\B(?=(\d{3})+(?!\d))/g;
 
   // Valores padroes no input
   const preValues = {
     residuo: nfTarget?.residuo,
     nfCliente: nfTarget?.nfClient,
     nfGri: nfTarget?.nfGri === null ? "" : nfTarget?.nfGri,
-    processo:
-      nfTarget?.processo === null
-        ? ""
-        : Number(
-            nfTarget?.processo
-              .toString()
-              .replace(/\./g, "")
-              .replace(regexp, ".")
-          ),
+    processo: nfTarget?.processo === null ? "" : nfTarget?.processo,
     statusNF: nfTarget?.statusNF,
     statusBoleto: nfTarget?.statusBoleto,
   };

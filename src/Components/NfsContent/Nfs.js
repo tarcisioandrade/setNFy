@@ -71,81 +71,83 @@ const Nfs = () => {
           </thead>
           <tbody>
             {data &&
-              data.sort((a, b) => b.processo - a.processo).map(
-                ({
-                  nf_id,
-                  type,
-                  residuo,
-                  nfClient,
-                  nfGri,
-                  processo,
-                  statusNF,
-                  statusBoleto,
-                }) => (
-                  <tr key={nf_id}>
-                    <td
-                      className={`${
-                        type === "Complementar" ? "addNF__tipo--red" : ""
-                      }`}
-                    >
-                      {type}
-                    </td>
-                    <td>{residuo}</td>
-                    <td>{nfClient}</td>
-                    <td>{nfGri === null ? "" : nfGri}</td>
-                    <td>{processo === null ? "" : processo}</td>
-                    <td
-                      className={
-                        statusNF === "Enviado"
-                          ? "nfs__status--true"
-                          : "nfs__status--false"
-                      }
-                    >
-                      {statusNF === "Enviado" ? "Enviado" : "Pendente"}
-                    </td>
-                    <td
-                      className={
-                        statusBoleto === "Enviado"
-                          ? "nfs__status--true"
-                          : "nfs__status--false"
-                      }
-                    >
-                      {statusBoleto === "Enviado" ? "Enviado" : "Pendente"}
-                    </td>
-                    <td className="test">
-                      <button className="nfs__table_icon">
-                        <DoneIcon
-                          onClick={() => {
-                            openModal();
-                            setActionModal({
-                              nf_id,
-                              message: `Deseja finalizar o processo da NF ${nfClient}?`,
-                              action: API_FIN_NF,
-                            });
-                          }}
-                        />
-                      </button>
-                      <button className="nfs__table_icon">
-                        <Link to={`nf/${nf_id}`}>
-                          <EditIcon />
-                        </Link>
-                      </button>
-                      <button className="nfs__table_icon">
-                        <DeleteIcon
-                          onClick={() => {
-                            openModal();
-                            setActionModal({
-                              nf_id,
-                              message: `Deseja remover a NF ${nfClient}?`,
-                              action: API_DEL_NF,
-                            });
-                          }}
-                        />
-                      </button>
-                    </td>
-                  </tr>
-                )
-              )}
+              data
+                .sort((a, b) => b.processo - a.processo)
+                .map(
+                  ({
+                    nf_id,
+                    type,
+                    residuo,
+                    nfClient,
+                    nfGri,
+                    processo,
+                    statusNF,
+                    statusBoleto,
+                  }) => (
+                    <tr key={nf_id}>
+                      <td
+                        className={`${
+                          type === "Complementar" ? "addNF__tipo--red" : ""
+                        }`}
+                      >
+                        {type}
+                      </td>
+                      <td>{residuo}</td>
+                      <td>{nfClient}</td>
+                      <td>{nfGri === null ? "" : nfGri}</td>
+                      <td>{processo === null ? "" : processo}</td>
+                      <td
+                        className={
+                          statusNF === "Enviado"
+                            ? "nfs__status--true"
+                            : "nfs__status--false"
+                        }
+                      >
+                        {statusNF}
+                      </td>
+                      <td
+                        className={
+                          statusBoleto === "Enviado"
+                            ? "nfs__status--true"
+                            : "nfs__status--false"
+                        }
+                      >
+                        {statusBoleto}
+                      </td>
+                      <td className="test">
+                        <button className="nfs__table_icon">
+                          <DoneIcon
+                            onClick={() => {
+                              openModal();
+                              setActionModal({
+                                nf_id,
+                                message: `Deseja finalizar o processo da NF ${nfClient}?`,
+                                action: API_FIN_NF,
+                              });
+                            }}
+                          />
+                        </button>
+                        <button className="nfs__table_icon">
+                          <Link to={`nf/${nf_id}`}>
+                            <EditIcon />
+                          </Link>
+                        </button>
+                        <button className="nfs__table_icon">
+                          <DeleteIcon
+                            onClick={() => {
+                              openModal();
+                              setActionModal({
+                                nf_id,
+                                message: `Deseja remover a NF ${nfClient}?`,
+                                action: API_DEL_NF,
+                              });
+                            }}
+                          />
+                        </button>
+                      </td>
+                    </tr>
+                  )
+                )}
           </tbody>
         </table>
         {error && (

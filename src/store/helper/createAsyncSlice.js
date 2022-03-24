@@ -45,9 +45,7 @@ const createAsyncSlice = (config) => {
       const response = await fetch(url, options);
       const data = await response.json();
       if (!response.ok)
-        throw new Error(
-          data.mensagem || data.message || data.error.message || data.error
-        );
+        throw new Error(data.message || data.error.message || data.error);
       return dispatch(fetchSuccess(data));
     } catch (error) {
       return dispatch(fetchError(error.message || true));
@@ -61,9 +59,7 @@ const createAsyncSlice = (config) => {
       const response = await fetch(url, options);
       const data = await response.json();
       if (!response.ok)
-        throw new Error(
-          data.mensagem || data.message || data.error.message || data.error
-        );
+        throw new Error(data.message || data.error.message || data.error);
       return dispatch(fetchSuccess(data));
     } catch (error) {
       return dispatch(fetchError(error.message || true));
@@ -77,9 +73,7 @@ const createAsyncSlice = (config) => {
       const response = await fetch(url, options);
       const data = await response.json();
       if (!response.ok)
-        throw new Error(
-          data.mensagem || data.message || data.error.message || data.error
-        );
+        throw new Error(data.message || data.error.message || data.error);
       return dispatch(fetchSuccess(data));
     } catch (error) {
       return dispatch(fetchError(error.message || true));
