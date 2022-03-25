@@ -4,10 +4,6 @@ import setToken from "./slices/setToken";
 import setNotaFiscal from "./slices/setNotaFiscal";
 
 const reducer = combineReducers({ setNotaFiscal, setUser, setToken });
-const store = configureStore({
-  reducer,
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(setLocalStorage),
-});
+const store = configureStore({ reducer });
 
 export default store;
