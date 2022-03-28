@@ -12,4 +12,5 @@ Tambem foi onde eu tive minha primeira experiência com NodeJS e Banco de Dados 
 
 <h2>NOTAS FISCAIS PENDENTES</h2>
 
-![image](https://user-images.githubusercontent.com/61153830/160186154-77576743-8a6e-4cf9-8819-94f0653aba0d.png)
+![localhost_3000_ (1)](https://user-images.githubusercontent.com/61153830/160468968-c7a1cfa1-05e1-4059-b376-e2dcbecabfc3.png)
+
