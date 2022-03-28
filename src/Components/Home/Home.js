@@ -7,6 +7,11 @@ import EditNF from "../NfsContent/EditNF";
 import Nfs from "../NfsContent/Nfs";
 
 const Home = () => {
+  
+  // Altera a cor do backgroung do body
+  document.body.classList.remove("user");
+  document.body.classList.add("home");
+
   return (
     <>
       <Menu />
