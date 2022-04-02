@@ -123,9 +123,8 @@ const EditNF = () => {
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
           {...register("processo", {
-            maxLength: { value: 7, message: "Digite no máximo 6 números." },
             pattern: {
-              value: /^[0-9.]*$/,
+              value: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
               message: "Digite apenas números",
             },
           })}
