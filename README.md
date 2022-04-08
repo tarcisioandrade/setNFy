@@ -1,6 +1,6 @@
 <a href="https://setnfy.com.br/">SetNFy - Gerenciador de Notas Fiscais.</a>
 
-Projeto criado com **ReactJS**, **Redux**, **NodeJS** e **Banco de Dados SQL**.
+Projeto criado com **ReactJS**, **Redux**, **NodeJS** e **Banco de Dados MYSQL**.
 
 Criei para ser usado na empresa onde eu trabalhava, pois esse processo era feito manualmente no meu caderno de anotações, foi bastante prazeroso cria-lo.
 
