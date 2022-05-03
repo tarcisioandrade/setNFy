@@ -1,9 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
 import { getNF, filterCompleteNF } from "../../store/slices/setNotaFiscal";
 import Head from "../Head/Head";
 import "./Finalizados.css";
 import Loading from "../Loading/Loading";
+import { API_DEL_NF } from "../../API";
+import ModalConfirm from "../ModalConfirm/ModalConfirm";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
@@ -11,6 +14,20 @@ const Finalizados = () => {
   const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   const dispatch = useDispatch();
+  const [toggleModal, setToggleModal] = React.useState(false);
+  const [actionModal, setActionModal] = React.useState({
+    nf_id: null,
+    message: null,
+    action: null,
+  });
+
+  function openModal() {
+    setToggleModal(true);
+  }
+
+  function closeModal() {
+    setToggleModal(false);
+  }
 
   React.useEffect(() => {
     dispatch(getNF(id_user));
@@ -20,6 +37,11 @@ const Finalizados = () => {
   return (
     <section className="finalizados">
       <Head title="Finalizadas" description="NFs Finalizadas" />
+      <ModalConfirm
+        closeModal={closeModal}
+        toggleModal={toggleModal}
+        finalize={actionModal}
+      />
       <div className="finalizados__header">
         <h2>Notas Fiscais Finalizadas</h2>
         <input
@@ -40,6 +62,7 @@ const Finalizados = () => {
               <th>NF Gri</th>
               <th>Nº Processo</th>
               <th>Status</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -112,6 +135,20 @@ const Finalizados = () => {
                         }
                       >
                         {statusFinal}
+                      </td>
+                      <td>
+                        <button className="finalizados__table_icon">
+                          <DeleteIcon
+                            onClick={() => {
+                              openModal();
+                              setActionModal({
+                                nf_id,
+                                message: `Deseja remover a NF ${nfClient}?`,
+                                action: API_DEL_NF,
+                              });
+                            }}
+                          />
+                        </button>
                       </td>
                     </tr>
                   )

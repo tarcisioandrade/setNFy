@@ -74,7 +74,8 @@
       width: rem(140);
     }
     th:last-child {
-      width: rem(148);
+      width: rem(90);
+      text-align: center;
     }
     tr {
       font-size: rem(14);
@@ -96,6 +97,9 @@
       font-weight: bold;
       text-transform: capitalize;
     }
+    td:last-child {
+      text-align: center;
+    }
   }
 }
 
@@ -114,4 +118,22 @@
 
 .finalizados__tipo--red {
   color: red;
+}
+
+.finalizados__table_icon {
+  cursor: pointer;
+
+  border: none;
+  vertical-align: middle;
+  background: $azul-medio;
+  padding: 0.2rem;
+  border-radius: 3px;
+  transition: background 0.3s;
+  &:hover {
+    background: $azul;
+  }
+  svg {
+    min-width: rem(18);
+    color: $branco;
+  }
 }

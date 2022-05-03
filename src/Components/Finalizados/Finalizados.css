@@ -87,7 +87,8 @@
 }
 
 .finalizados__table thead th:last-child {
-  width: 9.25rem;
+  width: 5.625rem;
+  text-align: center;
 }
 
 .finalizados__table thead tr {
@@ -112,6 +113,10 @@
   text-transform: capitalize;
 }
 
+.finalizados__table tbody td:last-child {
+  text-align: center;
+}
+
 .finalizados__status--true {
   color: green;
 }
@@ -127,4 +132,24 @@
 
 .finalizados__tipo--red {
   color: red;
+}
+
+.finalizados__table_icon {
+  cursor: pointer;
+  border: none;
+  vertical-align: middle;
+  background: #6998ab;
+  padding: 0.2rem;
+  border-radius: 3px;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+}
+
+.finalizados__table_icon:hover {
+  background: #406882;
+}
+
+.finalizados__table_icon svg {
+  min-width: 1.125rem;
+  color: #ece6e6;
 }
