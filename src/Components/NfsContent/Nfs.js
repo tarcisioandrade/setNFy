@@ -114,7 +114,7 @@ const Nfs = () => {
                       >
                         {statusBoleto}
                       </td>
-                      <td className="test">
+                      <td>
                         <button className="nfs__table_icon">
                           <DoneIcon
                             onClick={() => {
