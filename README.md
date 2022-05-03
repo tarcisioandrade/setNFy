@@ -14,3 +14,6 @@ Tambem foi onde eu tive minha primeira experiência com NodeJS e Banco de Dados 
 
 ![localhost_3000_ (1)](https://user-images.githubusercontent.com/61153830/160468968-c7a1cfa1-05e1-4059-b376-e2dcbecabfc3.png)
 
+<h2>NOTAS FISCAIS FINALIZADAS</h2>
+
+![localhost_3000_finalizados](https://user-images.githubusercontent.com/61153830/166555450-d6babf21-86f7-4d85-8959-849947ddf8fe.png)
