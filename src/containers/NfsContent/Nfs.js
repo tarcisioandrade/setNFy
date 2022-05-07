@@ -5,11 +5,9 @@ import "./Nfs.css";
 import { ReactComponent as DeleteIcon } from "../../assets/imgs/delete.svg";
 import { ReactComponent as EditIcon } from "../../assets/imgs/edit.svg";
 import { ReactComponent as DoneIcon } from "../../assets/imgs/done.svg";
-import { Loading, Head } from "../../components";
-import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import { Loading, Head, ModalConfirm, ModalFunctions } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
-import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
 const Nfs = () => {
   const navigate = useNavigate();

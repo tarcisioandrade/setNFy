@@ -5,8 +5,7 @@ import { getNF, filterCompleteNF } from "../../store/slices/setNotaFiscal";
 import { Head, Loading } from "../../components";
 import "./Finalizados.css";
 import { API_DEL_NF } from "../../API";
-import ModalConfirm from "../ModalConfirm/ModalConfirm";
-import ModalFunctions from "../ModalConfirm/ModalFunctions";
+import { ModalConfirm, ModalFunctions } from "../../components/";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");

@@ -4,9 +4,8 @@ import { ReactComponent as UserIcon } from "../../assets/imgs/person-sharp.svg";
 import { ReactComponent as Logo } from "../../assets/imgs/logo.svg";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/slices/setUser";
-import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import { ModalConfirm, ModalFunctions } from "../../components";
 import { useSelector } from "react-redux";
-import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
 const Menu = () => {
   const [toggleDropdown, setToggleDropdown] = React.useState(false);
