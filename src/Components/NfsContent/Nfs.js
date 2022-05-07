@@ -10,6 +10,7 @@ import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import Loading from "../Loading/Loading";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
+import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
 const Nfs = () => {
   const navigate = useNavigate();
@@ -17,20 +18,8 @@ const Nfs = () => {
   const data = useSelector(filterIncompleteNF);
   const { loading, error } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
-  const [toggleModal, setToggleModal] = React.useState(false);
-  const [actionModal, setActionModal] = React.useState({
-    nf_id: null,
-    message: null,
-    action: null,
-  });
-
-  function openModal() {
-    setToggleModal(true);
-  }
-
-  function closeModal() {
-    setToggleModal(false);
-  }
+  const { closeModal, openModal, toggleModal, actionModal, setActionModal } =
+  ModalFunctions();
 
   React.useEffect(() => {
     dispatch(getNF(id_user));

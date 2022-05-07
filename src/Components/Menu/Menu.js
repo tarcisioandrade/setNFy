@@ -6,23 +6,13 @@ import { NavLink } from "react-router-dom";
 import { logout } from "../../store/slices/setUser";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import { useSelector } from "react-redux";
+import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
 const Menu = () => {
-  const [confirmLogout, setConfirmLogout] = React.useState({
-    id: null,
-    action: null,
-    message: null,
-  });
-  const [toggleModal, setToggleModal] = React.useState(false);
   const [toggleDropdown, setToggleDropdown] = React.useState(false);
   const { username } = useSelector((state) => state.setToken.data);
-
-  function openModal() {
-    setToggleModal(true);
-  }
-  function closeModal() {
-    setToggleModal(false);
-  }
+  const { closeModal, openModal, toggleModal, actionModal, setActionModal } =
+    ModalFunctions();
 
   React.useEffect(() => {
     function handleToggleDropDown() {
@@ -73,7 +63,7 @@ const Menu = () => {
             <p
               onClick={() => {
                 openModal();
-                setConfirmLogout({
+                setActionModal({
                   action: logout,
                   message: "Deseja encerrar a sessão?",
                 });
@@ -87,7 +77,7 @@ const Menu = () => {
       <ModalConfirm
         closeModal={closeModal}
         toggleModal={toggleModal}
-        finalize={confirmLogout}
+        finalize={actionModal}
       />
     </header>
   );

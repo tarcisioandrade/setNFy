@@ -7,6 +7,7 @@ import "./Finalizados.css";
 import Loading from "../Loading/Loading";
 import { API_DEL_NF } from "../../API";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
+import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
 const Finalizados = () => {
   const [searchValue, setSearchValue] = React.useState("");
@@ -14,20 +15,8 @@ const Finalizados = () => {
   const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   const dispatch = useDispatch();
-  const [toggleModal, setToggleModal] = React.useState(false);
-  const [actionModal, setActionModal] = React.useState({
-    nf_id: null,
-    message: null,
-    action: null,
-  });
-
-  function openModal() {
-    setToggleModal(true);
-  }
-
-  function closeModal() {
-    setToggleModal(false);
-  }
+  const { closeModal, openModal, toggleModal, actionModal, setActionModal } =
+    ModalFunctions();
 
   React.useEffect(() => {
     dispatch(getNF(id_user));
