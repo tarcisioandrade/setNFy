@@ -2,15 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-// import { nfSet } from "../../store/slices/setNotaFiscal";
-import Input from "../Inputs/Input";
-import Select from "../Inputs/Select";
-import Radio from "../Inputs/Radio";
 import "./AddNF.css";
-import Head from "../Head/Head";
 import { useForm } from "react-hook-form";
-import Error from "../Error/Error";
 import { addNF } from "../../store/slices/setNotaFiscal";
+import { Error, Input, Select, Radio, Head } from "../../components";
 
 const AddNF = () => {
   // Tipo de NF Venda por padrão

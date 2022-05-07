@@ -1,9 +1,7 @@
 import React from "react";
-import Input from "../Inputs/Input";
 import "./Usuario.css";
 import { useForm } from "react-hook-form";
-import Error from "../Error/Error";
-import Head from "../Head/Head";
+import { Error, Head, Input } from "../../components";
 import { Link } from "react-router-dom";
 import { login } from "../../store/slices/setUser";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,7 +59,7 @@ const Login = () => {
           Senha:
         </Input>
         {error && <Error message="Falha na Autenticação." />}
-        {errors.senha?.message  && <Error message={errors.senha.message} />}
+        {errors.senha?.message && <Error message={errors.senha.message} />}
         <p className="usuario__link usuario__link--margin">
           Esqueçeu a senha? <Link to="/user/forgot">Recuperar</Link>
         </p>

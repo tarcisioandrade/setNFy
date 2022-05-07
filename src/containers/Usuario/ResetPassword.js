@@ -2,10 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { API_USER_RESET_PASSWORD } from "../../API";
-import useFetch from "../../Hooks/useFetch";
-import Error from "../Error/Error";
-import Head from "../Head/Head";
-import Input from "../Inputs/Input";
+import useFetch from "../../hooks/useFetch";
+import { Error, Head, Input } from "../../components";
 import UserMessage from "./UserMessage";
 
 const ResetPassword = () => {

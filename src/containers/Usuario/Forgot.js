@@ -1,12 +1,10 @@
 import React from "react";
-import Input from "../Inputs/Input";
 import "./Usuario.css";
 import { useForm } from "react-hook-form";
-import Error from "../Error/Error";
-import Head from "../Head/Head";
+import { Error, Input, Head } from "../../components";
 import { Link } from "react-router-dom";
 import { API_USER_FORGOT } from "../../API";
-import useFetch from "../../Hooks/useFetch";
+import useFetch from "../../hooks/useFetch";
 import UserMessage from "./UserMessage";
 
 const Forgot = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Menu.css";
-import { ReactComponent as UserIcon } from "../../imgs/person-sharp.svg";
-import { ReactComponent as Logo } from "../../imgs/logo.svg";
+import { ReactComponent as UserIcon } from "../../assets/imgs/person-sharp.svg";
+import { ReactComponent as Logo } from "../../assets/imgs/logo.svg";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/slices/setUser";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";

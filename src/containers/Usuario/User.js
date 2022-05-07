@@ -4,7 +4,7 @@ import Signup from "./Signup";
 import Login from "./Login";
 import Forgot from "./Forgot";
 import { useSelector } from "react-redux";
-import Loading from "../Loading/Loading";
+import { Loading } from "../../components";
 import ResetPassword from "./ResetPassword";
 
 const User = () => {
