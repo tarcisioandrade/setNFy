@@ -148,7 +148,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background: url("../../imgs/logout.svg") 0.3125rem no-repeat;
+  background: url("../../assets/imgs/logout.svg") 0.3125rem no-repeat;
   background-size: 1.5rem;
 }
 

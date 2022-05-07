@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import "./ModalConfirm.css";
-import { ReactComponent as AlertIcon } from "../../imgs/alert-outline.svg";
+import { ReactComponent as AlertIcon } from "../../assets/imgs/alert-outline.svg";
 import { useDispatch } from "react-redux";
 
 const customStyles = {

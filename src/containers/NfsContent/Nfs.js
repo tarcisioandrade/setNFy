@@ -2,13 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "./Nfs.css";
-import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
-import { ReactComponent as EditIcon } from "../../imgs/edit.svg";
-import { ReactComponent as DoneIcon } from "../../imgs/done.svg";
-import Head from "../Head/Head";
+import { ReactComponent as DeleteIcon } from "../../assets/imgs/delete.svg";
+import { ReactComponent as EditIcon } from "../../assets/imgs/edit.svg";
+import { ReactComponent as DoneIcon } from "../../assets/imgs/done.svg";
+import { Loading, Head } from "../../components";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
-import Loading from "../Loading/Loading";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
 import ModalFunctions from "../ModalConfirm/ModalFunctions";
 
@@ -19,7 +18,7 @@ const Nfs = () => {
   const { loading, error } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   const { closeModal, openModal, toggleModal, actionModal, setActionModal } =
-  ModalFunctions();
+    ModalFunctions();
 
   React.useEffect(() => {
     dispatch(getNF(id_user));

@@ -1,12 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useParams } from "react-router-dom";
-import Head from "../Head/Head";
-import Input from "../Inputs/Input";
-import Select from "../Inputs/Select";
 import "./AddNF.css";
 import { useForm } from "react-hook-form";
-import Error from "../Error/Error";
+import { Error, Input, Select, Head } from "../../components";
 import { attNF } from "../../store/slices/setNotaFiscal";
 
 const EditNF = () => {

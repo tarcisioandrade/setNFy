@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ReactComponent as DeleteIcon } from "../../imgs/delete.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/imgs/delete.svg";
 import { getNF, filterCompleteNF } from "../../store/slices/setNotaFiscal";
-import Head from "../Head/Head";
+import { Head, Loading } from "../../components";
 import "./Finalizados.css";
-import Loading from "../Loading/Loading";
 import { API_DEL_NF } from "../../API";
 import ModalConfirm from "../ModalConfirm/ModalConfirm";
 import ModalFunctions from "../ModalConfirm/ModalFunctions";
