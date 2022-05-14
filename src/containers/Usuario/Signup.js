@@ -31,6 +31,7 @@ const Signup = () => {
       <Head title="Criar uma Conta" description="Cria uma conta" />
       <form className="usuario__form">
         <Input
+          autoComplete="off"
           {...register("usuario", {
             required: "Insira um nome de usuário.",
             pattern: {

@@ -91,6 +91,7 @@ const EditNF = () => {
         </Input>
         {errors.residuo?.message && <Error message={errors.residuo.message} />}
         <Input
+          autoComplete="off"
           {...register("nfCliente", {
             required: "Insira o número da NF do Cliente.",
             maxLength: { value: 5, message: "Digite no máximo 5 números." },
@@ -107,6 +108,7 @@ const EditNF = () => {
           <Error message={errors.nfCliente.message} />
         )}
         <Input
+          autoComplete="off"
           {...register("nfGri", {
             maxLength: { value: 4, message: "Digite no máximo 4 números." },
             pattern: {
@@ -119,6 +121,7 @@ const EditNF = () => {
         </Input>
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
+          autoComplete="off"
           {...register("processo", {
             pattern: {
               value: /^([0-9]*[.])?([0-9]*[\s]?)+$/,

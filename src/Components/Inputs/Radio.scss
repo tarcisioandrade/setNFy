@@ -1,8 +1,8 @@
 @import "../../assets/styles/_var-mixins";
 
-.radio-label:first-child {
+.radio-label:nth-child(2) {
   display: inline-block;
-  margin-right: 1rem;
+  margin: 0 1rem;
 }
 
 .radio-label {

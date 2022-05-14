@@ -58,7 +58,7 @@ const AddNF = () => {
       <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
         <div className="addNf__row--radio">
           <Radio
-            options={["Venda", "Complementar"]}
+            options={["Venda", "Complementar", "Doação"]}
             value={tipoNF}
             setValue={setTipoNF}
           />
@@ -77,6 +77,7 @@ const AddNF = () => {
         </Input>
         {errors.residuo?.message && <Error message={errors.residuo.message} />}
         <Input
+          autoComplete="off"
           {...register("nfCliente", {
             required: "Insira o número da NF do Cliente.",
             maxLength: { value: 5, message: "Digite no máximo 5 números." },
@@ -92,6 +93,7 @@ const AddNF = () => {
           <Error message={errors.nfCliente.message} />
         )}
         <Input
+          autoComplete="off"
           {...register("nfGri", {
             pattern: {
               value: /^[0-9]*$/,
@@ -104,6 +106,7 @@ const AddNF = () => {
         </Input>
         {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
         <Input
+          autoComplete="off"
           {...register("processo", {
             pattern: {
               value: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
