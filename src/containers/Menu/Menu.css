@@ -1,22 +1,10 @@
 .menu {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   position: fixed;
-  max-width: 1366px;
-  margin: 0 auto;
   right: 0;
   left: 0;
   top: 0;
   z-index: 1000;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   background-color: #1a374d;
-  padding: 0 1rem;
   -webkit-box-shadow: 0px 1px 17px 1px #18181840;
           box-shadow: 0px 1px 17px 1px #18181840;
   font-family: "Nunito", sans-serif;
@@ -24,6 +12,21 @@
 
 .menu a {
   text-decoration: none;
+}
+
+.menu__wrapper {
+  max-width: 1366px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 1rem;
 }
 
 .menu__logo-content {
@@ -106,7 +109,7 @@
   display: none;
   position: absolute;
   min-width: 6.25rem;
-  left: -4.0625rem;
+  left: -rem(65);
   top: 2.5rem;
   border-radius: 4px;
   background-color: #1a374d;

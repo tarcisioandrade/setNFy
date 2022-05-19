@@ -1,24 +1,27 @@
-@import "../../var-mixins";
+@import "../../assets/styles/var-mixins";
 
 .menu {
-  display: flex;
   position: fixed;
-  max-width: 1366px;
-  margin: 0 auto;
   right: 0;
   left: 0;
   top: 0;
   z-index: 1000;
-  align-items: center;
-  justify-content: space-between;
   background-color: $azul-forte;
-  padding: 0 1rem;
   box-shadow: 0px 1px 17px 1px #18181840;
   font-family: $font-nunito;
   a {
     text-decoration: none;
   }
 }
+.menu__wrapper {
+  max-width: 1366px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
 .menu__logo-content {
   display: flex;
   align-items: center;
@@ -79,7 +82,7 @@
   display: none;
   position: absolute;
   min-width: rem(100);
-  left: - rem(65);
+  left: -rem(65);
   top: rem(40);
   border-radius: 4px;
   background-color: $azul-forte;
