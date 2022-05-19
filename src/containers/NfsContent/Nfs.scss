@@ -1,8 +1,8 @@
-@import "../../var-mixins";
+@import "../../assets/styles/var-mixins";
 
 .nfs {
-  padding: 1rem;
-  margin-top: calc(2.5rem + 62px);
+  padding: 0.5rem 1rem;
+  margin-top: rem(62);
 }
 
 .nfs__header {

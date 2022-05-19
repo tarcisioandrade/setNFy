@@ -1,10 +1,6 @@
-body > #root > .App > .menu > .nfs {
-  background-color: red;
-}
-
 .nfs {
-  padding: 1rem;
-  margin-top: calc(2.5rem + 62px);
+  padding: 0.5rem 1rem;
+  margin-top: 3.875rem;
 }
 
 .nfs__header {

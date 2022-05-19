@@ -1,8 +1,8 @@
-@import "../../var-mixins";
+@import "../../assets/styles/var-mixins";
 
 .finalizados {
-  padding: 1rem;
-  margin-top: calc(2.5rem + 62px);
+  padding: 0.5rem 1rem;
+  margin-top: rem(62);
 }
 
 .finalizados__header {
@@ -24,7 +24,7 @@
   background-size: 24px;
   border: 2px solid $azul-fraco;
   border-radius: 3px;
-  margin-right: rem();
+  margin-right: rem(16);
   &:focus,
   &:hover {
     outline: none;
@@ -33,7 +33,7 @@
 }
 
 .finalizados__table-content {
-  height: rem(380);
+  max-height: rem(389);
   overflow-y: scroll;
   & table thead tr {
     position: sticky;
@@ -122,7 +122,6 @@
 
 .finalizados__table_icon {
   cursor: pointer;
-
   border: none;
   vertical-align: middle;
   background: $azul-medio;
@@ -136,4 +135,40 @@
     min-width: rem(18);
     color: $branco;
   }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-right: 1rem;
+}
+
+.pagination__select {
+  display: block;
+  border: 2px solid $azul-fraco;
+  border-radius: 3px;
+  &:focus,
+  &:hover {
+    outline: none;
+    border-color: $azul-medio;
+  }
+}
+
+.pagination__buttons button {
+  background-color: #fff;
+  font-family: $font-roboto;
+  border: none;
+  cursor: pointer;
+  padding: 0 6px;
+  font-size: 18px;
+  color: $branco;
+  background-color: $azul;
+  border-radius: 4px;
+}
+
+.pagination__info {
+  font-family: $font-nunito;
+  margin-left: 2rem;
 }

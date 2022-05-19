@@ -1,6 +1,6 @@
 .finalizados {
-  padding: 1rem;
-  margin-top: calc(2.5rem + 62px);
+  padding: 0.5rem 1rem;
+  margin-top: 3.875rem;
 }
 
 .finalizados__header {
@@ -38,7 +38,7 @@
 }
 
 .finalizados__table-content {
-  height: 23.75rem;
+  max-height: 24.3125rem;
   overflow-y: scroll;
 }
 
@@ -152,4 +152,46 @@
 .finalizados__table_icon svg {
   min-width: 1.125rem;
   color: #ece6e6;
+}
+
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 1rem;
+  padding-right: 1rem;
+}
+
+.pagination__select {
+  display: block;
+  border: 2px solid #b1d0e0;
+  border-radius: 3px;
+}
+
+.pagination__select:focus, .pagination__select:hover {
+  outline: none;
+  border-color: #6998ab;
+}
+
+.pagination__buttons button {
+  background-color: #fff;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0 6px;
+  font-size: 18px;
+  color: #ece6e6;
+  background-color: #406882;
+  border-radius: 4px;
+}
+
+.pagination__info {
+  font-family: "Nunito", sans-serif;
+  margin-left: 2rem;
 }
