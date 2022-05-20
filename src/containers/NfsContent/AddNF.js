@@ -12,7 +12,7 @@ const AddNF = () => {
   const [tipoNF, setTipoNF] = React.useState("Venda");
   // State Redux Métodos
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state) => state.setNotaFiscal);
+  const { data, loading, error } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
 
   const {
@@ -136,6 +136,9 @@ const AddNF = () => {
             ></Select>
           )}
         </div>
+        {error && (
+          <Error message="Ocorreu um erro ao adicionar esta Nota Fiscal" />
+        )}
         {loading ? (
           <button disabled style={{ cursor: "wait" }} className="addNF__button">
             Adicionando...

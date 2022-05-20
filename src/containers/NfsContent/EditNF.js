@@ -11,7 +11,7 @@ const EditNF = () => {
   const { id } = useParams();
   // const state = useSelector((state) => state.setNotaFiscal.data);
   const { data, loading } = useSelector((state) => state.setNotaFiscal);
-  const nfTarget = data.length && data.filter((nf) => nf.nf_id === id)[0];
+  const nfTarget = data?.length && data?.filter((nf) => nf.nf_id === id)[0];
   const tipoNF = nfTarget?.type;
 
   // State Redux Métodos

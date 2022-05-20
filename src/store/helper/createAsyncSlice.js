@@ -58,11 +58,10 @@ const createAsyncSlice = (config) => {
       const { url, options } = config.asyncAdd(payload);
       const response = await fetch(url, options);
       const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.message || data.error.message || data.error);
+      if (!response.ok) throw new Error(data.error.errno);
       return dispatch(fetchSuccess(data));
     } catch (error) {
-      return dispatch(fetchError(error.message || true));
+      return dispatch(fetchError(error.message));
     }
   };
 
@@ -72,11 +71,10 @@ const createAsyncSlice = (config) => {
       const { url, options } = config.asyncAtt(payload);
       const response = await fetch(url, options);
       const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.message || data.error.message || data.error);
+      if (!response.ok) throw new Error(data.error.errno);
       return dispatch(fetchSuccess(data));
     } catch (error) {
-      return dispatch(fetchError(error.message || true));
+      return dispatch(fetchError(error.message));
     }
   };
 
