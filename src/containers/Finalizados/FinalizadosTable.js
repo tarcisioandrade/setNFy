@@ -72,6 +72,8 @@ const FinalizadosTable = (props) => {
     usePagination
   );
 
+  console.log(data);
+
   return (
     <>
       <ModalConfirm
