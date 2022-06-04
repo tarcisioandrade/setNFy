@@ -12,6 +12,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Head } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
+import AddNF from "./AddNF";
+import ModalFunctions from "../../components/ModalConfirm/ModalFunctions";
 
 // CONSTANTES DO ANTD
 const { Column } = Table;
@@ -25,6 +27,9 @@ const Nfs = () => {
   const data = useSelector(filterIncompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
+
+  // MODAL FUNCOES
+  const { openModalAdd, toggleModalAdd, closeModalAdd } = ModalFunctions();
 
   // FUNÇÕES DO ANTD
   const showDeleteConfirm = (id, name, action, message) => {
@@ -53,7 +58,7 @@ const Nfs = () => {
         <h2>Notas Fiscais</h2>
         <Button
           type="primary"
-          onClick={() => navigate("/adicionar")}
+          onClick={() => openModalAdd()}
           icon={<UserAddOutlined />}
           size="large"
         >
@@ -137,6 +142,8 @@ const Nfs = () => {
           )}
         />
       </Table>
+
+      <AddNF show={toggleModalAdd} handleClose={closeModalAdd} />
     </>
   );
 };
