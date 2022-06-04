@@ -2,12 +2,14 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-import "./AddNF.css";
 import { useForm } from "react-hook-form";
 import { addNF } from "../../store/slices/setNotaFiscal";
 import { Error, Input, Select, Radio, Head } from "../../components";
+import { Button, Modal, Form } from "antd";
 
 const AddNF = () => {
+  // CONSTANTES ANTD
+  const [form] = Form.useForm();
   // Tipo de NF Venda por padrão
   const [tipoNF, setTipoNF] = React.useState("Venda");
   // State Redux Métodos
@@ -50,12 +52,8 @@ const AddNF = () => {
 
   if (data && data.ok) return <Navigate to="/" />;
   return (
-    <section className="addNF">
-      <Head
-        title="Adicionar Nota Fiscal"
-        descritpion="Adicione uma Nota Fiscal"
-      />
-      <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
+    <Modal className="addNF">
+      <Form >
         <div className="addNf__row--radio">
           <Radio
             options={["Venda", "Complementar", "Doação"]}
@@ -146,8 +144,8 @@ const AddNF = () => {
         ) : (
           <button className="addNF__button">Adicionar</button>
         )}
-      </form>
-    </section>
+      </Form>
+    </Modal>
   );
 };
 

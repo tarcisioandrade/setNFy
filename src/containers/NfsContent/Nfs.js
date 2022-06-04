@@ -1,146 +1,143 @@
 import React from "react";
+import { Button, Table, Space, Row, Typography, Modal } from "antd";
+import {
+  CheckOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ExclamationCircleOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import "./Nfs.css";
-import { ReactComponent as DeleteIcon } from "../../assets/imgs/delete.svg";
-import { ReactComponent as EditIcon } from "../../assets/imgs/edit.svg";
-import { ReactComponent as DoneIcon } from "../../assets/imgs/done.svg";
-import { Loading, Head, ModalConfirm, ModalFunctions } from "../../components";
+import { Head } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
 
+// CONSTANTES DO ANTD
+const { Column } = Table;
+const { Text } = Typography;
+const { confirm } = Modal;
+
 const Nfs = () => {
+  // CONSTANTES DO STATE
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector(filterIncompleteNF);
-  const { loading, error } = useSelector((state) => state.setNotaFiscal);
+  const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
-  const { closeModal, openModal, toggleModal, actionModal, setActionModal } =
-    ModalFunctions();
+
+  // FUNÇÕES DO ANTD
+  const showDeleteConfirm = (id, name, action, message) => {
+    confirm({
+      title: `Deseja ${message} o processo da NF ${name}?`,
+      icon: <ExclamationCircleOutlined />,
+      okText: "Confirmar",
+      cancelText: "Cancelar",
+      onOk() {
+        action({ id });
+      },
+    });
+  };
 
   React.useEffect(() => {
     dispatch(getNF(id_user));
   }, [dispatch, id_user]);
 
-  if (loading) return <Loading />;
   return (
-    <section className="nfs">
-      <ModalConfirm
-        closeModal={closeModal}
-        toggleModal={toggleModal}
-        finalize={actionModal}
-      />
+    <>
       <Head
         title="Gerenciador de Notas Fiscais"
         description="Gerencie e controle suas notas fiscais"
       />
-      <div className="nfs__header">
+      <Row justify="space-between" style={{ marginBottom: "10px" }}>
         <h2>Notas Fiscais</h2>
-        <button onClick={() => navigate("/adicionar")} className="nfs__add">
-          +
-        </button>
-      </div>
-
-      <div className="nfs__content">
-        <table className="nfs__table">
-          <thead>
-            <tr>
-              <th>Tipo</th>
-              <th>Resíduo</th>
-              <th>NF Cliente</th>
-              <th>NF Gri</th>
-              <th>Nº Processo</th>
-              <th>Status NF</th>
-              <th>Status Boleto</th>
-              <th>Acões</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data &&
-              data
-                .sort((a, b) => b.processo - a.processo)
-                .map(
-                  ({
-                    nf_id,
-                    type,
-                    residuo,
-                    nfClient,
-                    nfGri,
-                    processo,
-                    statusNF,
-                    statusBoleto,
-                  }) => (
-                    <tr key={nf_id}>
-                      <td
-                        className={`${
-                          type === "Complementar" ? "addNF__tipo--red" : ""
-                        }`}
-                      >
-                        {type}
-                      </td>
-                      <td>{residuo}</td>
-                      <td>{nfClient}</td>
-                      <td>{nfGri === null ? "" : nfGri}</td>
-                      <td>{processo === null ? "" : processo}</td>
-                      <td
-                        className={
-                          statusNF === "Enviado"
-                            ? "nfs__status--true"
-                            : "nfs__status--false"
-                        }
-                      >
-                        {statusNF}
-                      </td>
-                      <td
-                        className={
-                          statusBoleto === "Enviado"
-                            ? "nfs__status--true"
-                            : "nfs__status--false"
-                        }
-                      >
-                        {statusBoleto}
-                      </td>
-                      <td>
-                        <button className="nfs__table_icon">
-                          <DoneIcon
-                            onClick={() => {
-                              openModal();
-                              setActionModal({
-                                nf_id,
-                                message: `Deseja finalizar o processo da NF ${nfClient}?`,
-                                action: API_FIN_NF,
-                              });
-                            }}
-                          />
-                        </button>
-                        <button className="nfs__table_icon">
-                          <Link to={`nf/${nf_id}`}>
-                            <EditIcon />
-                          </Link>
-                        </button>
-                        <button className="nfs__table_icon">
-                          <DeleteIcon
-                            onClick={() => {
-                              openModal();
-                              setActionModal({
-                                nf_id,
-                                message: `Deseja remover a NF ${nfClient}?`,
-                                action: API_DEL_NF,
-                              });
-                            }}
-                          />
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                )}
-          </tbody>
-        </table>
-        {error && (
-          <p className="nfs__errorMsg">Nenhuma nota fiscal foi encontrada.</p>
-        )}
-      </div>
-    </section>
+        <Button
+          type="primary"
+          onClick={() => navigate("/adicionar")}
+          icon={<UserAddOutlined />}
+          size="large"
+        >
+          Adicionar
+        </Button>
+      </Row>
+      <Table
+        dataSource={data}
+        pagination={{ responsive: true }}
+        loading={loading}
+        rowKey={({ nfClient }) => nfClient + 1}
+      >
+        <Column
+          title="TIPO"
+          dataIndex="type"
+          key="type"
+          render={(_, { type }) => (
+            <Text type={type === "Venda" ? "" : "danger"}>{type}</Text>
+          )}
+        />
+        <Column
+          title="RESÍDUO"
+          dataIndex="residuo"
+          key="residuo"
+          className="weight"
+        />
+        <Column title="NF CLIENTE" dataIndex="nfClient" key="nfClient" />
+        <Column title="NF GRI" dataIndex="nfGri" key="nfGri" />
+        <Column title="PROCESSO" dataIndex="processo" key="processo" />
+        <Column
+          title="ENVIO NF"
+          dataIndex="statusNF"
+          key="statusNF"
+          render={(_, { statusNF }) => (
+            <Text
+              type={statusNF === "Pendente" ? "danger" : "success"}
+              className="weight"
+              title={statusNF}
+            >
+              {statusNF}
+            </Text>
+          )}
+        />
+        <Column
+          title="ENVIO BOLETO"
+          dataIndex="statusBoleto"
+          key="statusBoleto"
+          render={(_, { statusBoleto }) => (
+            <Text
+              type={statusBoleto === "Pendente" ? "danger" : "success"}
+              className="weight"
+            >
+              {statusBoleto}
+            </Text>
+          )}
+        />
+        <Column
+          title="AÇÃO"
+          align="center"
+          key="ação"
+          render={(_, { nf_id, nfClient }) => (
+            <Space size="small">
+              <Button
+                size="small"
+                type="primary"
+                icon={<CheckOutlined />}
+                onClick={() =>
+                  showDeleteConfirm(nf_id, nfClient, API_FIN_NF, "finalizar")
+                }
+              />
+              <Button size="small" type="primary" icon={<EditOutlined />} />
+              <Button
+                size="small"
+                icon={<DeleteOutlined />}
+                type="primary"
+                onClick={() =>
+                  showDeleteConfirm(nf_id, nfClient, API_DEL_NF, "apagar")
+                }
+              />
+            </Space>
+          )}
+        />
+      </Table>
+    </>
   );
 };
 

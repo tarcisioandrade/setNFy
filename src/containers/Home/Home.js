@@ -5,23 +5,38 @@ import Menu from "../Menu/Menu";
 import AddNF from "../NfsContent/AddNF";
 import EditNF from "../NfsContent/EditNF";
 import Nfs from "../NfsContent/Nfs";
+import { Layout } from "antd";
+import Sider from "../Sider/Sider";
+import BreadCrump from "../../components/BreadCrump/BreadCrumb";
+const { Content } = Layout;
 
 const Home = () => {
-  
   // Altera a cor do backgroung do body
   document.body.classList.remove("user");
   document.body.classList.add("home");
 
   return (
-    <>
-      <Menu />
-      <Routes>
-        <Route path="/" element={<Nfs />} />
-        <Route path="adicionar" element={<AddNF />} />
-        <Route path="nf/:id" element={<EditNF />} />
-        <Route path="finalizados" element={<Finalizados />} />
-      </Routes>
-    </>
+    <Layout hasSider style={{ minHeight: "100vh" }}>
+      <Sider>
+        <Menu />
+      </Sider>
+      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+        <Content style={{ margin: "0 0px" }}>
+          <BreadCrump />
+          <div
+            className="site-layout-background"
+            style={{ padding: 24, minHeight: 360 }}
+          >
+            <Routes>
+              <Route path="/home" element={<Nfs />} />
+              <Route path="adicionar" element={<AddNF />} />
+              <Route path="nf/:id" element={<EditNF />} />
+              <Route path="finalizados" element={<Finalizados />} />
+            </Routes>
+          </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 

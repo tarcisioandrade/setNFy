@@ -15,7 +15,7 @@ const User = () => {
   document.body.classList.add("user");
 
   if (loading) return <Loading />;
-  if (data) return <Navigate to="/" />;
+  if (data) return <Navigate to="/home" />;
   return (
     <>
       <Routes>

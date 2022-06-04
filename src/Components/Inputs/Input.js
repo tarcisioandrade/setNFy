@@ -1,18 +1,11 @@
 import React from "react";
-import "./Input.css";
+import { Input as InputAntd, Form } from "antd";
 
 const Input = React.forwardRef(({ type = "text", children, ...props }, ref) => {
-  
   return (
-    <label className="labelComp">
-      {children}
-      <input
-        className="inputComp"
-        type={type}
-        ref={ref}
-        {...props}
-      />
-    </label>
+    <Form.Item label={children}>
+      <InputAntd type={type} ref={ref} {...props} />
+    </Form.Item>
   );
 });
 
