@@ -8,7 +8,6 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
 import { Head } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
@@ -22,7 +21,6 @@ const { confirm } = Modal;
 
 const Nfs = () => {
   // CONSTANTES DO STATE
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector(filterIncompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
@@ -32,14 +30,15 @@ const Nfs = () => {
   const { openModalAdd, toggleModalAdd, closeModalAdd } = ModalFunctions();
 
   // FUNÇÕES DO ANTD
-  const showDeleteConfirm = (id, name, action, message) => {
+  const showDeleteConfirm = (nf_id, name, action, message) => {
     confirm({
       title: `Deseja ${message} o processo da NF ${name}?`,
       icon: <ExclamationCircleOutlined />,
       okText: "Confirmar",
       cancelText: "Cancelar",
-      onOk() {
-        action({ id });
+      async onOk() {
+        const { data } = await action({ nf_id });
+        if (data.ok) dispatch(getNF(id_user));
       },
     });
   };
@@ -142,7 +141,6 @@ const Nfs = () => {
           )}
         />
       </Table>
-
       <AddNF show={toggleModalAdd} handleClose={closeModalAdd} />
     </>
   );

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-import { addNF } from "../../store/slices/setNotaFiscal";
+import { addNF, getNF } from "../../store/slices/setNotaFiscal";
 import { Modal, Form, Input, Row, Col, Select } from "antd";
 
 const AddNF = ({ show, handleClose }) => {
@@ -11,38 +10,46 @@ const AddNF = ({ show, handleClose }) => {
   const { Option } = Select;
   // State Redux Métodos
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.setNotaFiscal);
+  const { data } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   // Valida se statusNF está enviado para habilitar o select do boleto
   const { statusNF } = form.getFieldValue();
   const [onStatusNF, setOnStatusNF] = useState(statusNF);
   const statusValid = onStatusNF === "Enviado";
 
-  console.log(statusValid);
   const onSubmit = (data) => {
-    // const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
-    //   data;
-    // dispatch(
-    //   addNF({
-    //     id_user,
-    //     nf_id: generateID(),
-    //     type: tipoNF,
-    //     residuo,
-    //     nfClient: Number(nfCliente),
-    //     nfGri: nfGri === "" ? null : Number(nfGri),
-    //     processo: processo === "" ? null : processo,
-    //     statusNF,
-    //     statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
-    //     statusFinal:
-    //       statusNF === "Enviado" && statusBoleto === "Enviado"
-    //         ? "Completo"
-    //         : "Incompleto",
-    //   })
-    // );
+    const {
+      residuo,
+      nfCliente,
+      nfGri,
+      processo,
+      statusNF,
+      statusBoleto,
+      tipo,
+    } = data;
+    dispatch(
+      addNF({
+        id_user,
+        nf_id: generateID(),
+        type: tipo,
+        residuo,
+        nfClient: Number(nfCliente),
+        nfGri: nfGri === "" ? null : Number(nfGri),
+        processo: processo === "" ? null : processo,
+        statusNF,
+        statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
+        statusFinal:
+          statusNF === "Enviado" && statusBoleto === "Enviado"
+            ? "Completo"
+            : "Incompleto",
+      })
+    );
     console.log(data);
   };
+  useEffect(() => {
+    if (data?.ok) dispatch(getNF(id_user));
+  }, [dispatch, id_user, data?.ok]);
 
-  if (data && data.ok) return <Navigate to="/" />;
   return (
     <Modal
       style={{ padding: "16px 0" }}
@@ -56,11 +63,15 @@ const AddNF = ({ show, handleClose }) => {
       onOk={() => {
         form
           .validateFields()
-          .then((values) => onSubmit(values))
+          .then((values) => {
+            onSubmit(values);
+            handleClose();
+          })
           .catch((err) => err);
       }}
     >
       <Form
+        preserve={false}
         form={form}
         layout="vertical"
         initialValues={{
