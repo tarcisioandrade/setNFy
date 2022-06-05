@@ -12,6 +12,14 @@ body.home {
   text-align: center;
 }
 
+.logo svg {
+  height: 28px;
+  width: 28px;
+  position: relative;
+  bottom: -2px;
+  margin-right: 10px;
+}
+
 .site-layout .site-layout-background {
   background: #fff;
 }

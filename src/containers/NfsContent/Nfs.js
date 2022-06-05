@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Table, Space, Row, Typography, Modal } from "antd";
 import {
   CheckOutlined,
@@ -13,6 +13,7 @@ import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
 import AddNF from "./AddNF";
 import ModalFunctions from "../../components/ModalConfirm/ModalFunctions";
+import EditNF from "./EditNF";
 
 // CONSTANTES DO ANTD
 const { Column } = Table;
@@ -26,8 +27,18 @@ const Nfs = () => {
   const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
 
+  // ID DA NF QUE VAI SER EDITADA
+  const [nfID, setNfID] = useState(false);
+
   // MODAL FUNCOES
-  const { openModalAdd, toggleModalAdd, closeModalAdd } = ModalFunctions();
+  const {
+    openModalAdd,
+    toggleModalAdd,
+    closeModalAdd,
+    openModalEdit,
+    toggleModalEdit,
+    closeModalEdit,
+  } = ModalFunctions();
 
   // FUNÇÕES DO ANTD
   const showDeleteConfirm = (nf_id, name, action, message) => {
@@ -75,7 +86,13 @@ const Nfs = () => {
           dataIndex="type"
           key="type"
           render={(_, { type }) => (
-            <Text type={type === "Venda" ? "" : "danger"}>{type}</Text>
+            <Text
+              type={
+                type === "Venda" ? "" : type === "Complementar" ? "danger" : ""
+              }
+            >
+              {type}
+            </Text>
           )}
         />
         <Column
@@ -84,9 +101,26 @@ const Nfs = () => {
           key="residuo"
           className="weight"
         />
-        <Column title="NF CLIENTE" dataIndex="nfClient" key="nfClient" />
-        <Column title="NF GRI" dataIndex="nfGri" key="nfGri" />
-        <Column title="PROCESSO" dataIndex="processo" key="processo" />
+
+        <Column
+          title="NF CLIENTE"
+          dataIndex="nfClient"
+          key="nfClient"
+          sorter={(a, b) => a.nfGri - b.nfGri}
+        />
+        <Column
+          title="NF GRI"
+          dataIndex="nfGri"
+          key="nfGri"
+          sorter={(a, b) => a.nfGri - b.nfGri}
+        />
+        <Column
+          title="PROCESSO"
+          dataIndex="processo"
+          key="processo"
+          sorter={(a, b) => a.processo - b.processo}
+          defaultSortOrder="descend"
+        />
         <Column
           title="ENVIO NF"
           dataIndex="statusNF"
@@ -128,7 +162,15 @@ const Nfs = () => {
                   showDeleteConfirm(nf_id, nfClient, API_FIN_NF, "finalizar")
                 }
               />
-              <Button size="small" type="primary" icon={<EditOutlined />} />
+              <Button
+                size="small"
+                type="primary"
+                icon={<EditOutlined />}
+                onClick={() => {
+                  openModalEdit();
+                  setNfID(nf_id);
+                }}
+              />
               <Button
                 size="small"
                 icon={<DeleteOutlined />}
@@ -142,6 +184,9 @@ const Nfs = () => {
         />
       </Table>
       <AddNF show={toggleModalAdd} handleClose={closeModalAdd} />
+      {nfID && (
+        <EditNF show={toggleModalEdit} handleClose={closeModalEdit} id={nfID} />
+      )}
     </>
   );
 };

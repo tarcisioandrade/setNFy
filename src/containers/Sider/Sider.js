@@ -1,14 +1,15 @@
 import React from "react";
-import { Popconfirm, Layout, Avatar } from "antd";
+import { Popconfirm, Layout, Avatar, Row } from "antd";
 import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/slices/setUser";
+import { ReactComponent as Logo } from "../../assets/imgs/newLogo.svg";
 
 const { Sider: SiderAntd } = Layout;
 
 const Sider = ({ children: Menu }) => {
   const { username } = useSelector((state) => state.setToken.data);
-
+  const dispatch = useDispatch();
   return (
     <SiderAntd
       style={{
@@ -22,11 +23,10 @@ const Sider = ({ children: Menu }) => {
         zIndex: 50,
       }}
     >
-      <div className="logo">
-        <h1 level={2} style={{ color: "#ece6e6", margin: 0 }}>
-          SetNFy
-        </h1>
-      </div>
+      <Row className="logo" align="middle" justify="center">
+        <Logo />
+        <h1 style={{ color: "#ece6e6", margin: 0 }}>SetNFy</h1>
+      </Row>
       {Menu}
       <div className="profile">
         <Popconfirm
@@ -34,7 +34,7 @@ const Sider = ({ children: Menu }) => {
           okText="Sair"
           placement="right"
           icon={<LogoutOutlined />}
-          onConfirm={() => logout()}
+          onConfirm={() => dispatch(logout())}
         >
           <Avatar
             style={{ background: "#1890ff" }}

@@ -27,6 +27,7 @@ const AddNF = ({ show, handleClose }) => {
       statusBoleto,
       tipo,
     } = data;
+    
     dispatch(
       addNF({
         id_user,
@@ -44,7 +45,7 @@ const AddNF = ({ show, handleClose }) => {
             : "Incompleto",
       })
     );
-    console.log(data);
+    form.resetFields();
   };
   useEffect(() => {
     if (data?.ok) dispatch(getNF(id_user));
@@ -71,7 +72,6 @@ const AddNF = ({ show, handleClose }) => {
       }}
     >
       <Form
-        preserve={false}
         form={form}
         layout="vertical"
         initialValues={{
@@ -106,7 +106,7 @@ const AddNF = ({ show, handleClose }) => {
             },
           ]}
         >
-          <Input placeholder="Ex: Bombonas" />
+          <Input allowClear placeholder="Ex: Bombonas" />
         </Form.Item>
 
         <Form.Item
