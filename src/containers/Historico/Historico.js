@@ -16,7 +16,7 @@ const { Column } = Table;
 const { Text } = Typography;
 const { confirm } = Modal;
 
-const Finalizados = () => {
+const Historico = () => {
   const data = useSelector(filterCompleteNF);
   const { loading } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
@@ -153,4 +153,4 @@ const Finalizados = () => {
   );
 };
 
-export default Finalizados;
+export default Historico;

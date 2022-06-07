@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 
 const breadcrumbNameMap = {
   "/home": "Notas Fiscais",
-  "/finalizadas": "Finalizadas",
+  "/historico": "Histórico",
 };
 
 const BreadCrump = () => {

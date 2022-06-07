@@ -6,7 +6,7 @@ import { Menu as MenuAntd } from "antd";
 const Menu = () => {
   const menuOptions = [
     getItem(<Link to="/home">Notas Fiscais</Link>, "1", <PieChartOutlined />),
-    getItem(<Link to="finalizadas">Finalizadas</Link>, "2", <CheckOutlined />),
+    getItem(<Link to="historico">Histórico</Link>, "2", <CheckOutlined />),
   ];
 
   function getItem(label, key, icon, children) {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Finalizados from "../Finalizados/Finalizados";
+import Historico from "../Historico/Historico";
 import Menu from "../Menu/Menu";
 import Nfs from "../NfsContent/Nfs";
 import { Layout } from "antd";
@@ -27,7 +27,7 @@ const Home = () => {
           >
             <Routes>
               <Route path="home" element={<Nfs />} />
-              <Route path="finalizadas" element={<Finalizados />} />
+              <Route path="historico" element={<Historico />} />
             </Routes>
           </div>
         </Content>
