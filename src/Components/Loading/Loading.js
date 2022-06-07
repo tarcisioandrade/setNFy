@@ -1,10 +1,16 @@
-import React from 'react'
-import "./Loader.css"
+import React from "react";
+import { Spin } from "antd";
+import "./Loader.css";
 
 const Loading = () => {
-  return (
-    <div className='loader'></div>
-  )
-}
+  document.body.classList.remove("user");
+  document.body.classList.add("home");
 
-export default React.memo(Loading)
+  return (
+    <div className="loader">
+      <Spin size="large"></Spin>
+    </div>
+  );
+};
+
+export default React.memo(Loading);

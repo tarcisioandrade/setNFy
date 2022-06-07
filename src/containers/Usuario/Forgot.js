@@ -1,60 +1,73 @@
 import React from "react";
 import "./Usuario.css";
-import { useForm } from "react-hook-form";
-import { Error, Input, Head } from "../../components";
-import { Link } from "react-router-dom";
+import { Head } from "../../components";
 import { API_USER_FORGOT } from "../../API";
 import useFetch from "../../hooks/useFetch";
-import UserMessage from "./UserMessage";
+import { Button, Form, Input, message } from "antd";
+import { MailOutlined } from "@ant-design/icons";
+import { ReactComponent as Logo } from "../../assets/imgs/newLogo.svg";
+import URL from "../../helper/getUrl";
 
 const Forgot = () => {
-  const [successForgot, setSuccessForgot] = React.useState(false);
-  const { loading, request, error } = useFetch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { loading, request } = useFetch();
+
+  // CONSTANTES ANTD
+  const [form] = Form.useForm();
 
   const onSubmit = async (data) => {
     const { email } = data;
     const { url, options } = API_USER_FORGOT({ email });
     const { response } = await request(url, options);
-    if (response.ok) setSuccessForgot(true);
+    if (response.status === 409) {
+      message.error("Usuário não encontrado.");
+    } else if (!response.ok) {
+      message.error("Ocorreu um erro, verifique o email e tente novamente.");
+    } else {
+      message.success("E-mail de redefinição foi enviado!");
+      form.resetFields();
+    }
   };
 
-  if (successForgot)
-    return <UserMessage message="E-mail de redefinição foi enviado!" />;
   return (
-    <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
+    <section className="usuario">
       <Head title="Recuperar Senha" description="Recuperar senha esquecida" />
-      <form className="usuario__form">
-        <Input
-          {...register("email", {
-            required: true,
-            pattern: {
-              value: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-              message: "Insira um email válido.",
-            },
-          })}
-        >
-          E-mail
-        </Input>
-        <p className="usuario__link">
-          Lembrou a senha? <Link to="/user/login">Faça Login</Link>
-        </p>
-        {error && (
-          <Error message="Ocorreu um erro, verifique o email e tente novamente." />
-        )}
-        {errors.email?.message && <Error message={errors.email.message} />}
-        {loading ? (
-          <button className="usuario__button" style={{ cursor: "await" }}>
-            Enviando...
-          </button>
-        ) : (
-          <button className="usuario__button">Enviar</button>
-        )}
-      </form>
+      <div className="usuario__form">
+        <div className="usuario_logo">
+          <a href={`${URL}/user/login`}>
+            <Logo />
+          </a>
+        </div>
+        <Form form={form} layout="vertical" onFinish={onSubmit}>
+          <Form.Item
+            name="email"
+            rules={[
+              { required: true, message: "Digite seu e-mail." },
+              {
+                pattern: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
+                message: "Digite um e-mail válido.",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              placeholder="E-mail"
+              prefix={<MailOutlined className="usuario__icons" />}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              size="large"
+              type="primary"
+              className="usuario__button"
+              htmlType="submit"
+              loading={loading}
+            >
+              Enviar
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </section>
   );
 };

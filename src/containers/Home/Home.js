@@ -2,8 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Finalizados from "../Finalizados/Finalizados";
 import Menu from "../Menu/Menu";
-import AddNF from "../NfsContent/AddNF";
-import EditNF from "../NfsContent/EditNF";
 import Nfs from "../NfsContent/Nfs";
 import { Layout } from "antd";
 import Sider from "../Sider/Sider";
@@ -28,10 +26,8 @@ const Home = () => {
             style={{ padding: 24, minHeight: 360 }}
           >
             <Routes>
-              <Route path="/home" element={<Nfs />} />
-              <Route path="adicionar" element={<AddNF />} />
-              <Route path="nf/:id" element={<EditNF />} />
-              <Route path="finalizados" element={<Finalizados />} />
+              <Route path="home" element={<Nfs />} />
+              <Route path="finalizadas" element={<Finalizados />} />
             </Routes>
           </div>
         </Content>

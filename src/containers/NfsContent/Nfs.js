@@ -12,7 +12,7 @@ import { Head } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
 import AddNF from "./AddNF";
-import ModalFunctions from "../../components/ModalConfirm/ModalFunctions";
+import { ModalFunctions } from "../../components/";
 import EditNF from "./EditNF";
 
 // CONSTANTES DO ANTD
@@ -64,8 +64,7 @@ const Nfs = () => {
         title="Gerenciador de Notas Fiscais"
         description="Gerencie e controle suas notas fiscais"
       />
-      <Row justify="space-between" style={{ marginBottom: "10px" }}>
-        <h2>Notas Fiscais</h2>
+      <Row justify="end" style={{ marginBottom: "10px" }}>
         <Button
           type="primary"
           onClick={() => openModalAdd()}

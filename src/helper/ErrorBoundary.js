@@ -1,5 +1,6 @@
 import React from "react";
 import { Result, Button } from "antd";
+import URL from "./getUrl";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ErrorBoundary extends React.Component {
           title="500"
           subTitle="Desculpe, ocorreu algum erro."
           extra={
-            <Button type="primary" href="http://localhost:3000/home">
+            <Button type="primary" href={`${URL}/home`}>
               Página Inicial
             </Button>
           }

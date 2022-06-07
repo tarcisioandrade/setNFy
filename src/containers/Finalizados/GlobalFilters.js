@@ -1,23 +1,13 @@
-import React, { useState } from "react";
-import { useAsyncDebounce } from "react-table/dist/react-table.development";
-
-export const GlobalFilters = ({ globalFilter, setGlobalFilter }) => {
-  const [value, setValue] = useState(globalFilter);
-  const onChange = useAsyncDebounce((value) => {
-    setGlobalFilter(value || undefined);
-  }, 300);
-
-  return (
-    <input
-      value={value || ""}
-      onChange={(e) => {
-        setValue(e.target.value);
-        onChange(e.target.value);
-      }}
-      type="search"
-      name="search"
-      placeholder="Pesquisar"
-      className="finalizados__search"
-    />
-  );
+const GlobalFilters = (items, search, searchTerm) => {
+  if (search === null) return items;
+  return items.filter((item) => {
+    return searchTerm.some((newItem) => {
+      return (
+        item[newItem].toString().toLowerCase().indexOf(search.toLowerCase()) >
+        -1
+      );
+    });
+  });
 };
+
+export default GlobalFilters;

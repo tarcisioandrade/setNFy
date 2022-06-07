@@ -42,7 +42,7 @@ const Sider = ({ children: Menu }) => {
             icon={<UserOutlined />}
           />
         </Popconfirm>
-        <p>{username}</p>
+        <p style={{textTransform: "capitalize"}}>{username}</p>
       </div>
     </SiderAntd>
   );
