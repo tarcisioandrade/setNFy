@@ -1,6 +1,6 @@
 
 ![setnfy](https://user-images.githubusercontent.com/61153830/172717004-320197e8-3b23-4fc8-ad26-e05cda375ced.png)
-# [](https://setnfy.netlify.app)SetNFy - Gerenciador de Notas Fiscais.
+# SetNFy - Gerenciador de Notas Fiscais.
 
 
 Criado com objetivo de facilitar a minha gestão das Notas Fiscais e Boletos no setor financeiro na empresa onde trabalho no momento.
