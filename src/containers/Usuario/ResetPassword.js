@@ -1,55 +1,96 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { API_USER_RESET_PASSWORD } from "../../API";
 import useFetch from "../../hooks/useFetch";
-import { Error, Head, Input } from "../../components";
-import UserMessage from "./UserMessage";
+import { Head } from "../../components";
+import { Button, Form, Input, message } from "antd";
+import { LockOutlined } from "@ant-design/icons";
+import { ReactComponent as Logo } from "../../assets/imgs/newLogo.svg";
+import URL from "../../helper/getUrl";
 
 const ResetPassword = () => {
-  const [successReset, setSuccessReset] = React.useState(false);
   const { loading, request } = useFetch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
   const { token } = useParams();
+  const navigate = useNavigate();
+
+  // CONSTANTES ANTD
+  const [form] = Form.useForm();
 
   async function onSubmit(data) {
     const { password } = data;
     const { url, options } = API_USER_RESET_PASSWORD(token, { password });
     const { response } = await request(url, options);
-    if (response.ok) setSuccessReset(true);
+    if (response.ok) {
+      message.error("Ocorreu um erro. Por favor, tente novamente.");
+    } else {
+      message.success("E-mail de redefinição foi enviado!");
+      navigate("/user/login");
+    }
   }
 
-  if (successReset)
-    return <UserMessage message="Senha Redefinida com Sucesso!" />;
   return (
-    <section className="usuario" onSubmit={handleSubmit(onSubmit)}>
+    <section className="usuario">
       <Head title="Nova Senha" description="Digite sua nova senha" />
-      <form className="usuario__form">
-        <Input
-          type="password"
-          {...register("password", {
-            required: true,
-            pattern: {
-              value: /^.{8,}$/,
-              message: "Insira uma senha com no mínimo 8 carácteres.",
-            },
-          })}
-        >
-          Nova Senha:
-        </Input>
-        {errors.email?.message && <Error message={errors.email.message} />}
-        {loading ? (
-          <button className="usuario__button" style={{ cursor: "await" }}>
-            Enviando...
-          </button>
-        ) : (
-          <button className="usuario__button">Enviar</button>
-        )}
-      </form>
+      <div className="usuario__form">
+        <div className="usuario_logo">
+          <a href={`${URL}/user/login`}>
+            <Logo />
+          </a>
+        </div>
+        <Form form={form} layout="vertical" onFinish={onSubmit}>
+          <Form.Item
+            name="password"
+            rules={[
+              { required: true, message: "Digite sua nova senha" },
+              {
+                pattern: /^.{8,}$/,
+                message: "Insira uma senha com no mínimo 8 carácteres.",
+              },
+            ]}
+          >
+            <Input.Password
+              size="large"
+              placeholder="Nova Senha"
+              prefix={<LockOutlined className="usuario__icons" />}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            dependencies={["password"]}
+            rules={[
+              { required: true, message: "Confirme sua senha" },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+
+                  return Promise.reject(new Error("Senhas Divergentes."));
+                },
+              }),
+            ]}
+          >
+            <Input.Password
+              placeholder="Confirmar Senha"
+              size="large"
+              prefix={<LockOutlined className="usuario__icons" />}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              size="large"
+              type="primary"
+              className="usuario__button"
+              htmlType="submit"
+              loading={loading}
+            >
+              Enviar
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </section>
   );
 };

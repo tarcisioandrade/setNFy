@@ -1,39 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 import generateID from "../../store/helper/generateID";
-import "./AddNF.css";
-import { useForm } from "react-hook-form";
-import { addNF } from "../../store/slices/setNotaFiscal";
-import { Error, Input, Select, Radio, Head } from "../../components";
+import { addNF, getNF } from "../../store/slices/setNotaFiscal";
+import { Modal, Form, Input, Row, Col, Select } from "antd";
 
-const AddNF = () => {
-  // Tipo de NF Venda por padrão
-  const [tipoNF, setTipoNF] = React.useState("Venda");
+const AddNF = ({ show, handleClose }) => {
+  // CONSTANTES ANTD
+  const [form] = Form.useForm();
+  const { Option } = Select;
   // State Redux Métodos
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.setNotaFiscal);
+  const { data } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
-
   // Valida se statusNF está enviado para habilitar o select do boleto
-  const { statusNF } = watch();
-  const statusValid = statusNF === "Enviado";
+  const { statusNF } = form.getFieldValue();
+  const [onStatusNF, setOnStatusNF] = useState(statusNF);
+  const statusValid = onStatusNF === "Enviado";
 
   const onSubmit = (data) => {
-    const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
-      data;
+    const {
+      residuo,
+      nfCliente,
+      nfGri,
+      processo,
+      statusNF,
+      statusBoleto,
+      tipo,
+    } = data;
+    
     dispatch(
       addNF({
         id_user,
         nf_id: generateID(),
-        type: tipoNF,
+        type: tipo,
         residuo,
         nfClient: Number(nfCliente),
         nfGri: nfGri === "" ? null : Number(nfGri),
@@ -46,108 +45,138 @@ const AddNF = () => {
             : "Incompleto",
       })
     );
+    form.resetFields();
   };
 
-  if (data && data.ok) return <Navigate to="/" />;
-  return (
-    <section className="addNF">
-      <Head
-        title="Adicionar Nota Fiscal"
-        descritpion="Adicione uma Nota Fiscal"
-      />
-      <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="addNf__row--radio">
-          <Radio
-            options={["Venda", "Complementar", "Doação"]}
-            value={tipoNF}
-            setValue={setTipoNF}
-          />
-        </div>
-        <Input
-          {...register("residuo", {
-            required: "Insira um nome do resíduo.",
-            pattern: {
-              value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-              message: "Digite apenas letras",
-            },
-          })}
-          placeholder="ex: Tambores"
-        >
-          Resíduo*
-        </Input>
-        {errors.residuo?.message && <Error message={errors.residuo.message} />}
-        <Input
-          autoComplete="off"
-          {...register("nfCliente", {
-            required: "Insira o número da NF do Cliente.",
-            maxLength: { value: 5, message: "Digite no máximo 5 números." },
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Digite apenas números",
-            },
-          })}
-        >
-          NF Cliente*
-        </Input>
-        {errors.nfCliente?.message && (
-          <Error message={errors.nfCliente.message} />
-        )}
-        <Input
-          autoComplete="off"
-          {...register("nfGri", {
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Digite apenas números",
-            },
-            maxLength: { value: 4, message: "Digite no máximo 4 números." },
-          })}
-        >
-          NF Gri
-        </Input>
-        {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
-        <Input
-          autoComplete="off"
-          {...register("processo", {
-            pattern: {
-              value: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
-              message: "Digite apenas números",
-            },
-          })}
-        >
-          Nª Processo Lecom
-        </Input>
-        {errors.processo?.message && (
-          <Error message={errors.processo.message} />
-        )}
-        <div className="addNf__row">
-          <Select label="Status NF" {...register("statusNF")}></Select>
+  useEffect(() => {
+    if (data?.ok) dispatch(getNF(id_user));
+  }, [dispatch, id_user, data?.ok]);
 
-          {/* STATUS BOLETO SO É HABILITADO SE O STATUS NF FOR ENVIADO */}
-          {statusValid === true ? (
-            <Select
-              label="Status Boleto"
-              {...register("statusBoleto")}
-            ></Select>
-          ) : (
-            <Select
-              label="Status Boleto"
-              {...register("statusBoleto")}
-              disabled
-            ></Select>
-          )}
-        </div>
-        {error && (
-          <Error message="Ocorreu um erro ao adicionar esta Nota Fiscal" />
-        )}
-        {loading ? (
-          <button disabled style={{ cursor: "wait" }} className="addNF__button">
-            Adicionando...
-          </button>
-        ) : (
-          <button className="addNF__button">Adicionar</button>
-        )}
-      </form>
-    </section>
+  return (
+    <Modal
+      style={{ padding: "16px 0" }}
+      destroyOnClose
+      focusTriggerAfterClose={false}
+      centered
+      visible={show}
+      onCancel={handleClose}
+      okText="Adicionar"
+      title="Adicionar Nota Fiscal"
+      onOk={() => {
+        form
+          .validateFields()
+          .then((values) => {
+            onSubmit(values);
+            handleClose();
+          })
+          .catch((err) => err);
+      }}
+    >
+      <Form
+        form={form}
+        layout="vertical"
+        initialValues={{
+          tipo: "Venda",
+          statusNF: "Pendente",
+          statusBoleto: "Pendente",
+        }}
+      >
+        <Row>
+          <Col span={12}>
+            <Form.Item name="tipo" label="Tipo">
+              <Select>
+                <Option value="Venda" />
+                <Option value="Complementar" />
+                <Option value="Doação" />
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+
+        <Form.Item
+          label="Resíduo"
+          name="residuo"
+          rules={[
+            {
+              required: true,
+              message: "Insira o nome do Resíduo.",
+            },
+            {
+              pattern: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
+              message: "Digite apenas letras.",
+            },
+          ]}
+        >
+          <Input allowClear placeholder="Ex: Bombonas" />
+        </Form.Item>
+
+        <Form.Item
+          label="NF Cliente"
+          name="nfCliente"
+          rules={[
+            {
+              required: true,
+              message: "Insira o número da NF do Cliente.",
+            },
+            {
+              pattern: /^[0-9]*$/,
+              message: "Digite apenas números.",
+              max: 7,
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+
+        <Form.Item
+          label="NF Gri"
+          name="nfGri"
+          rules={[
+            {
+              max: 7,
+              pattern: /^[0-9]*$/,
+              message: "Digite apenas números.",
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+
+        <Form.Item
+          label="Processo"
+          name="processo"
+          rules={[
+            {
+              pattern: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
+              message: "Digite apenas números.",
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+        <Row gutter={15}>
+          <Col span={12}>
+            <Form.Item label="Envio NF" name="statusNF">
+              <Select
+                value={onStatusNF}
+                onChange={(value) => setOnStatusNF(value)}
+              >
+                <Option value="Pendente" />
+                <Option value="Enviado" />
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="Envio Boleto" name="statusBoleto">
+              <Select disabled={statusValid ? false : true}>
+                <Option value="Pendente" />
+                <Option value="Enviado" />
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
   );
 };
 

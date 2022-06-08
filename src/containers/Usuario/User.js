@@ -10,12 +10,12 @@ import ResetPassword from "./ResetPassword";
 const User = () => {
   const { data, loading } = useSelector((state) => state.setToken);
 
-  // Altera a cor do backgroung do body
+  // // Altera a cor do backgroung do body
   document.body.classList.remove("home");
   document.body.classList.add("user");
 
   if (loading) return <Loading />;
-  if (data) return <Navigate to="/" />;
+  if (data) return <Navigate to="/home" />;
   return (
     <>
       <Routes>

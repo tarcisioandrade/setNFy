@@ -1,11 +1,11 @@
 import React from "react";
-import "./assets/styles/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./containers/Home/Home";
 import User from "./containers/Usuario/User";
 import { useDispatch } from "react-redux";
 import { autoLogin } from "./store/slices/setUser";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import "./assets/styles/App.css"
 
 const App = () => {
   const dispatch = useDispatch();

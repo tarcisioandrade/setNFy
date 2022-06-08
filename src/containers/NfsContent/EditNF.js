@@ -1,57 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useParams } from "react-router-dom";
-import "./AddNF.css";
-import { useForm } from "react-hook-form";
-import { Error, Input, Select, Head } from "../../components";
 import { attNF } from "../../store/slices/setNotaFiscal";
+import { Modal, Form, Input, Row, Col, Select } from "antd";
 
-const EditNF = () => {
-  // Seleciona a array especifica para editar
-  const { id } = useParams();
-  // const state = useSelector((state) => state.setNotaFiscal.data);
-  const { data, loading } = useSelector((state) => state.setNotaFiscal);
+// CONSTANTES DO ANTD
+const { Option } = Select;
+
+const EditNF = ({ show, handleClose, id }) => {
+  const { data } = useSelector((state) => state.setNotaFiscal);
   const nfTarget = data?.length && data?.filter((nf) => nf.nf_id === id)[0];
-  const tipoNF = nfTarget?.type;
-
+  // CONSTANTES DO  ANTD
+  const [form] = Form.useForm();
   // State Redux Métodos
   const dispatch = useDispatch();
-
-  // Valores padroes no input
-  const preValues = {
-    residuo: nfTarget?.residuo,
-    nfCliente: nfTarget?.nfClient,
-    nfGri: nfTarget?.nfGri === null ? "" : nfTarget?.nfGri,
-    processo: nfTarget?.processo === null ? "" : nfTarget?.processo,
-    statusNF: nfTarget?.statusNF,
-    statusBoleto: nfTarget?.statusBoleto,
-  };
-
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: preValues,
-  });
-
   // Valida se statusNF está enviado para habilitar o select do boleto
-  const { statusNF } = watch();
-  const statusValid = statusNF === "Enviado";
+  const [onStatusNF, setOnStatusNF] = useState("");
+  const statusValid = onStatusNF === "Enviado";
+  useEffect(() => {
+    setOnStatusNF(nfTarget?.statusNF);
+  }, [nfTarget?.statusNF]);
 
-  const onSubmit = (data) => {
-    const { residuo, nfCliente, nfGri, processo, statusNF, statusBoleto } =
-      data;
+  const onSubmit = (values) => {
+    const { residuo, nfClient, nfGri, processo, statusNF, statusBoleto } =
+      values;
+    console.log(values);
+
     dispatch(
       attNF({
         nf_id: id,
-        type: tipoNF,
+        type: nfTarget.type,
         residuo,
-        nfClient: Number(nfCliente),
-        nfGri: nfGri === "" ? null : Number(nfGri),
+        nfClient: Number(nfClient),
+        nfGri: nfGri === null ? null : Number(nfGri),
         processo:
-          processo === "" ? null : +processo.toString().replace(/\./g, ""),
+          processo === null ? null : +processo.toString().replace(/\./g, ""),
         statusNF,
         statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
         statusFinal:
@@ -62,104 +44,132 @@ const EditNF = () => {
     );
   };
 
-  if (data && data.ok) return <Navigate to="/" />;
   return (
-    <section className="addNF">
-      <Head
-        title="Editar Nota Fiscal"
-        description="Modifique uma Nota Fiscal"
-      />
-      <form className="addNF__form" onSubmit={handleSubmit(onSubmit)}>
-        <p
-          className={`addNF__tipo ${
-            tipoNF === "Complementar" ? "addNF__tipo--red" : ""
-          }`}
-        >
-          {tipoNF}
-        </p>
-        <Input
-          {...register("residuo", {
-            required: "Insira um nome do resíduo.",
-            pattern: {
-              value: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-              message: "Digite apenas letras",
+    <Modal
+      style={{ padding: "16px 0" }}
+      destroyOnClose
+      focusTriggerAfterClose={false}
+      centered
+      visible={show}
+      onCancel={handleClose}
+      okText="Salvar Mudanças"
+      title="Editar Nota Fiscal"
+      onOk={() => {
+        form
+          .validateFields()
+          .then((values) => {
+            onSubmit(values);
+            handleClose();
+          })
+          .catch((err) => err);
+      }}
+    >
+      <Form preserve={false} form={form} layout="vertical">
+        <Row gutter={15}>
+          <Col span={12}>
+            <Form.Item>
+              <Input
+                value={nfTarget?.type}
+                disabled
+                style={{ fontWeight: "bold" }}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
+        <Form.Item
+          initialValue={nfTarget?.residuo}
+          label="Resíduo"
+          name="residuo"
+          rules={[
+            {
+              required: true,
+              message: "Insira o nome do Resíduo.",
             },
-          })}
-          placeholder="ex: Tambores"
-        >
-          Resíduo*
-        </Input>
-        {errors.residuo?.message && <Error message={errors.residuo.message} />}
-        <Input
-          autoComplete="off"
-          {...register("nfCliente", {
-            required: "Insira o número da NF do Cliente.",
-            maxLength: { value: 5, message: "Digite no máximo 5 números." },
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Digite apenas números",
+            {
+              pattern: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
+              message: "Digite apenas letras.",
             },
-          })}
-          type="number"
+          ]}
         >
-          NF Cliente*
-        </Input>
-        {errors.nfCliente?.message && (
-          <Error message={errors.nfCliente.message} />
-        )}
-        <Input
-          autoComplete="off"
-          {...register("nfGri", {
-            maxLength: { value: 4, message: "Digite no máximo 4 números." },
-            pattern: {
-              value: /^[0-9]*$/,
-              message: "Digite apenas números",
-            },
-          })}
-        >
-          NF Gri
-        </Input>
-        {errors.nfGri?.message && <Error message={errors.nfGri.message} />}
-        <Input
-          autoComplete="off"
-          {...register("processo", {
-            pattern: {
-              value: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
-              message: "Digite apenas números",
-            },
-          })}
-        >
-          Nª Processo Lecom
-        </Input>
-        {errors.processo?.message && (
-          <Error message={errors.processo.message} />
-        )}
-        <div className="addNf__row">
-          <Select label="Status NF" {...register("statusNF")}></Select>
+          <Input allowClear />
+        </Form.Item>
 
-          {/* STATUS BOLETO SO É HABILITADO SE O STATUS NF FOR ENVIADO */}
-          {statusValid === true ? (
-            <Select
-              label="Status Boleto"
-              {...register("statusBoleto")}
-            ></Select>
-          ) : (
-            <Select
-              label="Status Boleto"
-              {...register("statusBoleto")}
-              disabled
-            ></Select>
-          )}
-        </div>
-        {loading ? (
-          <button disabled style={{ cursor: "wait" }} className="addNF__button">
-            Editando...
-          </button>
-        ) : (
-          <button className="addNF__button">Editar</button>
-        )}
-      </form>
-    </section>
+        <Form.Item
+          label="NF Cliente"
+          name="nfClient"
+          initialValue={nfTarget?.nfClient}
+          rules={[
+            {
+              required: true,
+              message: "Insira o número da NF do Cliente.",
+            },
+            {
+              pattern: /^[0-9]*$/,
+              message: "Digite apenas números.",
+              max: 7,
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+
+        <Form.Item
+          label="NF Gri"
+          name="nfGri"
+          initialValue={nfTarget?.nfGri}
+          rules={[
+            {
+              max: 7,
+              pattern: /^[0-9]*$/,
+              message: "Digite apenas números.",
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+
+        <Form.Item
+          label="Processo"
+          name="processo"
+          initialValue={nfTarget?.processo}
+          rules={[
+            {
+              pattern: /^([0-9]*[.])?([0-9]*[\s]?)+$/,
+              message: "Digite apenas números.",
+            },
+          ]}
+        >
+          <Input autoComplete="off" />
+        </Form.Item>
+
+        <Row gutter={15}>
+          <Col span={12}>
+            <Form.Item
+              label="Envio NF"
+              name="statusNF"
+              initialValue={nfTarget?.statusNF}
+            >
+              <Select onChange={(value) => setOnStatusNF(value)}>
+                <Option value="Pendente" />
+                <Option value="Enviado" />
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              label="Envio Boleto"
+              name="statusBoleto"
+              initialValue={nfTarget?.statusBoleto}
+            >
+              <Select disabled={statusValid ? false : true}>
+                <Option value="Pendente" />
+                <Option value="Enviado" />
+              </Select>
+            </Form.Item>
+          </Col>
+        </Row>
+      </Form>
+    </Modal>
   );
 };
 

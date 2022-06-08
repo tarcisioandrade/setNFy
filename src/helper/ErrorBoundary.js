@@ -1,11 +1,12 @@
 import React from "react";
+import { Result, Button } from "antd";
+import URL from "./getUrl";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
-
   static getDerivedStateFromError(error) {
     return { hasError: true };
   }
@@ -17,10 +18,16 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <>
-          <h1 style={{ textAlign: "center" }}>Eita erro!</h1>;
-          <a href="setnfy.netlify.app">Voltar pra página inicial</a>
-        </>
+        <Result
+          status="500"
+          title="500"
+          subTitle="Desculpe, ocorreu algum erro."
+          extra={
+            <Button type="primary" href={`${URL}/home`}>
+              Página Inicial
+            </Button>
+          }
+        />
       );
     }
 

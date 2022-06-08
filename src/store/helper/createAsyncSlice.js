@@ -13,7 +13,7 @@ const createAsyncSlice = (config) => {
   const slice = createSlice({
     name: config.name,
     initialState: {
-      loading: null,
+      loading: false,
       data: null,
       error: null,
       ...config.initialState,
@@ -21,6 +21,7 @@ const createAsyncSlice = (config) => {
     reducers: {
       fetchStarted(state) {
         state.loading = true;
+        state.error = null;
       },
       fetchSuccess(state, action) {
         state.loading = false;
