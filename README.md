@@ -1,19 +1,28 @@
-<a href="https://setnfy.com.br/">SetNFy - Gerenciador de Notas Fiscais.</a>
 
-Projeto criado com **ReactJS**, **Redux**, **NodeJS** e **Banco de Dados MYSQL**.
+![setnfy](https://user-images.githubusercontent.com/61153830/172717004-320197e8-3b23-4fc8-ad26-e05cda375ced.png)
+# [](https://setnfy.netlify.app)SetNFy - Gerenciador de Notas Fiscais.
 
-Criei para ser usado na empresa onde eu trabalhava, pois esse processo era feito manualmente no meu caderno de anotações, foi bastante prazeroso cria-lo.
 
-Tambem foi onde eu tive minha primeira experiência com NodeJS e Banco de Dados e acabei gostando demais do backend, com certeza estudarei mais sobre e aplicarei novamente em futuros projetos.
+Criado com objetivo de facilitar a minha gestão das Notas Fiscais e Boletos no setor financeiro na empresa onde trabalho no momento.
 
-<h2>TELA DE LOGIN</h2>
+## [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#-fun%C3%A7oes-opcional)🔧  Funções
 
-![image](https://user-images.githubusercontent.com/61153830/160185992-18dfcc95-f93c-4282-b33b-49fbfd4f8c87.png)
+### [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#fun%C3%A7%C3%A3o-01)Função 01:
 
-<h2>NOTAS FISCAIS PENDENTES</h2>
+-   Monitorar o envio das notas fiscais e boletos.
 
-![localhost_3000_ (1)](https://user-images.githubusercontent.com/61153830/160468968-c7a1cfa1-05e1-4059-b376-e2dcbecabfc3.png)
+### [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#fun%C3%A7%C3%A3o-02)Função 02:
 
-<h2>NOTAS FISCAIS FINALIZADAS</h2>
+-   Armazenar as notas ficais que ja foram usadas.
 
-![localhost_3000_finalizados](https://user-images.githubusercontent.com/61153830/166555450-d6babf21-86f7-4d85-8959-849947ddf8fe.png)
+
+## [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#feito-com)Feito Com:
+
+
+![REACT](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![NODE,JS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white) ![JAVASCRIPT](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![SASS](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white) 
+
+### [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#support-ou-contato)Support Ou Contato
+
+[![Instagram Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tarcisioandrade016@gmail.com)  
+
+Copyright © 2022 tarcisioandrade
