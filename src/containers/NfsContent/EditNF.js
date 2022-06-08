@@ -23,7 +23,6 @@ const EditNF = ({ show, handleClose, id }) => {
   const onSubmit = (values) => {
     const { residuo, nfClient, nfGri, processo, statusNF, statusBoleto } =
       values;
-    console.log(values);
 
     dispatch(
       attNF({

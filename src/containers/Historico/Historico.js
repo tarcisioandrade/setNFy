@@ -24,11 +24,6 @@ const Historico = () => {
   const searchTerm = ["residuo", "nfClient", "nfGri", "processo"];
   const [searchData, setSearchData] = useState(data);
 
-  useEffect(() => {
-    dispatch(getNF(id_user));
-    console.log("efectou");
-  }, [dispatch, id_user]);
-
   // FUNÇÕES DO ANTD
   const showDeleteConfirm = (nf_id, name) => {
     confirm({
@@ -39,13 +34,14 @@ const Historico = () => {
       async onOk() {
         const { data } = await API_DEL_NF({ nf_id });
         if (data?.ok) dispatch(getNF(id_user));
-        console.log(data);
       },
     });
   };
 
-  console.log("SearchData", searchData);
-  console.log("Data", data);
+  useEffect(() => {
+    setSearchData(data);
+  }, [data]);
+
   return (
     <>
       <Row justify="end" style={{ marginBottom: "16px" }}>
