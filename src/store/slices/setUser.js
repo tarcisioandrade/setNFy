@@ -1,6 +1,7 @@
 import createAsyncSlice from "../helper/createAsyncSlice";
 import { API_USER_LOGIN } from "../../API";
 import { fetchErrorToken, fetchToken, removeToken } from "./setToken";
+import { removeData } from "./setNotaFiscal";
 
 // SLICES
 const setLogin = createAsyncSlice({
@@ -29,6 +30,7 @@ export const login = (user) => async (dispatch) => {
 export const logout = () => (dispatch) => {
   dispatch(removeUser());
   dispatch(removeToken());
+  dispatch(removeData());
   window.localStorage.removeItem("token");
 };
 

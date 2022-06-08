@@ -58,6 +58,7 @@ const Nfs = () => {
     dispatch(getNF(id_user));
   }, [dispatch, id_user]);
 
+  console.log(data);
   return (
     <>
       <Head

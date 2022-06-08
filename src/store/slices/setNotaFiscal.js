@@ -6,11 +6,17 @@ const setNotaFiscal = createAsyncSlice({
   fetchConfig: (id_user) => API_GET_NF(id_user),
   asyncAdd: (nf) => API_ADD_NF(nf),
   asyncAtt: (nf) => API_ATT_NF(nf),
+  reducers: {
+    removeData(state) {
+      state.data = null;
+    },
+  },
 });
 
 const GET_NF = setNotaFiscal.asyncAction;
 const ADD_NF = setNotaFiscal.asyncAdd;
 const ATT_NF = setNotaFiscal.asyncAtt;
+export const { removeData } = setNotaFiscal.actions;
 
 export const getNF = (id_user) => async (dispatch) => {
   await dispatch(GET_NF(id_user));
