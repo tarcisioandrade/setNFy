@@ -83,11 +83,11 @@ const EditNF = ({ show, handleClose, id }) => {
           rules={[
             {
               required: true,
-              message: "Insira o nome do Resíduo",
+              message: "Insira o nome do Resíduo.",
             },
             {
               pattern: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-              message: "Digite apenas letras",
+              message: "Digite apenas letras.",
             },
           ]}
         >

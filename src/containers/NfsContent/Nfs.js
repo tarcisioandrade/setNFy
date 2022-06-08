@@ -101,18 +101,8 @@ const Nfs = () => {
           className="weight"
         />
 
-        <Column
-          title="NF CLIENTE"
-          dataIndex="nfClient"
-          key="nfClient"
-          sorter={(a, b) => a.nfGri - b.nfGri}
-        />
-        <Column
-          title="NF GRI"
-          dataIndex="nfGri"
-          key="nfGri"
-          sorter={(a, b) => a.nfGri - b.nfGri}
-        />
+        <Column title="NF CLIENTE" dataIndex="nfClient" key="nfClient" />
+        <Column title="NF GRI" dataIndex="nfGri" key="nfGri" />
         <Column
           title="PROCESSO"
           dataIndex="processo"

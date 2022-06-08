@@ -4,11 +4,6 @@ import { CheckOutlined, PieChartOutlined } from "@ant-design/icons";
 import { Menu as MenuAntd } from "antd";
 
 const Menu = () => {
-  const menuOptions = [
-    getItem(<Link to="/home">Notas Fiscais</Link>, "1", <PieChartOutlined />),
-    getItem(<Link to="historico">Histórico</Link>, "2", <CheckOutlined />),
-  ];
-
   function getItem(label, key, icon, children) {
     return {
       key,
@@ -17,6 +12,11 @@ const Menu = () => {
       label,
     };
   }
+
+  const menuOptions = [
+    getItem(<Link to="home">Notas Fiscais</Link>, "1", <PieChartOutlined />),
+    getItem(<Link to="historico">Histórico</Link>, "2", <CheckOutlined />),
+  ];
 
   return (
     <MenuAntd

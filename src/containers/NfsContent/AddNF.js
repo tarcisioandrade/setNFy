@@ -47,6 +47,7 @@ const AddNF = ({ show, handleClose }) => {
     );
     form.resetFields();
   };
+
   useEffect(() => {
     if (data?.ok) dispatch(getNF(id_user));
   }, [dispatch, id_user, data?.ok]);
@@ -75,9 +76,9 @@ const AddNF = ({ show, handleClose }) => {
         form={form}
         layout="vertical"
         initialValues={{
+          tipo: "Venda",
           statusNF: "Pendente",
           statusBoleto: "Pendente",
-          tipo: "Venda",
         }}
       >
         <Row>
@@ -98,11 +99,11 @@ const AddNF = ({ show, handleClose }) => {
           rules={[
             {
               required: true,
-              message: "Insira o nome do Resíduo",
+              message: "Insira o nome do Resíduo.",
             },
             {
               pattern: /^[a-zA-Z\u00C0-\u00FF\s]*$/,
-              message: "Digite apenas letras",
+              message: "Digite apenas letras.",
             },
           ]}
         >
