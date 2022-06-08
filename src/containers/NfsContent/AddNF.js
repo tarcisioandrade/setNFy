@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import generateID from "../../store/helper/generateID";
 import { addNF, getNF } from "../../store/slices/setNotaFiscal";
-import { Modal, Form, Input, Row, Col, Select } from "antd";
+import { Modal, Form, Input, Row, Col, Select, message } from "antd";
 
 const AddNF = ({ show, handleClose }) => {
   // CONSTANTES ANTD
@@ -10,7 +10,7 @@ const AddNF = ({ show, handleClose }) => {
   const { Option } = Select;
   // State Redux Métodos
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.setNotaFiscal);
+  const { data, error } = useSelector((state) => state.setNotaFiscal);
   const { id_user } = useSelector((state) => state.setToken.data);
   // Valida se statusNF está enviado para habilitar o select do boleto
   const { statusNF } = form.getFieldValue();
@@ -27,7 +27,7 @@ const AddNF = ({ show, handleClose }) => {
       statusBoleto,
       tipo,
     } = data;
-    
+
     dispatch(
       addNF({
         id_user,
@@ -51,6 +51,15 @@ const AddNF = ({ show, handleClose }) => {
   useEffect(() => {
     if (data?.ok) dispatch(getNF(id_user));
   }, [dispatch, id_user, data?.ok]);
+
+  useEffect(() => {
+    if (error === "1062") {
+      message.error(
+        "Nota Fiscal ou Processo já utilizados. Por favor, verifique e tente novamente."
+      );
+      dispatch(getNF(id_user));
+    }
+  }, [error, dispatch, id_user]);
 
   return (
     <Modal

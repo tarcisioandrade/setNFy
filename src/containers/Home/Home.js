@@ -1,18 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Historico from "../Historico/Historico";
 import Menu from "../Menu/Menu";
 import Nfs from "../NfsContent/Nfs";
 import { Layout } from "antd";
 import Sider from "../Sider/Sider";
 import BreadCrump from "../../components/BreadCrump/BreadCrumb";
+import { Loading } from "../../components";
 const { Content } = Layout;
+const HistoricoLazy = lazy(() => import("../Historico/Historico"));
 
 const Home = () => {
-  // Altera a cor do backgroung do body
-  document.body.classList.remove("user");
-  document.body.classList.add("home");
-
   return (
     <Layout hasSider style={{ minHeight: "100vh" }}>
       <Sider>
@@ -27,7 +24,14 @@ const Home = () => {
           >
             <Routes>
               <Route path="home" element={<Nfs />} />
-              <Route path="historico" element={<Historico />} />
+              <Route
+                path="historico"
+                element={
+                  <Suspense fallback={<Loading size="medium" />}>
+                    <HistoricoLazy />
+                  </Suspense>
+                }
+              />
             </Routes>
           </div>
         </Content>

@@ -45,4 +45,5 @@ body.home {
 
 .weight {
   font-weight: bold;
+  text-transform: capitalize;
 }
