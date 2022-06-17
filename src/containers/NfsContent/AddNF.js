@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import generateID from "../../store/helper/generateID";
 import { addNF, getNF } from "../../store/slices/setNotaFiscal";
 import { Modal, Form, Input, Row, Col, Select, message } from "antd";
+import { authNfGri, authProcesso, authStatusFinal } from "./authData";
 
 const AddNF = ({ show, handleClose }) => {
   // CONSTANTES ANTD
@@ -35,14 +36,11 @@ const AddNF = ({ show, handleClose }) => {
         type: tipo,
         residuo,
         nfClient: Number(nfCliente),
-        nfGri: nfGri === "" ? null : Number(nfGri),
-        processo: processo === "" ? null : processo,
+        nfGri: authNfGri(nfGri),
+        processo: authProcesso(processo),
         statusNF,
         statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
-        statusFinal:
-          statusNF === "Enviado" && statusBoleto === "Enviado"
-            ? "Completo"
-            : "Incompleto",
+        statusFinal: authStatusFinal(statusNF, statusBoleto),
       })
     );
     form.resetFields();

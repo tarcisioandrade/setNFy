@@ -54,7 +54,7 @@ const Login = () => {
               },
               {
                 pattern: /[\w.-]+@[\w-]+\.[\w-.]+/gi,
-                message: "Insira um email válido.",
+                message: "Insira um e-mail válido.",
               },
             ]}
           >

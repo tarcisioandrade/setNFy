@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { attNF } from "../../store/slices/setNotaFiscal";
 import { Modal, Form, Input, Row, Col, Select } from "antd";
+import { authNfGri, authProcesso, authStatusFinal } from "./authData";
 
 // CONSTANTES DO ANTD
 const { Option } = Select;
@@ -30,15 +31,11 @@ const EditNF = ({ show, handleClose, id }) => {
         type: nfTarget.type,
         residuo,
         nfClient: Number(nfClient),
-        nfGri: nfGri === null ? null : Number(nfGri),
-        processo:
-          processo === null ? null : +processo.toString().replace(/\./g, ""),
+        nfGri: authNfGri(nfGri),
+        processo: authProcesso(processo),
         statusNF,
         statusBoleto: statusNF === "Pendente" ? "Pendente" : statusBoleto,
-        statusFinal:
-          statusNF === "Enviado" && statusBoleto === "Enviado"
-            ? "Completo"
-            : "Incompleto",
+        statusFinal: authStatusFinal(statusNF, statusBoleto),
       })
     );
   };

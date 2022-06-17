@@ -23,7 +23,7 @@ const Sider = ({ children: Menu }) => {
         zIndex: 50,
       }}
     >
-      <Row className="logo" align="middle" justify="center">
+      <Row className="logo" align="middle" style={{ paddingLeft: "24px" }}>
         <Logo />
         <h1 style={{ color: "#ece6e6", margin: 0 }}>SetNFy</h1>
       </Row>
@@ -42,7 +42,7 @@ const Sider = ({ children: Menu }) => {
             icon={<UserOutlined />}
           />
         </Popconfirm>
-        <p style={{textTransform: "capitalize"}}>{username}</p>
+        <p style={{ textTransform: "capitalize" }}>{username}</p>
       </div>
     </SiderAntd>
   );
