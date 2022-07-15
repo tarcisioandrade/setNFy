@@ -1,5 +1,5 @@
 
-![setnfy](https://user-images.githubusercontent.com/61153830/172717004-320197e8-3b23-4fc8-ad26-e05cda375ced.png)
+![setnfy-screen](https://user-images.githubusercontent.com/61153830/177002843-977b0165-d6cb-4aad-88ba-53487bf31873.jpg)
 # SetNFy - Gerenciador de Notas Fiscais.
 
 
