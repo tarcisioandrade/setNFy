@@ -5,7 +5,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   ExclamationCircleOutlined,
-  UserAddOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Head } from "../../components";
@@ -68,7 +68,7 @@ const Nfs = () => {
         <Button
           type="primary"
           onClick={() => openModalAdd()}
-          icon={<UserAddOutlined />}
+          icon={<PlusOutlined />}
           size="large"
         >
           Adicionar
@@ -82,6 +82,7 @@ const Nfs = () => {
       >
         <Column
           title="TIPO"
+          width={165}
           dataIndex="type"
           key="type"
           render={(_, { type }) => (
@@ -96,6 +97,7 @@ const Nfs = () => {
         />
         <Column
           title="RESÍDUO"
+          width={300}
           dataIndex="residuo"
           key="residuo"
           className="weight"
