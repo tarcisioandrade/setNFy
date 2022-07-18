@@ -41,9 +41,10 @@ const Nfs = () => {
   } = ModalFunctions();
 
   // FUNÇÕES DO ANTD
-  const showDeleteConfirm = (nf_id, name, action, message) => {
+  const showDeleteConfirm = (nf_id, nfId, nfClient, action, message) => {
+    let target = nfId || nfClient;
     confirm({
-      title: `Deseja ${message} o processo da NF ${name}?`,
+      title: `Deseja ${message} o processo da NF ${target}?`,
       icon: <ExclamationCircleOutlined />,
       okText: "Confirmar",
       cancelText: "Cancelar",
@@ -97,7 +98,7 @@ const Nfs = () => {
         />
         <Column
           title="RESÍDUO"
-          width={300}
+          width={250}
           dataIndex="residuo"
           key="residuo"
           className="weight"
@@ -143,14 +144,20 @@ const Nfs = () => {
           title="AÇÃO"
           align="center"
           key="ação"
-          render={(_, { nf_id, nfClient }) => (
+          render={(_, { nf_id, nfGri, nfClient }) => (
             <Space size="small">
               <Button
                 size="small"
                 type="primary"
                 icon={<CheckOutlined />}
                 onClick={() =>
-                  showDeleteConfirm(nf_id, nfClient, API_FIN_NF, "finalizar")
+                  showDeleteConfirm(
+                    nf_id,
+                    nfGri,
+                    nfClient,
+                    API_FIN_NF,
+                    "finalizar"
+                  )
                 }
               />
               <Button
@@ -167,7 +174,13 @@ const Nfs = () => {
                 icon={<DeleteOutlined />}
                 type="primary"
                 onClick={() =>
-                  showDeleteConfirm(nf_id, nfClient, API_DEL_NF, "apagar")
+                  showDeleteConfirm(
+                    nf_id,
+                    nfGri,
+                    nfClient,
+                    API_DEL_NF,
+                    "apagar"
+                  )
                 }
               />
             </Space>

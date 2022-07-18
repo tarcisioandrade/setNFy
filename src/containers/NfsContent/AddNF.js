@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import generateID from "../../store/helper/generateID";
+import generateID from "../../utils/generateID";
 import { addNF, getNF } from "../../store/slices/setNotaFiscal";
 import { Modal, Form, Input, Row, Col, Select, message } from "antd";
 import { authNfGri, authProcesso, authStatusFinal } from "./authData";
