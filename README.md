@@ -3,7 +3,7 @@
 # SetNFy - Gerenciador de Notas Fiscais.
 
 
-Criado com objetivo de facilitar a minha gestão das Notas Fiscais e Boletos no setor financeiro na empresa onde trabalho no momento.
+Criado com objetivo de facilitar a minha gestão das Notas Fiscais e Boletos no setor financeiro na empresa onde trabalhava.
 
 ## [](https://github.com/iuricode/readme-template/blob/main/README-repository/LuanderFarias.md#-fun%C3%A7oes-opcional)🔧  Funções
 
