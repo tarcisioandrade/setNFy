@@ -1,5 +1,5 @@
 {
-  "name": "setnfy_api",
+  "name": "server",
   "version": "1.0.0",
   "description": "REST_API - SetNFy",
   "main": "server.js",

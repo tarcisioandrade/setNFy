@@ -1,1 +1,1 @@
-web: node src/server.js
+web:cd apps/server && node src/server.js

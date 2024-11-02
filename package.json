@@ -8,7 +8,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "start:api": "turbo run start --filter=server"
+    "heroku-postbuild": "turbo run start --filter=server"
   },
   "devDependencies": {
     "turbo": "^2.2.3"
