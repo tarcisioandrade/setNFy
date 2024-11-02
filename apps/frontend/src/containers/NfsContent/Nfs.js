@@ -12,7 +12,7 @@ import { Head } from "../../components";
 import { filterIncompleteNF, getNF } from "../../store/slices/setNotaFiscal";
 import { API_DEL_NF, API_FIN_NF } from "../../API";
 import AddNF from "./AddNF";
-import { ModalFunctions } from "../../components/";
+import { ModalFunctions } from "../../components";
 import EditNF from "./EditNF";
 
 // CONSTANTES DO ANTD
